@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@drawable/tile_bg" >
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:background="@drawable/menu_btn"
+        android:text="@string/label_continue"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_large" />
+
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/banner_height"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/crail"
+        android:gravity="center"
+        android:text="@string/label_round_end"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_xlarge" />
+
+    <ViewFlipper
+        android:id="@+id/descFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/continueButton"
+        android:layout_below="@id/banner"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:background="@color/translucent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="UselessParent" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center"
+                android:text="@string/popup_display_1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_large" />
+
+            <ImageView
+                android:id="@+id/puzzleImage"
+                android:layout_width="@dimen/puzzle_dimen"
+                android:layout_height="@dimen/puzzle_dimen"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:background="@color/white"
+                android:contentDescription="@string/empty"
+                android:padding="@dimen/margin_small" />
+
+            <TextView
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_height"
+                android:layout_marginLeft="@dimen/margin_medium"
+                android:layout_marginRight="@dimen/margin_medium"
+                android:background="@color/translucent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_snormal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/popup_display_2_1"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_large" />
+
+                <TextView
+                    android:id="@+id/amountLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_large" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/popup_display_2_2"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_large" />
+            </LinearLayout>
+        </LinearLayout>
+    </ViewFlipper>
+
+</RelativeLayout>

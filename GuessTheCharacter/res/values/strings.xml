@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="fonts">
+        <item >roboto_black</item>
+        <item >roboto_bold</item>
+        <item >roboto_condensed</item>
+        <item >roboto_light</item>
+        <item >roboto_medium</item>
+        <item >roboto_regular</item>
+    </string-array>
+    
+    <string name="app_name">Guess The Character: One Piece</string>
+    <string name="empty"></string>
+    <string name="label_play">Play</string>
+    <string name="label_about">About Us</string>
+    <string name="label_level">Level: </string>
+	<string name="label_round_end">AWESOME!</string>
+	<string name="label_continue">Continue</string>
+	<string name="label_gold">Gold</string>
+	<string name="startLevel">1</string>
+	<string name="startGold">50</string>
+	<string name="label_confirm">OK</string>
+	<string name="label_cancel">Cancel</string>
+	<string name="label_close">Close</string>
+	<string name="label_loading">Loading&#8230;</string>
+	
+    <string name="popup_display_1">You\'ve solved the Puzzle!</string>
+    <string name="popup_display_2_1">Receive </string>
+    <string name="popup_display_2_2"> Gold!</string>
+    
+    <string name="finish_display_1">You\'ve solved all the Puzzle!</string>
+    <string name="finish_display_2">Stay tuned for the next update!</string>
+</resources>

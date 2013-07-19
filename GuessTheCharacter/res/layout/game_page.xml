@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tile_bg" >
+
+    <RelativeLayout
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/banner_height"
+        android:layout_alignParentTop="true"
+        android:background="@color/crail" >
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/box_button"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:contentDescription="@string/empty"
+            android:src="@drawable/navigation_previous" />
+
+        <TextView
+            android:id="@+id/levelLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/backButton"
+            android:gravity="center_vertical"
+            android:text="@string/label_level"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/font_large" />
+
+        <TextView
+            android:id="@+id/currLevelLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/levelLabel"
+            android:gravity="center_vertical"
+            android:text="@string/startLevel"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/font_large" />
+
+        <TextView
+            android:id="@+id/goldLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_small"
+            android:gravity="center_vertical"
+            android:text="@string/label_gold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/font_large" />
+
+        <TextView
+            android:id="@+id/amountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_toLeftOf="@id/goldLabel"
+            android:gravity="center_vertical"
+            android:text="@string/startGold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/font_large" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/choices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/choiceLayer1"
+            layout="@layout/choices" />
+
+        <include
+            android:id="@+id/choiceLayer2"
+            layout="@layout/choices" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/puzzleImageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/banner"
+        android:layout_marginTop="@dimen/margin_small"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/puzzleImage1"
+                android:layout_width="@dimen/puzzle_dimen"
+                android:layout_height="@dimen/puzzle_dimen"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/margin_xsmall"
+                android:background="@color/white"
+                android:contentDescription="@string/empty"
+                android:padding="@dimen/margin_small"
+                android:scaleType="fitXY" />
+
+            <ImageButton
+                android:id="@+id/solvePuzzleButton"
+                android:layout_width="@dimen/medium_button"
+                android:layout_height="@dimen/button_dimen"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/margin_negxsmall"
+                android:background="@drawable/solve_btn"
+                android:contentDescription="@string/empty"
+                android:gravity="center_vertical|left"
+                android:onClick="solvePuzzle"
+                android:src="@drawable/solve" />
+
+            <ImageButton
+                android:id="@+id/deleteLetterButton"
+                android:layout_width="@dimen/medium_button"
+                android:layout_height="@dimen/button_dimen"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/margin_negxsmall"
+                android:background="@drawable/delete_btn"
+                android:contentDescription="@string/empty"
+                android:gravity="center_vertical|right"
+                android:onClick="removeLetter"
+                android:src="@drawable/delete" />
+
+            <ImageButton
+                android:id="@+id/revealClueButton"
+                android:layout_width="@dimen/medium_button"
+                android:layout_height="@dimen/button_dimen"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/deleteLetterButton"
+                android:layout_marginLeft="@dimen/margin_negxsmall"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/reveal_btn"
+                android:contentDescription="@string/empty"
+                android:gravity="center_vertical|right"
+                android:onClick="revealLetter"
+                android:src="@drawable/reveal" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/levelContainer"
+            android:layout_width="@dimen/puzzle_dimen"
+            android:layout_height="@dimen/diff_height"
+            android:background="@color/crail"
+            android:gravity="center_horizontal" >
+
+            <ImageView
+                android:id="@+id/level1"
+                android:layout_width="@dimen/diff_height"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/empty"
+                android:src="@drawable/level_null" />
+
+            <ImageView
+                android:id="@+id/level2"
+                android:layout_width="@dimen/diff_height"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/empty"
+                android:src="@drawable/level_null" />
+
+            <ImageView
+                android:id="@+id/level3"
+                android:layout_width="@dimen/diff_height"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/empty"
+                android:src="@drawable/level_null" />
+
+            <ImageView
+                android:id="@+id/level4"
+                android:layout_width="@dimen/diff_height"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/empty"
+                android:src="@drawable/level_null" />
+
+            <ImageView
+                android:id="@+id/level5"
+                android:layout_width="@dimen/diff_height"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/empty"
+                android:src="@drawable/level_null" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/answers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/choices"
+        android:layout_below="@id/puzzleImageContainer"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</RelativeLayout>

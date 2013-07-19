@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- BUTTONS -->
+    <dimen name="button_height">125dp</dimen>
+    <dimen name="button_dimen">125dp</dimen>
+    <dimen name="medium_button">150dp</dimen>
+    <dimen name="large_button">200dp</dimen>
+    <dimen name="box_button">100dp</dimen>
+    <dimen name="small_box_button">88dp</dimen>
+    <dimen name="answer_box_button">88dp</dimen>
+    <dimen name="choice_box_button">100dp</dimen>
+    
+    <!-- BANNERS -->
+    <dimen name="banner_height">100dp</dimen>
+    
+    <!-- MARGIN -->
+    <dimen name="margin_small">13dp</dimen>
+    <dimen name="margin_xsmall">5dp</dimen>
+    <dimen name="margin_medium">20dp</dimen>
+    <dimen name="margin_negxsmall">-13dp</dimen>
+    <dimen name="margin_large">85dp</dimen>
+    
+    <!-- GRAPHICS -->
+    <dimen name="logo_height">375dp</dimen>
+    <dimen name="badge_height">750dp</dimen>
+    <dimen name="speech_height">500dp</dimen>
+    
+    <!-- TEXT -->
+    <dimen name="font_normal">25dp</dimen>
+    <dimen name="font_snormal">38dp</dimen>
+    <dimen name="font_large">40dp</dimen>
+    <dimen name="font_xlarge">60dp</dimen>
+    <dimen name="font_letter">50dp</dimen>
+    
+    <!-- PUZZLE -->
+    <dimen name="puzzle_dimen">400dp</dimen>
+    <dimen name="diff_height">80dp</dimen>
+    
+    <!-- POPUP -->
+    <dimen name="popup_width">625dp</dimen>
+    <dimen name="small_popup_height">625dp</dimen>
+</resources>

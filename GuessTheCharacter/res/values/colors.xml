@@ -1,0 +1,12 @@
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="translucent">#77000000</color>
+    <color name="crail">#B9453F</color>
+    <color name="black">#000000</color>
+    <color name="burnt_amber">#862734</color>
+    
+    <!-- VINTAGE -->
+    <color name="vintage_red_dark">@color/burnt_amber</color>
+
+</resources>

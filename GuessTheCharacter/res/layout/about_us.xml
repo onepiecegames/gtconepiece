@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tile_bg" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/banner_height"
+        android:background="@color/crail" >
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/box_button"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:contentDescription="@string/empty"
+            android:src="@drawable/navigation_previous" />
+
+        <TextView
+            android:id="@+id/pageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/backButton"
+            android:gravity="center_vertical"
+            android:text="@string/label_about"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/font_large" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/aboutHTML"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header"
+        android:background="@null"
+        android:textSize="@dimen/font_snormal" />
+
+</RelativeLayout>

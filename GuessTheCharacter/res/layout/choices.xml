@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_small"
+    android:gravity="center_horizontal" >
+
+    <Button
+        android:id="@+id/letter1"
+        style="@style/Letter"
+        android:layout_marginLeft="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
+        android:contentDescription="@string/empty"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textSize="@dimen/font_letter" />
+
+    <Button
+        android:id="@+id/letter2"
+        style="@style/Letter"
+        android:layout_marginLeft="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
+        android:contentDescription="@string/empty"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textSize="@dimen/font_letter" />
+
+    <Button
+        android:id="@+id/letter3"
+        style="@style/Letter"
+        android:layout_marginLeft="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
+        android:contentDescription="@string/empty"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textSize="@dimen/font_letter" />
+
+    <Button
+        android:id="@+id/letter4"
+        style="@style/Letter"
+        android:layout_marginLeft="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
+        android:contentDescription="@string/empty"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textSize="@dimen/font_letter" />
+
+    <Button
+        android:id="@+id/letter5"
+        style="@style/Letter"
+        android:layout_marginLeft="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
+        android:contentDescription="@string/empty"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textSize="@dimen/font_letter" />
+
+    <Button
+        android:id="@+id/letter6"
+        style="@style/Letter"
+        android:layout_marginLeft="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
+        android:contentDescription="@string/empty"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textSize="@dimen/font_letter" />
+
+    <Button
+        android:id="@+id/letter7"
+        style="@style/Letter"
+        android:layout_marginLeft="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
+        android:contentDescription="@string/empty"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textSize="@dimen/font_letter" />
+
+</LinearLayout>
