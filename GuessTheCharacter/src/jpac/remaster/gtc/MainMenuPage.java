@@ -53,15 +53,19 @@ public class MainMenuPage extends GTCActivity {
 		((Button) findViewById(R.id.playButton)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/roboto_bold.ttf"));
 
-		ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
-		imageBg.setImageBitmap(ResourceUtil
-				.loadImage(ResourceUtil.MAIN_MASCOT_BG));
-
-		ImageView logo = (ImageView) findViewById(R.id.gameLogo);
-		logo.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_LOGO));
-
-		ImageView mascot = (ImageView) findViewById(R.id.gameMascot);
-		mascot.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_MASCOT));
+		try {
+			ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
+			imageBg.setImageBitmap(ResourceUtil
+					.loadImage(ResourceUtil.MAIN_MASCOT_BG));
+	
+			ImageView logo = (ImageView) findViewById(R.id.gameLogo);
+			logo.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_LOGO));
+	
+			ImageView mascot = (ImageView) findViewById(R.id.gameMascot);
+			mascot.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_MASCOT));
+		} catch (RuntimeException e) {
+			finish();
+		}
 	}
 
 	@Override
