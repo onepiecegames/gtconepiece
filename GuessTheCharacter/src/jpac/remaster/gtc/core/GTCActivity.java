@@ -2,6 +2,7 @@ package jpac.remaster.gtc.core;
 
 import jpac.remaster.gtc.GTCSplash;
 import jpac.remaster.gtc.util.ResourceUtil;
+import jpac.remaster.gtc.util.Util;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +14,13 @@ public abstract class GTCActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		Util.log(this.getClass().getName() + "[onDestroy]");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		Util.log(this.getClass().getName() + "[onPause]");
 	}
 
 	@Override
@@ -48,6 +51,7 @@ public abstract class GTCActivity extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
+		Util.log(this.getClass().getName() + "[onStop]");
 	}
 
 	@Override
@@ -66,5 +70,6 @@ public abstract class GTCActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		ResourceUtil.setContextRef(this);
+		Util.log(this.getClass().getName() + "[onCreate]");
 	}
 }
