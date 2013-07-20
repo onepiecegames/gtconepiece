@@ -1,16 +1,16 @@
 # built application files
-GuessTheCharacter/*.apk
-GuessTheCharacter/*.ap_
+*.apk
+*.ap_
 
 # files for the dex VM
-GuessTheCharacter/*.dex
+*.dex
 
 # Java class files
-GuessTheCharacter/*.class
+*.class
 
 # generated files
-GuessTheCharacter/bin/
-GuessTheCharacter/gen/
+bin/
+gen/
 
 # Local configuration file (sdk path, etc)
 local.properties
