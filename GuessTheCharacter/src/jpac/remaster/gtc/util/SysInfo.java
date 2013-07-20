@@ -9,7 +9,7 @@ public class SysInfo {
 		public static final int RELEASE = 2;
 
 		// change the value for this before releasing
-		private static int mode = DEBUG;
+		private static int mode = RELEASE;
 
 		public static boolean isDebug() {
 			return mode == DEBUG;
