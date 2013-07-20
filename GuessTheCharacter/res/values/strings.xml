@@ -11,6 +11,8 @@
     </string-array>
     
     <string name="app_name">Guess The Character: One Piece</string>
+    <string name="app_id">139678339573107</string>
+    
     <string name="empty"></string>
     <string name="label_play">Play</string>
     <string name="label_about">About Us</string>
