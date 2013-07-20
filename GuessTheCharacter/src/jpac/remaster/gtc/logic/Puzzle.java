@@ -31,7 +31,17 @@ public class Puzzle {
 	}
 
 	public String getFormattedAnswer() {
-		return rawAnswer.replace("-", "").replace(":", "");
+		String formattedAnswer = "";
+		
+		if (rawAnswer.contains("-:")) {
+			formattedAnswer = rawAnswer.replace("-:", "");
+		} else if (rawAnswer.contains(":")) {
+			formattedAnswer = rawAnswer.replace(":", " ");
+		} else {
+			formattedAnswer = rawAnswer;
+		}
+		
+		return formattedAnswer;
 	}
 
 	public String getAnswer() {
