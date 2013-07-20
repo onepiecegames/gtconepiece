@@ -144,6 +144,10 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			showInsufficientGold(Constants.SOLVE_COST);
 		}
 	}
+	
+	public void askFacebook(View v) {
+		
+	}
 
 	private void showConfirmUseHint(String message, int requestCode) {
 		Intent intent = new Intent(this, ConfirmationPopup.class);
