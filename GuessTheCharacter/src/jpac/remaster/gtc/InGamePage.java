@@ -73,8 +73,12 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 
 			final ImageView puzzle1 = (ImageView) findViewById(R.id.puzzleImage1);
 
-			puzzle1.setImageBitmap(ResourceUtil.loadPuzzleImage(puzzle
-					.getImageId()));
+			try {
+				puzzle1.setImageBitmap(ResourceUtil.loadPuzzleImage(puzzle
+						.getImageId()));
+			} catch (RuntimeException e) {
+				finish();
+			}
 			updatePuzzleDifficulty();
 		}
 	}
