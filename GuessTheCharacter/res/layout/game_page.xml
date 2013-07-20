@@ -135,7 +135,7 @@
                 android:contentDescription="@string/empty"
                 android:gravity="center_vertical|right"
                 android:onClick="askFacebook"
-                android:src="@drawable/reveal" />
+                android:src="@drawable/facebook" />
 
             <ImageButton
                 android:id="@+id/deleteLetterButton"
