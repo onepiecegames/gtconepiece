@@ -21,6 +21,11 @@ import android.widget.TextView;
 public class GTCSplash extends GTCActivity implements ResourceLoader {
 
 	@Override
+	public void onBackPressed() {
+		return;
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
