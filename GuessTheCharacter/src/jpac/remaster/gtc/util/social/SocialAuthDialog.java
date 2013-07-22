@@ -131,7 +131,7 @@ public class SocialAuthDialog extends Dialog {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		handler = new Handler();
-		Util.getDisplayDpi(getContext());
+		SocialUtil.getDisplayDpi(getContext());
 
 		mSpinner = new ProgressDialog(getContext());
 		mSpinner.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -239,7 +239,7 @@ public class SocialAuthDialog extends Dialog {
 					// Handles Twitter and Facebook Cancel
 					mListener.onCancel();
 				} else { // for Facebook and Twitter
-					final Map<String, String> params = Util.parseUrl(url);
+					final Map<String, String> params = SocialUtil.parseUrl(url);
 
 					Runnable runnable = new Runnable() {
 						@Override
@@ -318,15 +318,15 @@ public class SocialAuthDialog extends Dialog {
 
 			// To set zoom density of runkeeper dialog for various densities
 			if (url.startsWith("https://runkeeper.com/apps/authorize") & count < 1) {
-				if (Util.UI_SIZE == 4 && Util.UI_DENSITY == 120) {
+				if (SocialUtil.UI_SIZE == 4 && SocialUtil.UI_DENSITY == 120) {
 					mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
 					mWebView.setInitialScale(60);
 					count = 1;
-				} else if (Util.UI_SIZE == 3 && Util.UI_DENSITY == 160) {
+				} else if (SocialUtil.UI_SIZE == 3 && SocialUtil.UI_DENSITY == 160) {
 					mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
 					mWebView.setInitialScale(70);
 					count = 1;
-				} else if (Util.UI_DENSITY == 240) {
+				} else if (SocialUtil.UI_DENSITY == 240) {
 					mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
 					count = 1;
 				} else {
@@ -339,13 +339,13 @@ public class SocialAuthDialog extends Dialog {
 			// To set zoom density of yahoo dialog for mdpi and xhdpi
 			if (mProviderName.toString().equalsIgnoreCase("yahoo")) {
 				if (url.startsWith("https://login.yahoo.com/config/login")) {
-					if (Util.UI_DENSITY == 160 && Util.UI_SIZE == 4) {
+					if (SocialUtil.UI_DENSITY == 160 && SocialUtil.UI_SIZE == 4) {
 						mWebView.getSettings().setDefaultZoom(ZoomDensity.CLOSE);
 						mWebView.setInitialScale(155);
-					} else if (Util.UI_DENSITY == 320) {
-						if (Util.UI_SIZE == 7)
+					} else if (SocialUtil.UI_DENSITY == 320) {
+						if (SocialUtil.UI_SIZE == 7)
 							mWebView.getSettings().setDefaultZoom(ZoomDensity.MEDIUM);
-						else if (Util.UI_SIZE == 10) {
+						else if (SocialUtil.UI_SIZE == 10) {
 							mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
 							mWebView.setInitialScale(120);
 						}
@@ -356,10 +356,10 @@ public class SocialAuthDialog extends Dialog {
 
 			// To set zoom density of linkedin dialog for ldpi and mdpi
 			if (mProviderName.toString().equalsIgnoreCase("linkedin")) {
-				if (Util.UI_DENSITY == 120)
+				if (SocialUtil.UI_DENSITY == 120)
 					mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
-				else if (Util.UI_DENSITY == 160) {
-					if (Util.UI_SIZE == 3)
+				else if (SocialUtil.UI_DENSITY == 160) {
+					if (SocialUtil.UI_SIZE == 3)
 						mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
 					else
 						mWebView.getSettings().setDefaultZoom(ZoomDensity.MEDIUM);
@@ -369,19 +369,19 @@ public class SocialAuthDialog extends Dialog {
 
 			// To set zoom density of yammer dialog
 			if (mProviderName.toString().equalsIgnoreCase("yammer")) {
-				if (Util.UI_DENSITY == 120) {
+				if (SocialUtil.UI_DENSITY == 120) {
 					mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
 					mWebView.setInitialScale(55);
-				} else if (Util.UI_DENSITY == 160) {
-					if (Util.UI_SIZE == 3) {
+				} else if (SocialUtil.UI_DENSITY == 160) {
+					if (SocialUtil.UI_SIZE == 3) {
 						mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
 						mWebView.setInitialScale(65);
-					} else if (Util.UI_SIZE == 10) {
+					} else if (SocialUtil.UI_SIZE == 10) {
 						mWebView.getSettings().setDefaultZoom(ZoomDensity.MEDIUM);
 					}
-				} else if (Util.UI_DENSITY == 240) {
+				} else if (SocialUtil.UI_DENSITY == 240) {
 					mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
-				} else if (Util.UI_DENSITY == 320) {
+				} else if (SocialUtil.UI_DENSITY == 320) {
 					mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
 				}
 			}
@@ -395,7 +395,7 @@ public class SocialAuthDialog extends Dialog {
 				if (url.startsWith(mProviderName.getCancelUri())) {
 					mListener.onCancel();
 				} else {
-					final Map<String, String> params = Util.parseUrl(url);
+					final Map<String, String> params = SocialUtil.parseUrl(url);
 					Runnable runnable = new Runnable() {
 						@Override
 						public void run() {

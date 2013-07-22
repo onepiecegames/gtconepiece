@@ -150,7 +150,7 @@ public class SocialAuthAdapter {
 	}
 
 	public void authorize(Context ctx, Provider provider) {
-		if (!Util.isNetworkAvailable(ctx)) {
+		if (!SocialUtil.isNetworkAvailable(ctx)) {
 			dialogListener
 					.onError(new SocialAuthError(
 							"Please check your Internet connection",

@@ -98,7 +98,7 @@ public class ShareButtonAdapter extends BaseAdapter {
 		text.setText(data[position]);
 		final Drawable image;
 		image = ctx.getResources().getDrawable(imagesdata[position]);
-		if (Util.UI_DENSITY == 320 || Util.UI_DENSITY == 240)
+		if (SocialUtil.UI_DENSITY == 320 || SocialUtil.UI_DENSITY == 240)
 			image.setBounds(0, 0, 50, 50);
 		else
 			image.setBounds(0, 0, 30, 30);
