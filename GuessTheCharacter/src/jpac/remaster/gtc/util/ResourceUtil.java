@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -191,5 +192,21 @@ public class ResourceUtil {
 		}
 
 		FOR_RECYCLE.clear();
+	}
+	
+	private static Bitmap capturedImage;
+	
+	public static void captureView(View v) {
+		if (capturedImage != null) {
+			capturedImage.recycle();
+			capturedImage = null;
+		}
+		
+		v.setDrawingCacheEnabled(true);
+		capturedImage = v.getDrawingCache();
+	}
+	
+	public static Bitmap getCapturedImage() {
+		return capturedImage;
 	}
 }
