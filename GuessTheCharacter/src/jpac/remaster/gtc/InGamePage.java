@@ -146,7 +146,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 	
 	public void askFacebook(View v) {
-		
+		startActivity(new Intent(this, SocialPopup.class));
 	}
 
 	private void showConfirmUseHint(String message, int requestCode) {
