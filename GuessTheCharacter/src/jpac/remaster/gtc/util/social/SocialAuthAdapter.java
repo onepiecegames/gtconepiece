@@ -21,9 +21,7 @@ import org.brickred.socialauth.util.MethodType;
 import org.brickred.socialauth.util.OAuthConfig;
 import org.brickred.socialauth.util.Response;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.AssetManager;
@@ -94,13 +92,8 @@ public class SocialAuthAdapter {
 	// provides currentprovider information
 	private Provider currentProvider;
 
-	// contains array of providers
-	private final Provider authProviders[];
-
 	// Variables, Arrays and Maps
 	private String url;
-	private int providerCount = 0;
-	private final int authProviderLogos[];
 	private Map<String, Object> tokenMap;
 	private final Map<String, OAuthConfig> authMap;
 
@@ -109,20 +102,12 @@ public class SocialAuthAdapter {
 	private final Handler handler = new Handler();
 
 	public SocialAuthAdapter(DialogListener listener) {
-		authProviders = new Provider[Provider.values().length];
-		authProviderLogos = new int[Provider.values().length];
 		this.dialogListener = listener;
 		authMap = new HashMap<String, OAuthConfig>();
 	}
 
 	public void setListener(DialogListener listener) {
 		this.dialogListener = listener;
-	}
-
-	public void addProvider(Provider provider, int logo) {
-		authProviders[providerCount] = provider;
-		authProviderLogos[providerCount] = logo;
-		providerCount++;
 	}
 
 	public void addCallBack(Provider provider, String callBack) {
@@ -152,47 +137,8 @@ public class SocialAuthAdapter {
 		// Click Listener For Share Button
 		sharebtn.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				// This dialog will show list of all providers
-				AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-				builder.setTitle("Share via");
-				builder.setCancelable(true);
-				builder.setIcon(android.R.drawable.ic_menu_more);
-
-				// Handles Click Events
-				String[] providerNames = new String[providerCount];
-				int[] providerLogos = new int[providerCount];
-
-				for (int i = 0; i < providerCount; i++) {
-					providerNames[i] = authProviders[i].toString();
-					providerLogos[i] = authProviderLogos[i];
-				}
-
-				builder.setSingleChoiceItems(new ShareButtonAdapter(ctx,
-						providerNames, providerLogos), 0,
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int item) {
-								if (authProviders[item].toString().startsWith(
-										"share_mail")
-										|| authProviders[item].toString()
-												.startsWith("share_mms")) {
-									// Getting selected provider email or mms
-									Bundle bundle = new Bundle();
-									bundle.putString(
-											SocialAuthAdapter.PROVIDER,
-											authProviders[item].toString());
-									dialogListener.onComplete(bundle);
-								} else {
-									// Getting selected provider and starting
-									// authentication
-									authorize(ctx, authProviders[item]);
-								}
-								dialog.dismiss();
-							}
-						});
-				final AlertDialog dialog = builder.create();
-				dialog.show();
+			public void onClick(View v) {		
+				authorize(ctx, Provider.FACEBOOK);
 			}
 		});
 
