@@ -31,8 +31,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
@@ -128,25 +126,8 @@ public class SocialAuthAdapter {
 		}
 	}
 
-	public void enable(View sharebtn) {
-		final Context ctx = sharebtn.getContext();
-		context = ctx;
-
-		// Click Listener For Share Button
-		sharebtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {		
-				authorize(ctx, Provider.FACEBOOK);
-			}
-		});
-
-		if (!Util.isNetworkAvailable(ctx)) {
-			dialogListener
-					.onError(new SocialAuthError(
-							"Please check your Internet connection",
-							new Exception("")));
-			return;
-		}
+	public void share(Context context) {
+		authorize(context, Provider.FACEBOOK);
 	}
 
 	public void authorize(Context ctx, Provider provider) {
