@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gamepage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tile_bg" >
@@ -122,6 +123,20 @@
                 android:gravity="center_vertical|left"
                 android:onClick="solvePuzzle"
                 android:src="@drawable/solve" />
+            
+            <ImageButton
+                android:id="@+id/askFacebookButton"
+                android:layout_width="@dimen/medium_button"
+                android:layout_height="@dimen/button_dimen"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/solvePuzzleButton"
+                android:layout_marginRight="@dimen/margin_negxsmall"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/unlock_btn"
+                android:contentDescription="@string/empty"
+                android:gravity="center_vertical|right"
+                android:onClick="askFacebook"
+                android:src="@drawable/facebook" />
 
             <ImageButton
                 android:id="@+id/deleteLetterButton"

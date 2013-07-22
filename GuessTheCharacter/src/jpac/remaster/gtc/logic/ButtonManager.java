@@ -195,6 +195,7 @@ public class ButtonManager {
 	private final int ANSWER_TEXT_SIZE = ResourceUtil
 			.loadDimension(R.dimen.font_normal);
 
+	@SuppressWarnings("deprecation")
 	private Button initAnswerButton(Context context, String text) {
 		Button button = new Button(context);
 		button.setText("");

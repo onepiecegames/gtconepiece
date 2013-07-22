@@ -8,6 +8,8 @@ import jpac.remaster.gtc.logic.UserActionListener;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.ResourceUtil;
 import jpac.remaster.gtc.util.SysInfo.Constants;
+import jpac.remaster.gtc.util.social.SocialDataManager;
+import jpac.remaster.gtc.util.social.SocialUtil;
 import jpac.remaster.gtc.util.Util;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,10 +27,14 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	private static final int REQUEST_CONFIRM_REVEAL = 2;
 	private static final int REQUEST_CONFIRM_REMOVE = 3;
 	private static final int REQUEST_CONFIRM_SOLVE = 4;
+	private static final int REQUEST_SHARE_FACEBOOK = 5;
+	private static final int REQUEST_PUBLISH_FEED = 6;
 
 	private Puzzle puzzle;
 
 	private ButtonManager buttonManager;
+
+	private boolean alreadyPosted = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +68,9 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			startActivity(new Intent(this, GameFinishedPage.class));
 			finish();
 		} else {
+			if (SocialDataManager.checkIfPosted(puzzle.getId())) {
+				alreadyPosted = true;
+			}
 			UserDataManager.updatePuzzle("" + puzzle.getId());
 
 			buttonManager.init(this, puzzle.getAnswer());
@@ -145,6 +154,20 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 		}
 	}
 
+	public void askFacebook(View v) {
+		if (alreadyPosted) {
+			Intent intent = new Intent(this, AcknowledgementPopup.class);
+			intent.putExtra("title", "Facebook");
+			intent.putExtra(
+					"message",
+					"You've already posted this image.\n\nCheck the comments section to know what your friends think.");
+			startActivityForResult(intent, REQUEST_SHOW_ACKNOWLEDGE);
+		} else {
+			startActivityForResult(new Intent(this, SocialPopup.class),
+					REQUEST_SHARE_FACEBOOK);
+		}
+	}
+
 	private void showConfirmUseHint(String message, int requestCode) {
 		Intent intent = new Intent(this, ConfirmationPopup.class);
 		intent.putExtra("title", "Confirm Use Hint");
@@ -191,6 +214,21 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			case REQUEST_CONFIRM_SOLVE:
 				UserDataManager.spendGold(Constants.SOLVE_COST);
 				showLevelComplete();
+				break;
+			case REQUEST_SHARE_FACEBOOK:
+				if (SocialUtil.isNetworkAvailable(getApplicationContext())) {
+					ResourceUtil.captureView(findViewById(R.id.gamepage));
+					startActivityForResult(new Intent(this,
+							SocialPostingPage.class), REQUEST_PUBLISH_FEED);
+				} else {
+					Util.displayToast(getApplicationContext(),
+							"Check your Internet connection.");
+				}
+				break;
+			case REQUEST_PUBLISH_FEED:
+				SocialDataManager.updatePosted(puzzle.getId());
+				alreadyPosted = true;
+				break;
 			default:
 				break;
 			}
@@ -231,6 +269,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 		buttonManager.saveData(this, puzzle);
 		UserDataManager.saveData(this);
 		PuzzleManager.saveData(this);
+		SocialDataManager.saveData(this);
 	}
 
 }
