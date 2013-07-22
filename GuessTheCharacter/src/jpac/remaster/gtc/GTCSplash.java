@@ -8,6 +8,7 @@ import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.ResourceLoader;
 import jpac.remaster.gtc.util.ResourceUtil;
 import jpac.remaster.gtc.util.SysInfo;
+import jpac.remaster.gtc.util.social.SocialDataManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
@@ -71,6 +72,7 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 			ResourceUtil.loadMainImages();
 			PuzzleManager.init(getApplicationContext());
 			UserDataManager.init(getApplicationContext());
+			SocialDataManager.loadData(getApplicationContext());
 			return null;
 		}
 
