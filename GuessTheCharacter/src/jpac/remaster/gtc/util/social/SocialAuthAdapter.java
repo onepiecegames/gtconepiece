@@ -39,9 +39,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class SocialAuthAdapter {
 
@@ -148,9 +145,7 @@ public class SocialAuthAdapter {
 		}
 	}
 
-	public void enable(Button sharebtn) {
-
-		Log.d("SocialAuthAdapter", "Enabling button with SocialAuth");
+	public void enable(View sharebtn) {
 		final Context ctx = sharebtn.getContext();
 		context = ctx;
 
@@ -200,50 +195,6 @@ public class SocialAuthAdapter {
 				dialog.show();
 			}
 		});
-
-		if (!Util.isNetworkAvailable(ctx)) {
-			dialogListener
-					.onError(new SocialAuthError(
-							"Please check your Internet connection",
-							new Exception("")));
-			return;
-		}
-	}
-
-	public void enable(LinearLayout linearbar) {
-		Log.d("SocialAuthAdapter", "Enabling bar with SocialAuth");
-		final Context ctx = linearbar.getContext();
-
-		context = ctx;
-		// Handles Clicking Events for Buttons
-		View.OnClickListener viewlistener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// Getting selected provider and starting authentication
-				if (authProviders[v.getId()].toString()
-						.startsWith("share_mail")
-						|| authProviders[v.getId()].toString().startsWith(
-								"share_mms")) {
-					Bundle bundle = new Bundle();
-					bundle.putString(SocialAuthAdapter.PROVIDER,
-							authProviders[v.getId()].toString());
-					dialogListener.onComplete(bundle);
-				} else {
-					// Getting selected provider and starting authentication
-					authorize(ctx, authProviders[v.getId()]);
-				}
-			}
-		};
-
-		// Adding Buttons to Bar
-		for (int i = 0; i < providerCount; i++) {
-			ImageView provider = new ImageView(ctx);
-			provider.setId(i);
-			provider.setImageResource(authProviderLogos[i]);
-			provider.setPadding(5, 5, 5, 5);
-			provider.setOnClickListener(viewlistener);
-			linearbar.addView(provider);
-		}
 
 		if (!Util.isNetworkAvailable(ctx)) {
 			dialogListener
