@@ -10,11 +10,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.brickred.socialauth.AuthProvider;
-import org.brickred.socialauth.Career;
 import org.brickred.socialauth.SocialAuthConfig;
 import org.brickred.socialauth.SocialAuthManager;
 import org.brickred.socialauth.exception.SocialAuthException;
-import org.brickred.socialauth.plugin.CareerPlugin;
 import org.brickred.socialauth.util.AccessGrant;
 import org.brickred.socialauth.util.Constants;
 import org.brickred.socialauth.util.MethodType;
@@ -582,50 +580,6 @@ public class SocialAuthAdapter {
 		protected void onPostExecute(Integer status) {
 
 			listener.onExecute(getCurrentProvider().getProviderId(), status);
-		}
-	}
-
-	public void getCareerAsync(SocialAuthListener<Career> listener) {
-		new CareerTask(listener).execute();
-	}
-
-	private class CareerTask extends AsyncTask<Void, Void, Career> {
-
-		SocialAuthListener<Career> listener;
-
-		private CareerTask(SocialAuthListener<Career> listener) {
-			this.listener = listener;
-		}
-
-		@Override
-		protected Career doInBackground(Void... params) {
-			try {
-				Career careerList = null;
-
-				if (getCurrentProvider().isSupportedPlugin(
-						org.brickred.socialauth.plugin.CareerPlugin.class)) {
-					CareerPlugin p = getCurrentProvider().getPlugin(
-							org.brickred.socialauth.plugin.CareerPlugin.class);
-					careerList = p.getCareerDetails();
-					Log.d("SocialAuthAdapter", "Received Career Details");
-
-				} else
-					Log.d("SocialAuthAdapter",
-							"Career Details only Supported from Linkedin");
-
-				return careerList;
-			} catch (Exception e) {
-				e.printStackTrace();
-				listener.onError(new SocialAuthError(
-						"Career Details not Available from Provider", e));
-				return null;
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Career careerList) {
-
-			listener.onExecute(getCurrentProvider().getProviderId(), careerList);
 		}
 	}
 }
