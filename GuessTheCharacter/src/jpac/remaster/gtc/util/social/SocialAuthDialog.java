@@ -24,6 +24,7 @@
 
 package jpac.remaster.gtc.util.social;
 
+import java.util.Locale;
 import java.util.Map;
 
 import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
@@ -40,7 +41,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Picture;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -55,7 +55,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
-import android.webkit.WebView.PictureListener;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -98,8 +97,8 @@ public class SocialAuthDialog extends Dialog {
 	private LinearLayout mContent;
 	private Drawable icon;
 	private Handler handler;
-	static final FrameLayout.LayoutParams FILL = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-			ViewGroup.LayoutParams.FILL_PARENT);
+	static final FrameLayout.LayoutParams FILL = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+			ViewGroup.LayoutParams.MATCH_PARENT);
 
 	// SocialAuth Components
 	private final SocialAuthManager mSocialAuthManager;
@@ -189,7 +188,7 @@ public class SocialAuthDialog extends Dialog {
 				getContext().getPackageName());
 		icon = getContext().getResources().getDrawable(res);
 		StringBuilder sb = new StringBuilder();
-		sb.append(mProviderName.toString().substring(0, 1).toUpperCase());
+		sb.append(mProviderName.toString().substring(0, 1).toUpperCase(Locale.getDefault()));
 		sb.append(mProviderName.toString().substring(1, mProviderName.toString().length()));
 		mTitle.setText(sb.toString());
 		mTitle.setGravity(Gravity.CENTER_VERTICAL);
@@ -439,43 +438,6 @@ public class SocialAuthDialog extends Dialog {
 
 			super.onPageFinished(view, url);
 
-			// workaround for yahoo and runkeeper
-			mWebView.setPictureListener(new PictureListener() {
-				@Override
-				public void onNewPicture(WebView view, Picture arg1) {
-					// To set zoom density of yahoo dialog
-					if (mProviderName.toString().equalsIgnoreCase("yahoo")) {
-						if (url.startsWith("https://login.yahoo.com/config/login"))
-							mWebView.scrollTo(Util.UI_YAHOO_SCROLL, 0);
-						else if (url.startsWith("https://api.login.yahoo.com//oauth/v2")) {
-							if (Util.UI_DENSITY == 160 && Util.UI_SIZE == 3)
-								mWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
-							else
-								mWebView.getSettings().setDefaultZoom(ZoomDensity.MEDIUM);
-
-							mWebView.scrollTo(Util.UI_YAHOO_ALLOW, 0);
-						}
-						mSpinner.dismiss();
-					}
-
-					if (mProviderName.toString().equalsIgnoreCase("yammer")) {
-						if (url.startsWith("https://www.yammer.com/dialog/authenticate")) {
-							if (Util.UI_DENSITY == 240)
-								mWebView.scrollTo(105, 0);
-							else if (Util.UI_DENSITY == 320)
-								mWebView.scrollTo(95, 0);
-						}
-					}
-
-					if (mProviderName.toString().equalsIgnoreCase("runkeeper")
-							&& (url.startsWith("http://m.facebook.com/login.php") || url
-									.startsWith("https://m.facebook.com/dialog/oauth"))) {
-						// Set Zoom Density of FaceBook Dialog
-						mWebView.getSettings().setDefaultZoom(ZoomDensity.MEDIUM);
-					}
-				}
-			});
-
 			String title = mWebView.getTitle();
 			if (title != null && title.length() > 0) {
 				mTitle.setText(title);
@@ -512,7 +474,7 @@ public class SocialAuthDialog extends Dialog {
 		edit.putString(mProviderName.toString() + " providerid", providerid);
 
 		if (attributes != null) {
-			for (Map.Entry entry : attributes.entrySet()) {
+			for (Map.Entry<String, Object> entry : attributes.entrySet()) {
 				System.out.println(entry.getKey() + ", " + entry.getValue());
 			}
 
