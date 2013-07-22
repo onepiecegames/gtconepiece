@@ -30,7 +30,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
@@ -68,10 +67,6 @@ public class SocialAuthAdapter {
 		}
 	}
 
-	// Share Mail & MMS providers
-	public static final String SHARE_MAIL = "share_mail";
-	public static final String SHARE_MMS = "share_mms";
-
 	// Constants
 	public static final String PROVIDER = "provider";
 	public static final String ACCESS_GRANT = "access_grant";
@@ -106,17 +101,6 @@ public class SocialAuthAdapter {
 		this.dialogListener = listener;
 	}
 
-	public void addCallBack(Provider provider, String callBack) {
-		if (provider.name() == Constants.FACEBOOK
-				|| provider.name() == Constants.LINKEDIN
-				|| provider.name() == Constants.MYSPACE
-				|| provider.name() == Constants.YAHOO
-				|| provider.name() == Constants.RUNKEEPER) {
-			Log.d("SocialAuthAdapter", "Callback Url not require");
-		} else
-			provider.setCallBackUri(callBack);
-	}
-
 	public AuthProvider getCurrentProvider() {
 		if (currentProvider != null) {
 			return socialAuthManager.getProvider(currentProvider.toString());
@@ -140,15 +124,13 @@ public class SocialAuthAdapter {
 		}
 		context = ctx;
 		currentProvider = provider;
-		Log.d("SocialAuthAdapter", "Selected provider is " + currentProvider);
-
+	
 		// Initialize socialauth manager if not already done
 		if (socialAuthManager != null) {
 			// If SocialAuthManager is not null and contains Provider Id, send
 			// response to listener
 			if (socialAuthManager.getConnectedProvidersIds().contains(
 					currentProvider.toString())) {
-				Log.d("SocialAuthAdapter", "Provider already connected");
 				Bundle bundle = new Bundle();
 				bundle.putString(SocialAuthAdapter.PROVIDER,
 						currentProvider.toString());
@@ -163,26 +145,15 @@ public class SocialAuthAdapter {
 		}
 		// If SocialAuthManager is null
 		else {
-			Log.d("SocialAuthAdapter",
-					"Loading keys and secrets from configuration");
-
 			socialAuthManager = new SocialAuthManager();
 			try {
 				loadConfig(ctx);
 
 			} catch (Exception e) {
-				Log.d("SocialAuthAdapter", "Could not load configuration");
+				
 			}
 			connectProvider(ctx, provider);
 		}
-	}
-
-	public void addConfig(Provider provider, String key, String secret,
-			String permissions) throws Exception {
-		OAuthConfig authConfig = new OAuthConfig(key, secret);
-		authConfig.setId(provider.toString());
-		authConfig.setCustomPermissions(permissions);
-		authMap.put(provider.toString(), authConfig);
 	}
 
 	private void loadConfig(Context ctx) throws Exception {
@@ -229,10 +200,6 @@ public class SocialAuthAdapter {
 					handler.post(new Runnable() {
 						@Override
 						public void run() {
-							Log.d("SocialAuthAdapter", "Loading URL : " + url);
-							String callbackUri = provider.getCallBackUri();
-							Log.d("SocialAuthAdapter", "Callback URI : "
-									+ callbackUri);
 							// start webview dialog
 							new SocialAuthDialog(context, url, provider,
 									dialogListener, socialAuthManager).show();
@@ -295,8 +262,6 @@ public class SocialAuthAdapter {
 				accessGrant.setProviderId(providerid);
 				accessGrant.setAttributes(attrMap);
 
-				Log.d("SocialAuthAdapter", "Loading from AccessToken");
-
 				Runnable runnable = new Runnable() {
 					@Override
 					public void run() {
@@ -322,9 +287,7 @@ public class SocialAuthAdapter {
 						} catch (Exception e) {
 							dialogListener.onError(new SocialAuthError(
 									"Token Error", e));
-							Log.d("SocialAuthAdapter",
-									"Starting webview for authentication for new Token");
-
+							
 							socialAuthManager = new SocialAuthManager();
 							try {
 								loadConfig(ctx);
@@ -346,22 +309,9 @@ public class SocialAuthAdapter {
 		}
 		// If Access Token is not available , Open Authentication Dialog
 		else {
-			Log.d("SocialAuthAdapter", "Starting webview for authentication");
 			startDialogAuth(ctx, currentProvider);
 		}
 
-	}
-
-	public void setDialogSize(float width, float height) {
-		if (width < 0 || width > 40)
-			SocialAuthDialog.width = 40;
-		else
-			SocialAuthDialog.width = width;
-
-		if (height < 0 || height > 60)
-			SocialAuthDialog.height = 60;
-		else
-			SocialAuthDialog.height = height;
 	}
 
 	public boolean signOut(String providerName) {
@@ -381,19 +331,12 @@ public class SocialAuthAdapter {
 			edit.remove(providerName + " key");
 			edit.commit();
 
-			Log.d("SocialAuthAdapter", "Disconnecting Provider");
-
 			return true;
 		} else {
-			Log.d("SocialAuthAdapter", "The provider name should be same");
 			return false;
 		}
 	}
-
-	public void setTitleVisible(boolean titleStatus) {
-		SocialAuthDialog.titleStatus = titleStatus;
-	}
-
+	
 	public void updateStatus(final String message,
 			final SocialAuthListener<Integer> listener,
 			final boolean shareOption) {
@@ -491,7 +434,7 @@ public class SocialAuthAdapter {
 
 			new Thread(runnable).start();
 		} else {
-			Log.d("SocialAuthAdapter", "Provider Not Supported");
+			
 		}
 	}
 
@@ -549,7 +492,6 @@ public class SocialAuthAdapter {
 			try {
 				res = getCurrentProvider().uploadImage((String) params[0],
 						(String) params[1], (InputStream) params[2]);
-				Log.d("SocialAuthAdapter", "Image Uploaded");
 				return Integer.valueOf(res.getStatus());
 			} catch (Exception e) {
 				listener.onError(new SocialAuthError("Image Upload Error", e));

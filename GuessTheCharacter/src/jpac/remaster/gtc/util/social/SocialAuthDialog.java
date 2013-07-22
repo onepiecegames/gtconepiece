@@ -1,27 +1,3 @@
-/*
- ===========================================================================
- Copyright (c) 2012 Three Pillar Global Inc. http://threepillarglobal.com
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sub-license, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ===========================================================================
- */
-
 package jpac.remaster.gtc.util.social;
 
 import java.util.Locale;
@@ -33,6 +9,7 @@ import org.brickred.socialauth.AuthProvider;
 import org.brickred.socialauth.SocialAuthManager;
 import org.brickred.socialauth.util.AccessGrant;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -60,15 +37,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Dialog that wraps a Web view for authenticating with the given social
- * network. All the OAuth redirection happens over here and the success and
- * failure are handed over to the listener
- * 
- * @author vineet.aggarwal@3pillarglobal.com
- * @author abhinav.maheswari@3pillarglobal.com
- * 
- */
 public class SocialAuthDialog extends Dialog {
 
 	// Variables
@@ -104,20 +72,6 @@ public class SocialAuthDialog extends Dialog {
 	private final SocialAuthManager mSocialAuthManager;
 	private final Provider mProviderName;
 
-	/**
-	 * Constructor for the dialog
-	 * 
-	 * @param context
-	 *            Parent component that opened this dialog
-	 * @param url
-	 *            URL that will be used for authenticating
-	 * @param providerName
-	 *            Name of provider that is being authenticated
-	 * @param listener
-	 *            Listener object to handle events
-	 * @param socialAuthManager
-	 *            Underlying SocialAuth framework for OAuth
-	 */
 	public SocialAuthDialog(Context context, String url, Provider providerName, DialogListener listener,
 			SocialAuthManager socialAuthManager) {
 		super(context);
@@ -127,6 +81,7 @@ public class SocialAuthDialog extends Dialog {
 		mSocialAuthManager = socialAuthManager;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -176,11 +131,6 @@ public class SocialAuthDialog extends Dialog {
 
 	}
 
-	/**
-	 * Sets title and icon of provider
-	 * 
-	 */
-
 	private void setUpTitle() {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		mTitle = new TextView(getContext());
@@ -203,10 +153,7 @@ public class SocialAuthDialog extends Dialog {
 			mContent.addView(mTitle);
 	}
 
-	/**
-	 * Set up WebView to load the provider URL
-	 * 
-	 */
+	@SuppressLint("SetJavaScriptEnabled")
 	private void setUpWebView() {
 		mWebView = new CustomWebView(getContext());
 		mWebView.setVerticalScrollBarEnabled(false);
@@ -222,10 +169,6 @@ public class SocialAuthDialog extends Dialog {
 
 		mContent.addView(mWebView);
 	}
-
-	/**
-	 * WebView Client
-	 */
 
 	private class SocialAuthWebViewClient extends WebViewClient {
 		@Override
@@ -449,14 +392,6 @@ public class SocialAuthDialog extends Dialog {
 
 	}
 
-	/**
-	 * Internal Method to create new File in internal memory for each provider
-	 * and save accessGrant
-	 * 
-	 * @param auth
-	 *            AuthProvider
-	 */
-
 	private void writeToken(AuthProvider auth) {
 
 		AccessGrant accessGrant = auth.getAccessGrant();
@@ -487,12 +422,6 @@ public class SocialAuthDialog extends Dialog {
 		edit.commit();
 
 	}
-
-	/**
-	 * Workaround for Null pointer exception in WebView.onWindowFocusChanged in
-	 * droid phones and emulator with android 2.2 os. It prevents first time
-	 * WebView crash.
-	 */
 
 	public class CustomWebView extends WebView {
 
