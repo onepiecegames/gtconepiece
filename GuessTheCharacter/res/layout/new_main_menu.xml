@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tile_bg" >
+
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/banner_height"
+        android:layout_alignParentTop="true"
+        android:background="@color/mine_shaft"
+        android:text="@string/app_name"
+        android:textIsSelectable="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_xlarge"
+        android:gravity="center" />
+
+    <View
+        android:id="@+id/bottomBar"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/margin_small"
+        android:layout_below="@id/banner"
+        android:layout_marginTop="@dimen/badge_height"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:background="@color/mine_shaft" />
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/medium_button"
+        android:layout_below="@id/bottomBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/puzzle_dimen"
+        android:background="@drawable/menu_btn"
+        android:text="@string/label_play"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_xlarge" />
+    
+    <ImageView
+        android:id="@+id/imageBG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomBar"
+        android:layout_below="@id/banner"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/empty"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/levelIndicator"
+        android:layout_width="@dimen/button_dimen"
+        android:layout_height="@dimen/button_dimen"
+        android:layout_above="@id/playButton"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:background="@color/white"
+        android:contentDescription="@string/empty"
+        android:padding="@dimen/margin_xsmall"
+        android:scaleType="fitXY"
+        android:src="@drawable/purple_btn" />
+
+    <TextView
+        android:id="@+id/currLevelLabel"
+        android:layout_width="@dimen/button_dimen"
+        android:layout_height="@dimen/button_dimen"
+        android:layout_above="@id/playButton"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_large" />
+
+    <ImageButton
+        android:id="@+id/aboutButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="@dimen/small_box_button"
+        android:layout_height="@dimen/small_box_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/menu_btn"
+        android:contentDescription="@string/empty"
+        android:scaleType="center"
+        android:src="@drawable/about" />
+
+</RelativeLayout>
