@@ -8,6 +8,7 @@
         <item >roboto_light</item>
         <item >roboto_medium</item>
         <item >roboto_regular</item>
+        <item >digitalstrip</item>
     </string-array>
     
     <string name="app_name">Guess The Character: One Piece</string>
