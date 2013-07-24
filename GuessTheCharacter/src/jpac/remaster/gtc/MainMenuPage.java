@@ -1,11 +1,13 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.logic.ButtonDataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.ResourceUtil;
 import jpac.remaster.gtc.util.SysInfo;
+import jpac.remaster.gtc.util.social.SocialDataManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -77,4 +79,15 @@ public class MainMenuPage extends GTCActivity {
 		level.setText("" + UserDataManager.checkLevel());
 	}
 
+	public void resetData() {
+		UserDataManager.resetData(this);
+		PuzzleManager.resetData(this);
+		SocialDataManager.resetData(this);
+		ButtonDataManager.resetData(this);
+		
+		Intent intent = new Intent(this, AcknowledgementPopup.class);
+		intent.putExtra("title", "Data Reset");
+		intent.putExtra("message", "All user data has been cleared. You can play the game from the start again.");
+		startActivity(intent);
+	}
 }
