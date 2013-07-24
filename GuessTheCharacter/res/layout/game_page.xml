@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/banner_height"
         android:layout_alignParentTop="true"
-        android:background="@color/crail" >
+        android:background="@color/mine_shaft" >
 
         <ImageButton
             android:id="@+id/backButton"
@@ -170,7 +170,7 @@
             android:id="@+id/levelContainer"
             android:layout_width="@dimen/puzzle_dimen"
             android:layout_height="@dimen/diff_height"
-            android:background="@color/crail"
+            android:background="@color/mine_shaft"
             android:gravity="center_horizontal" >
 
             <ImageView

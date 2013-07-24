@@ -31,7 +31,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:background="@color/crail"
+        android:background="@color/mine_shaft"
         android:gravity="center"
         android:text="@string/label_round_end"
         android:textAppearance="?android:attr/textAppearanceLarge"
