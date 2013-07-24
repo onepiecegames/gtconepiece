@@ -65,4 +65,12 @@ public class SocialDataManager {
 	public static void updatePosted(int id) {
 		idOfLastPosted = id;
 	}
+
+	public static void resetData(Context context) {
+		try {
+			context.deleteFile(FILENAME);
+		} catch (Exception e) {
+			
+		}
+	}
 }

@@ -112,4 +112,12 @@ public class UserDataManager {
 	public static int checkCurrentPuzzleId() {
 		return Integer.valueOf(USER.getCurrentPuzzle());
 	}
+
+	public static void resetData(Context context) {
+		try {
+			context.deleteFile(FILENAME);
+		} catch (Exception e) {
+			
+		}
+	}
 }

@@ -87,4 +87,12 @@ public class ButtonDataManager {
 			e.printStackTrace();
 		}
 	}
+
+	public static void resetData(Context context) {
+		try {
+			context.deleteFile(filename);
+		} catch (Exception e) {
+			
+		}
+	}
 }
