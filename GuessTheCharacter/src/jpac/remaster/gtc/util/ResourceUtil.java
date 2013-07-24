@@ -42,8 +42,6 @@ public class ResourceUtil {
 	public static final String GAME_LOGO = "game_logo";
 	public static final String GAME_DONE_MASCOT = "luffy_congrats";
 	public static final String GAME_CONTINUE = "to_be_continued";
-	public static final String GAME_MASCOT = "luffy_main";
-	public static final String MAIN_MASCOT_BG = "ph_background";
 
 	public static void loadMainImages() {
 		if (!IMAGE_CACHE.containsKey(GAME_LOGO)) {
@@ -69,23 +67,6 @@ public class ResourceUtil {
 							R.drawable.to_be_continued,
 							DeviceInfo.SCREEN_WIDTH,
 							loadDimension(R.dimen.badge_height)));
-		}
-
-		if (!IMAGE_CACHE.containsKey(GAME_MASCOT)) {
-			IMAGE_CACHE.put(
-					GAME_MASCOT,
-					decodeSampledBitmapFromResource(contextRef.getResources(),
-							R.drawable.luffy_main,
-							loadDimension(R.dimen.speech_height),
-							loadDimension(R.dimen.speech_height)));
-		}
-
-		if (!IMAGE_CACHE.containsKey(MAIN_MASCOT_BG)) {
-			IMAGE_CACHE.put(
-					MAIN_MASCOT_BG,
-					decodeSampledBitmapFromResource(contextRef.getResources(),
-							R.drawable.ph_background, DeviceInfo.SCREEN_WIDTH,
-							-1));
 		}
 	}
 
