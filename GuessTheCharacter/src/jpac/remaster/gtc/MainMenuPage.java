@@ -50,6 +50,12 @@ public class MainMenuPage extends GTCActivity {
 
 		((Button) findViewById(R.id.playButton)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/roboto_bold.ttf"));
+		((Button) findViewById(R.id.facebookButton)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/roboto_bold.ttf"));
+		((Button) findViewById(R.id.aboutButton)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/roboto_bold.ttf"));
+		((Button) findViewById(R.id.resetButton)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/roboto_bold.ttf"));
 //
 //		try {
 //			ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
