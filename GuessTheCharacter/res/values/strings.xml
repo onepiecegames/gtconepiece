@@ -31,7 +31,7 @@
 	<string name="label_close">Close</string>
 	<string name="label_loading">Loading&#8230;</string>
 	<string name="label_share">Post</string>
-	<string name="label_social">Facebook</string>
+	<string name="label_social">facebook</string>
 	<string name="label_social_message">Ask your facebook friends for help?</string>
 	<string name="label_signin">Sign In</string>
 	<string name="label_signout">Sign Out</string>
