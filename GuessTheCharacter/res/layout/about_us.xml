@@ -28,7 +28,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
     </RelativeLayout>
 
     <WebView

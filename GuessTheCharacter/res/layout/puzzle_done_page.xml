@@ -50,6 +50,7 @@
             tools:ignore="UselessParent" >
 
             <TextView
+                android:id="@+id/titleLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_medium"
@@ -58,7 +59,7 @@
                 android:text="@string/popup_display_1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_large" />
+                android:textSize="@dimen/font_xlarge" />
 
             <ImageView
                 android:id="@+id/puzzleImage"
@@ -79,7 +80,7 @@
                 android:background="@color/translucent"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_snormal" />
+                android:textSize="@dimen/font_xlarge" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,13 +90,14 @@
                 android:gravity="center" >
 
                 <TextView
+                    android:id="@+id/receiveLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:text="@string/popup_display_2_1"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_large" />
+                    android:textSize="@dimen/font_xlarge" />
 
                 <TextView
                     android:id="@+id/amountLabel"
@@ -106,16 +108,17 @@
                     android:gravity="center_vertical"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_large" />
+                    android:textSize="@dimen/font_xlarge" />
 
                 <TextView
+                    android:id="@+id/goldLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:text="@string/popup_display_2_2"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_large" />
+                    android:textSize="@dimen/font_xlarge" />
             </LinearLayout>
         </LinearLayout>
     </ViewFlipper>

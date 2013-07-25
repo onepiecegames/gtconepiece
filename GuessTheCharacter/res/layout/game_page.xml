@@ -30,7 +30,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
 
         <TextView
             android:id="@+id/currLevelLabel"
@@ -38,11 +38,12 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/levelLabel"
             android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_small"
             android:text="@string/startLevel"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
 
         <TextView
             android:id="@+id/goldLabel"
@@ -55,7 +56,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
 
         <TextView
             android:id="@+id/amountLabel"
@@ -68,7 +69,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
     </RelativeLayout>
 
     <LinearLayout

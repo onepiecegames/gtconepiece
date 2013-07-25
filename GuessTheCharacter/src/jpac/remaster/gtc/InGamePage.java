@@ -6,6 +6,7 @@ import jpac.remaster.gtc.logic.Puzzle;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserActionListener;
 import jpac.remaster.gtc.logic.UserDataManager;
+import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.ResourceUtil;
 import jpac.remaster.gtc.util.SysInfo.Constants;
 import jpac.remaster.gtc.util.social.SocialDataManager;
@@ -95,11 +96,21 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	private void updateLevel() {
 		final TextView level = (TextView) findViewById(R.id.currLevelLabel);
 		level.setText("" + UserDataManager.checkLevel());
+		level.setTypeface(FontUtil.getFont(
+				getAssets(), "font/digitalstrip.ttf"));
+
+		((TextView) findViewById(R.id.levelLabel)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/digitalstrip.ttf"));
 	}
 
 	private void updateGold() {
 		final TextView gold = (TextView) findViewById(R.id.amountLabel);
 		gold.setText("" + UserDataManager.checkGold());
+		gold.setTypeface(FontUtil.getFont(
+				getAssets(), "font/digitalstrip.ttf"));
+		
+		((TextView) findViewById(R.id.goldLabel)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/digitalstrip.ttf"));
 	}
 
 	private void updatePuzzleDifficulty() {

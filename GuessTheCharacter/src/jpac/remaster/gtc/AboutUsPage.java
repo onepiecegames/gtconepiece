@@ -1,10 +1,12 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.util.FontUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 public class AboutUsPage extends GTCActivity {
 
@@ -23,5 +25,8 @@ public class AboutUsPage extends GTCActivity {
 
 		WebView webView = (WebView) findViewById(R.id.aboutHTML);
 		webView.loadUrl("file:///android_asset/data/about.html");
+
+		((TextView) findViewById(R.id.pageTitle)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/digitalstrip.ttf"));
 	}
 }
