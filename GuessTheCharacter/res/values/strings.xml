@@ -22,7 +22,7 @@
     <string name="label_reset">Reset Data</string>
     <string name="label_level">Level: </string>
 	<string name="label_round_end">AWESOME!</string>
-	<string name="label_continue">Continue</string>
+	<string name="label_continue">CONTINUE</string>
 	<string name="label_gold">Gold</string>
 	<string name="startLevel">1</string>
 	<string name="startGold">50</string>
