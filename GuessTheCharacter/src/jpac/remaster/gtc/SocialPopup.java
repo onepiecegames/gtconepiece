@@ -1,9 +1,11 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.util.FontUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 public class SocialPopup extends GTCActivity {
 
@@ -30,6 +32,9 @@ public class SocialPopup extends GTCActivity {
 						finish();
 					}
 				});
+		
+		((TextView) findViewById(R.id.title)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/facebook.otf"));
 	}
 
 }
