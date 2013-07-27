@@ -69,6 +69,7 @@ public class SocialDataManager {
 	public static void resetData(Context context) {
 		try {
 			context.deleteFile(FILENAME);
+			idOfLastPosted = -1;
 		} catch (Exception e) {
 			
 		}
