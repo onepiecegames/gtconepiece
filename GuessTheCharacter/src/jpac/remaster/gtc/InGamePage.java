@@ -9,9 +9,9 @@ import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.ResourceUtil;
 import jpac.remaster.gtc.util.SysInfo.Constants;
+import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.SocialDataManager;
 import jpac.remaster.gtc.util.social.SocialUtil;
-import jpac.remaster.gtc.util.Util;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -90,6 +90,11 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				finish();
 			}
 			updatePuzzleDifficulty();
+			
+			final TextView clue = (TextView) findViewById(R.id.categoryLabel);
+			clue.setTypeface(FontUtil.getFont(
+				getAssets(), "font/digitalstrip.ttf"));
+			clue.setText(puzzle.getCategory());
 		}
 	}
 
