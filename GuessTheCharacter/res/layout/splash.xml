@@ -27,11 +27,11 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="@dimen/puzzle_dimen"
-        android:layout_height="@dimen/puzzle_dimen"
+        android:layout_width="@dimen/speech_height"
+        android:layout_height="@dimen/badge_height"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:scaleType="centerInside"
-        android:src="@drawable/luffy_silhouette" android:contentDescription="@string/empty"/>
+        android:src="@drawable/law_loading" android:contentDescription="@string/empty"/>
 
 </RelativeLayout>
