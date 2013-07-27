@@ -6,6 +6,7 @@ import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.SysInfo;
+import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
 import jpac.remaster.gtc.util.social.SocialDataManager;
 import jpac.remaster.gtc.util.social.SocialUtil;
@@ -20,6 +21,8 @@ public class MainMenuPage extends GTCActivity {
 
 	private static final int REQUEST_RESETCONFIRM = 1;
 	private static final int REQUEST_ACKNOWLEDGE_RESET = 2;
+	private static final int REQUEST_FACEBOOK_ACTION = 3;
+	private static final int REQUEST_FACEBOOK_SIGN = 4;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,14 @@ public class MainMenuPage extends GTCActivity {
 					
 					@Override
 					public void onClick(View v) {
-						doFacebookAction();
+						Intent intent = new Intent(MainMenuPage.this, ConfirmationPopup.class);
+						intent.putExtra("title", "Confirm Action");
+						if (SocialUtil.isConnected(MainMenuPage.this, Provider.FACEBOOK)) {
+							intent.putExtra("message", "Are you sure you want to sign out from Facebook?");
+						} else {
+							intent.putExtra("message", "This will connect to your Facebook account.");	
+						}
+						startActivityForResult(intent, REQUEST_FACEBOOK_ACTION);
 					}
 				});
 
@@ -102,7 +112,13 @@ public class MainMenuPage extends GTCActivity {
 
 
 	private void doFacebookAction() {
-		
+		Intent intent = new Intent(this, SocialPostingPage.class);
+		if (SocialUtil.isConnected(this, Provider.FACEBOOK)) {
+			intent.putExtra("action", SocialPostingPage.ACTION_SIGN_OUT);
+		} else {
+			intent.putExtra("action", SocialPostingPage.ACTION_SIGN_IN);
+		}
+		startActivityForResult(intent, REQUEST_FACEBOOK_SIGN);
 	}
 	
 	@Override
@@ -135,6 +151,12 @@ public class MainMenuPage extends GTCActivity {
 		} else if (requestCode == REQUEST_ACKNOWLEDGE_RESET) {
 			startActivity(new Intent(this, GTCSplash.class));
 			finish();
+		} else if (requestCode == REQUEST_FACEBOOK_ACTION && resultCode == RESULT_OK) {
+			doFacebookAction();
+		} else if (requestCode == REQUEST_FACEBOOK_SIGN) {
+			if (resultCode == RESULT_OK) {
+				Util.displayToast(this, "Logged Out");
+			}
 		}
 	}
 
