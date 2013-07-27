@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/badge_height"
         android:layout_alignParentBottom="true"
-        android:contentDescription="@string/empty" />
+        android:contentDescription="@string/empty"
+        android:src="@drawable/law_congrats" />
 
     <Button
         android:id="@+id/continueButton"
