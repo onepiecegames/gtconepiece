@@ -1,10 +1,12 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.logic.ButtonDataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.SysInfo;
+import jpac.remaster.gtc.util.social.SocialDataManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,9 @@ import android.widget.TextView;
 
 public class MainMenuPage extends GTCActivity {
 
+	private static final int REQUEST_RESETCONFIRM = 1;
+	private static final int REQUEST_ACKNOWLEDGE_RESET = 2;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,7 +58,10 @@ public class MainMenuPage extends GTCActivity {
 					
 					@Override
 					public void onClick(View v) {
-						
+						Intent intent = new Intent(MainMenuPage.this, ConfirmationPopup.class);
+						intent.putExtra("title", "Confirm Action");
+						intent.putExtra("message", "This will clear all your progress as of now. Are you sure you want to reset data?");
+						startActivityForResult(intent, REQUEST_RESETCONFIRM);
 					}
 				});
 		
@@ -101,5 +109,26 @@ public class MainMenuPage extends GTCActivity {
 		TextView banner = ((TextView) findViewById(R.id.banner));
 		banner.setTypeface(FontUtil
 				.getFont(getAssets(), "font/digitalstrip.ttf"));
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_RESETCONFIRM && resultCode == RESULT_OK) {
+			resetData();
+			
+			Intent intent = new Intent(this, AcknowledgementPopup.class);
+			intent.putExtra("title", "Data Reset");
+			intent.putExtra("message", "Your user data has been deleted.");
+			startActivityForResult(intent, REQUEST_ACKNOWLEDGE_RESET);
+		} else if (requestCode == REQUEST_ACKNOWLEDGE_RESET) {
+			startActivity(new Intent(this, GTCSplash.class));
+			finish();
+		}
+	}
+
+	private void resetData() {
+		UserDataManager.resetData(this);
+		PuzzleManager.resetData(this);
+		SocialDataManager.resetData(this);
+		ButtonDataManager.resetData(this);
 	}
 }
