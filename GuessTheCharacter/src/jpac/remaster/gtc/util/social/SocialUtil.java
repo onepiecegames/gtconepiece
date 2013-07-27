@@ -7,12 +7,16 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
+
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -22,6 +26,14 @@ public final class SocialUtil {
 	public static int UI_DENSITY;
 	public static int UI_SIZE;
 	public static int UI_RESOLUTION;
+	
+	public static boolean isConnected(final Context context, final Provider provider) {
+
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(context);
+
+		return pref.contains(provider.toString() + " key");
+	}
 
 	@SuppressWarnings("deprecation")
 	public static String encodeUrl(Bundle parameters) {
