@@ -11,6 +11,10 @@ import android.os.Bundle;
 
 public class SocialPostingPage extends GTCActivity implements DialogListener, SocialAuthListener<Integer> {
 
+	public static final String ACTION_SHARE = "Share";
+	public static final String ACTION_SIGN_IN = "Sign In";
+	public static final String ACTION_SIGN_OUT = "Sign Out";
+	
 	private SocialAuthAdapter adapter;
 	
 	@Override
