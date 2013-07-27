@@ -2,6 +2,23 @@ package jpac.remaster.gtc.logic;
 
 public class Puzzle {
 
+	public static enum Category {
+		
+		WEAPON,
+		
+		ABILITY,
+		
+		CLOTHING,
+		
+		MARKS,
+		
+		ACCESSORY,
+		
+		BODY,
+		
+		FACE;
+	}
+	
 	private String cleanAnswer;
 
 	private int difficulty;
@@ -13,8 +30,10 @@ public class Puzzle {
 	private long randomSeed;
 
 	private String rawAnswer;
-
-	public Puzzle(String rawAnswer, long randomSeed, String imageId1, int id,
+	
+	private Category category;
+	
+	public Puzzle(String rawAnswer, Category category, long randomSeed, String imageId1, int id,
 			int difficulty) {
 		super();
 		this.rawAnswer = rawAnswer;
@@ -22,6 +41,7 @@ public class Puzzle {
 		this.imageId = imageId1;
 		this.id = id;
 		this.difficulty = difficulty;
+		this.category = category;
 		cleanAnswer();
 	}
 
@@ -66,5 +86,9 @@ public class Puzzle {
 
 	public String getRawAnswer() {
 		return rawAnswer;
+	}
+	
+	public String getCategory() {
+		return category.name();
 	}
 }
