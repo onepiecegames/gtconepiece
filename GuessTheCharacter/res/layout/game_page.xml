@@ -222,7 +222,9 @@
                 android:id="@+id/categoryLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/font_normal"
+                android:textSize="@dimen/font_xlarge"
+                android:textColor="@color/white"
+                android:gravity="center"
                 android:textIsSelectable="false"/>
         </ViewFlipper>
     </LinearLayout>
