@@ -29,7 +29,11 @@ public class FontUtil {
 		int n = fonts.length;
 
 		for (int i = 0; i < n; i++) {
-			FontUtil.loadFont(mgr, "font/" + fonts[i] + ".ttf");
+			try {
+				FontUtil.loadFont(mgr, "font/" + fonts[i] + ".ttf");
+			} catch (RuntimeException e) {
+				FontUtil.loadFont(mgr, "font/" + fonts[i] + ".otf");
+			}
 		}
 	}
 

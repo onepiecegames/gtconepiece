@@ -38,6 +38,6 @@
     <dimen name="diff_height">57dp</dimen>
     
     <!-- POPUP -->
-    <dimen name="popup_width">450dp</dimen>
-    <dimen name="small_popup_height">450dp</dimen>
+    <dimen name="popup_width">540dp</dimen>
+    <dimen name="small_popup_height">540dp</dimen>
 </resources>

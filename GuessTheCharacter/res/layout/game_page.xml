@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gamepage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tile_bg" >
@@ -9,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/banner_height"
         android:layout_alignParentTop="true"
-        android:background="@color/crail" >
+        android:background="@color/mine_shaft" >
 
         <ImageButton
             android:id="@+id/backButton"
@@ -29,19 +30,20 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
 
         <TextView
             android:id="@+id/currLevelLabel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_small"
             android:layout_toRightOf="@id/levelLabel"
             android:gravity="center_vertical"
             android:text="@string/startLevel"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
 
         <TextView
             android:id="@+id/goldLabel"
@@ -54,7 +56,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
 
         <TextView
             android:id="@+id/amountLabel"
@@ -67,7 +69,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_large" />
+            android:textSize="@dimen/font_xlarge" />
     </RelativeLayout>
 
     <LinearLayout
@@ -124,6 +126,20 @@
                 android:src="@drawable/solve" />
 
             <ImageButton
+                android:id="@+id/askFacebookButton"
+                android:layout_width="@dimen/medium_button"
+                android:layout_height="@dimen/button_dimen"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/solvePuzzleButton"
+                android:layout_marginRight="@dimen/margin_negxsmall"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/unlock_btn"
+                android:contentDescription="@string/empty"
+                android:gravity="center_vertical|right"
+                android:onClick="askFacebook"
+                android:src="@drawable/facebook" />
+
+            <ImageButton
                 android:id="@+id/deleteLetterButton"
                 android:layout_width="@dimen/medium_button"
                 android:layout_height="@dimen/button_dimen"
@@ -151,48 +167,64 @@
                 android:src="@drawable/reveal" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/levelContainer"
-            android:layout_width="@dimen/puzzle_dimen"
-            android:layout_height="@dimen/diff_height"
-            android:background="@color/crail"
-            android:gravity="center_horizontal" >
+        <ViewFlipper
+                android:layout_width="@dimen/puzzle_dimen"
+                android:layout_height="@dimen/diff_height"
+                android:background="@color/mine_shaft"
+                android:gravity="center_horizontal"
+                android:autoStart="true"
+                android:flipInterval="3000"
+                android:inAnimation="@anim/fade_in"
+                android:outAnimation="@anim/fade_out">
 
-            <ImageView
-                android:id="@+id/level1"
-                android:layout_width="@dimen/diff_height"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/empty"
-                android:src="@drawable/level_null" />
+            <LinearLayout
+                android:id="@+id/levelContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
-            <ImageView
-                android:id="@+id/level2"
-                android:layout_width="@dimen/diff_height"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/empty"
-                android:src="@drawable/level_null" />
+                <ImageView
+                    android:id="@+id/level1"
+                    android:layout_width="@dimen/diff_height"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/empty"
+                    android:src="@drawable/level_null" />
 
-            <ImageView
-                android:id="@+id/level3"
-                android:layout_width="@dimen/diff_height"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/empty"
-                android:src="@drawable/level_null" />
+                <ImageView
+                    android:id="@+id/level2"
+                    android:layout_width="@dimen/diff_height"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/empty"
+                    android:src="@drawable/level_null" />
 
-            <ImageView
-                android:id="@+id/level4"
-                android:layout_width="@dimen/diff_height"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/empty"
-                android:src="@drawable/level_null" />
+                <ImageView
+                    android:id="@+id/level3"
+                    android:layout_width="@dimen/diff_height"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/empty"
+                    android:src="@drawable/level_null" />
 
-            <ImageView
-                android:id="@+id/level5"
-                android:layout_width="@dimen/diff_height"
+                <ImageView
+                    android:id="@+id/level4"
+                    android:layout_width="@dimen/diff_height"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/empty"
+                    android:src="@drawable/level_null" />
+
+                <ImageView
+                    android:id="@+id/level5"
+                    android:layout_width="@dimen/diff_height"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/empty"
+                    android:src="@drawable/level_null" />
+            </LinearLayout>
+            
+            <TextView 
+                android:id="@+id/categoryLabel"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/empty"
-                android:src="@drawable/level_null" />
-        </LinearLayout>
+                android:textSize="@dimen/font_normal"
+                android:textIsSelectable="false"/>
+        </ViewFlipper>
     </LinearLayout>
 
     <LinearLayout
