@@ -8,15 +8,21 @@
         <item >roboto_light</item>
         <item >roboto_medium</item>
         <item >roboto_regular</item>
+        <item >digitalstrip</item>
+        <item >facebook</item>
     </string-array>
     
     <string name="app_name">Guess The Character: One Piece</string>
+    <string name="app_alias">Guess The Character</string>
+    <string name="app_id">139678339573107</string>
+    
     <string name="empty"></string>
     <string name="label_play">Play</string>
     <string name="label_about">About Us</string>
+    <string name="label_reset">Reset Data</string>
     <string name="label_level">Level: </string>
 	<string name="label_round_end">AWESOME!</string>
-	<string name="label_continue">Continue</string>
+	<string name="label_continue">CONTINUE</string>
 	<string name="label_gold">Gold</string>
 	<string name="startLevel">1</string>
 	<string name="startGold">50</string>
@@ -24,6 +30,11 @@
 	<string name="label_cancel">Cancel</string>
 	<string name="label_close">Close</string>
 	<string name="label_loading">Loading&#8230;</string>
+	<string name="label_share">Post</string>
+	<string name="label_social">facebook</string>
+	<string name="label_social_message">Ask your facebook friends for help?</string>
+	<string name="label_signin">Sign In</string>
+	<string name="label_signout">Sign Out</string>
 	
     <string name="popup_display_1">You\'ve solved the Puzzle!</string>
     <string name="popup_display_2_1">Receive </string>

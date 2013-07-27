@@ -4,14 +4,12 @@ import jpac.remaster.gtc.core.GTCActivity;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.FontUtil;
-import jpac.remaster.gtc.util.ResourceUtil;
 import jpac.remaster.gtc.util.SysInfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainMenuPage extends GTCActivity {
@@ -19,7 +17,7 @@ public class MainMenuPage extends GTCActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_menu_beta);
+		setContentView(R.layout.new_main_menu);
 
 		if (!SysInfo.splash) {
 			startActivity(new Intent(getApplicationContext(), GTCSplash.class));
@@ -49,23 +47,47 @@ public class MainMenuPage extends GTCActivity {
 								AboutUsPage.class));
 					}
 				});
+		
+		findViewById(R.id.resetButton).setOnClickListener(
+				new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						
+					}
+				});
+		
+		findViewById(R.id.facebookButton).setOnClickListener(
+				new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+					
+					}
+				});
 
 		((Button) findViewById(R.id.playButton)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/roboto_bold.ttf"));
-
-		try {
-			ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
-			imageBg.setImageBitmap(ResourceUtil
-					.loadImage(ResourceUtil.MAIN_MASCOT_BG));
-	
-			ImageView logo = (ImageView) findViewById(R.id.gameLogo);
-			logo.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_LOGO));
-	
-			ImageView mascot = (ImageView) findViewById(R.id.gameMascot);
-			mascot.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_MASCOT));
-		} catch (RuntimeException e) {
-			finish();
-		}
+		((Button) findViewById(R.id.facebookButton)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/roboto_bold.ttf"));
+		((Button) findViewById(R.id.aboutButton)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/roboto_bold.ttf"));
+		((Button) findViewById(R.id.resetButton)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/roboto_bold.ttf"));
+//
+//		try {
+//			ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
+//			imageBg.setImageBitmap(ResourceUtil
+//					.loadImage(ResourceUtil.MAIN_MASCOT_BG));
+//	
+//			ImageView logo = (ImageView) findViewById(R.id.gameLogo);
+//			logo.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_LOGO));
+//	
+//			ImageView mascot = (ImageView) findViewById(R.id.gameMascot);
+//			mascot.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_MASCOT));
+//		} catch (RuntimeException e) {
+//			finish();
+//		}
 	}
 
 	@Override
@@ -75,6 +97,9 @@ public class MainMenuPage extends GTCActivity {
 		level.setTypeface(FontUtil
 				.getFont(getAssets(), "font/roboto_black.ttf"));
 		level.setText("" + UserDataManager.checkLevel());
+		
+		TextView banner = ((TextView) findViewById(R.id.banner));
+		banner.setTypeface(FontUtil
+				.getFont(getAssets(), "font/digitalstrip.ttf"));
 	}
-
 }

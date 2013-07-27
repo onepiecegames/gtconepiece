@@ -5,6 +5,9 @@
     <color name="crail">#B9453F</color>
     <color name="black">#000000</color>
     <color name="burnt_amber">#862734</color>
+    <color name="mine_shaft">#212121</color>
+    <color name="chambray">#3b5999</color>
+    <color name="tuna">#3E3F49</color>
     
     <!-- VINTAGE -->
     <color name="vintage_red_dark">@color/burnt_amber</color>

@@ -1,6 +1,7 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.util.FontUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,6 +38,9 @@ public class ConfirmationPopup extends GTCActivity {
 						finish();
 					}
 				});
+
+		((TextView) findViewById(R.id.title)).setTypeface(FontUtil.getFont(
+				getAssets(), "font/digitalstrip.ttf"));
 	}
 
 }

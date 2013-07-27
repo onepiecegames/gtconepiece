@@ -7,18 +7,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class AcknowledgementPopup extends GTCActivity {
+public class SocialPopup extends GTCActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pop_acknowledge);
-
-		String title = getIntent().getStringExtra("title");
-		String message = getIntent().getStringExtra("message");
-
-		((TextView) findViewById(R.id.title)).setText(title);
-		((TextView) findViewById(R.id.message)).setText(message);
+		setContentView(R.layout.pop_social);
 
 		findViewById(R.id.okButton).setOnClickListener(new OnClickListener() {
 
@@ -29,8 +23,18 @@ public class AcknowledgementPopup extends GTCActivity {
 			}
 		});
 
+		findViewById(R.id.cancelButton).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						setResult(RESULT_CANCELED);
+						finish();
+					}
+				});
+		
 		((TextView) findViewById(R.id.title)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/digitalstrip.ttf"));
+				getAssets(), "font/facebook.otf"));
 	}
 
 }

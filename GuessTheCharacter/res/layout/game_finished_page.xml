@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/badge_height"
         android:layout_alignParentBottom="true"
-        android:contentDescription="@string/empty" />
+        android:contentDescription="@string/empty"
+        android:src="@drawable/law_congrats" />
 
     <Button
         android:id="@+id/continueButton"
@@ -31,11 +32,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:background="@color/crail"
+        android:background="@color/mine_shaft"
         android:gravity="center"
         android:text="@string/label_round_end"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_xlarge" />
 
     <ViewFlipper
         android:id="@+id/descFlipper"
@@ -55,6 +57,7 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/titleLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
@@ -67,6 +70,7 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/finishLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

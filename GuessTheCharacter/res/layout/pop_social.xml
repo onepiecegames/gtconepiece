@@ -26,7 +26,7 @@
                 android:layout_margin="@dimen/margin_xsmall"
                 android:layout_weight="1"
                 android:background="@drawable/menu_btn"
-                android:text="@string/label_confirm"
+                android:text="@string/label_share"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_large" />
 
@@ -49,12 +49,13 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="@color/mine_shaft"
+            android:background="@color/chambray"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_xlarge" />
+            android:textSize="@dimen/font_xlarge"
+            android:text="@string/label_social" />
 
         <TextView
             android:id="@+id/message"
@@ -68,7 +69,8 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textIsSelectable="false"
-            android:textSize="@dimen/font_snormal" />
+            android:textSize="@dimen/font_snormal"
+            android:text="@string/label_social_message" />
     </RelativeLayout>
 
 </RelativeLayout>
