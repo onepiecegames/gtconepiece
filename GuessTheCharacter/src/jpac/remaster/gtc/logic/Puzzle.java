@@ -15,6 +15,8 @@ public class Puzzle {
 		ACCESSORY,
 		
 		BODY,
+		
+		FACE;
 	}
 	
 	private String cleanAnswer;
