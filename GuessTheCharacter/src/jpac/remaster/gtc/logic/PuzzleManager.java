@@ -136,4 +136,13 @@ public class PuzzleManager {
 
 		return puzzle;
 	}
+
+	public static void resetData(Context context) {
+		try {
+			context.deleteFile(FILENAME);
+			solvedPuzzles.clear();
+		} catch (Exception e) {
+			
+		}
+	}
 }

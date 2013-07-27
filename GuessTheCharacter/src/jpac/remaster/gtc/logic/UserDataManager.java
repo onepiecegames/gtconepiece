@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import jpac.remaster.gtc.util.SysInfo.Constants;
+
 import android.content.Context;
 
 public class UserDataManager {
@@ -111,5 +113,16 @@ public class UserDataManager {
 
 	public static int checkCurrentPuzzleId() {
 		return Integer.valueOf(USER.getCurrentPuzzle());
+	}
+
+	public static void resetData(Context context) {
+		try {
+			context.deleteFile(FILENAME);
+			USER.setCurrentPuzzle("X");
+			USER.setGold(Constants.START_GOLD);
+			USER.setLevel(1);
+		} catch (Exception e) {
+			
+		}
 	}
 }
