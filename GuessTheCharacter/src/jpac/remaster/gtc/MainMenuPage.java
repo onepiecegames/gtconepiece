@@ -6,7 +6,9 @@ import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.SysInfo;
+import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
 import jpac.remaster.gtc.util.social.SocialDataManager;
+import jpac.remaster.gtc.util.social.SocialUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -70,7 +72,7 @@ public class MainMenuPage extends GTCActivity {
 					
 					@Override
 					public void onClick(View v) {
-					
+						doFacebookAction();
 					}
 				});
 
@@ -98,6 +100,11 @@ public class MainMenuPage extends GTCActivity {
 //		}
 	}
 
+
+	private void doFacebookAction() {
+		
+	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -109,6 +116,12 @@ public class MainMenuPage extends GTCActivity {
 		TextView banner = ((TextView) findViewById(R.id.banner));
 		banner.setTypeface(FontUtil
 				.getFont(getAssets(), "font/digitalstrip.ttf"));
+
+		if (SocialUtil.isConnected(this, Provider.FACEBOOK)) {
+			((Button) findViewById(R.id.facebookButton)).setText("Sign Out");
+		} else {
+			((Button) findViewById(R.id.facebookButton)).setText("Sign In");
+		}
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
