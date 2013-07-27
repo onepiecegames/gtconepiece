@@ -7,6 +7,7 @@ import jpac.remaster.gtc.util.social.DialogListener;
 import jpac.remaster.gtc.util.social.SocialAuthAdapter;
 import jpac.remaster.gtc.util.social.SocialAuthError;
 import jpac.remaster.gtc.util.social.SocialAuthListener;
+import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
 import android.os.Bundle;
 
 public class SocialPostingPage extends GTCActivity implements DialogListener, SocialAuthListener<Integer> {
@@ -17,11 +18,15 @@ public class SocialPostingPage extends GTCActivity implements DialogListener, So
 	
 	private SocialAuthAdapter adapter;
 	
+	private String action;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loading);
 		
+		action = getIntent().getStringExtra("action");
+
 		adapter = new SocialAuthAdapter(this);
 		adapter.connect(this);
 	}
@@ -34,10 +39,22 @@ public class SocialPostingPage extends GTCActivity implements DialogListener, So
 	@Override
 	public void onComplete(Bundle values) {
 		try {
-			adapter.uploadImageAsync(
-					"Help! Who is this character?",
-					"guess_the_character.png",
-					ResourceUtil.getCapturedImage(), 1, this);
+			if (action.compareTo(ACTION_SHARE) == 0) {
+				adapter.uploadImageAsync(
+						"Help! Who is this character?",
+						"guess_the_character.png",
+						ResourceUtil.getCapturedImage(), 1, this);
+			} else if (action.compareTo(ACTION_SIGN_OUT) == 0) {
+				if (adapter.signOut(Provider.FACEBOOK.toString())) {
+					setResult(RESULT_OK);
+				} else {
+					setResult(RESULT_CANCELED);
+				}
+				finish();
+			} else {
+				setResult(RESULT_OK);
+				finish();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
