@@ -38,7 +38,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_large"
             android:layout_marginRight="@dimen/margin_xsmall"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="showAbout" />
 
         <Button
             android:id="@+id/resetButton"
@@ -49,7 +50,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_large"
             android:layout_marginLeft="@dimen/margin_xsmall"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="resetData" />
     </LinearLayout>
 
     <Button
@@ -63,7 +65,8 @@
         android:background="@drawable/fb_btn"
         android:text="@string/label_signin"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_xlarge" />
+        android:textSize="@dimen/font_xlarge"
+        android:onClick="fbAction" />
     
     <Button
         android:id="@+id/playButton"
@@ -99,14 +102,14 @@
         android:src="@drawable/ph_bg" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/mascot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/banner"
         android:layout_above="@id/bottomBar"
         android:scaleType="fitEnd"
-        android:src="@drawable/law" />
+        android:src="@drawable/law" android:contentDescription="@string/empty"/>
     
     <ImageView
         android:id="@+id/levelIndicator"
