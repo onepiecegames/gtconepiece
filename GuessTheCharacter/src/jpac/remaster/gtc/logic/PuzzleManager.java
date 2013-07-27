@@ -17,10 +17,25 @@ public class PuzzleManager {
 
 	public static Puzzle currentPuzzle = null;
 
+	public static ArrayList<Integer> smartLoader;
+	
 	public static void init(Context context) {
 		solvedPuzzles = new ArrayList<Integer>(50);
 
 		loadData(context);
+		
+		smartLoader = new ArrayList<Integer>();
+		smartLoad();
+	}
+
+	private static void smartLoad() {
+		while (smartLoader.size() < 10) {
+			int index = -1;
+			while (index == -1 || solvedPuzzles.contains(index) || smartLoader.contains(index)) {
+				index = Util.randInt(PuzzleFactory.TOTAL_PUZZLE);
+			}
+			smartLoader.add(index);
+		}
 	}
 
 	private static void loadData(Context context) {
@@ -106,9 +121,17 @@ public class PuzzleManager {
 
 		int index = -1;
 
-		while (index == -1 || solvedPuzzles.contains(index)) {
-			index = Util.randInt(PuzzleFactory.TOTAL_PUZZLE);
+		if (smartLoader.size() < 3 && (PuzzleFactory.TOTAL_PUZZLE - solvedPuzzles.size()) > 1) {
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					smartLoad();
+				}
+			}).start();
 		}
+
+		index = smartLoader.remove(0);
 
 		return PuzzleFactory.getPuzzleById(index);
 	}
