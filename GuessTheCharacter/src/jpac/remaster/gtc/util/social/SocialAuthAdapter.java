@@ -110,7 +110,7 @@ public class SocialAuthAdapter {
 		}
 	}
 
-	public void share(Context context) {
+	public void connect(Context context) {
 		authorize(context, Provider.FACEBOOK);
 	}
 
@@ -315,7 +315,6 @@ public class SocialAuthAdapter {
 	}
 
 	public boolean signOut(String providerName) {
-
 		CookieSyncManager.createInstance(context);
 		CookieManager cookieManager = CookieManager.getInstance();
 		cookieManager.removeAllCookie();

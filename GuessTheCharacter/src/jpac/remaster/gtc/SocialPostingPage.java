@@ -23,7 +23,7 @@ public class SocialPostingPage extends GTCActivity implements DialogListener, So
 		setContentView(R.layout.loading);
 		
 		adapter = new SocialAuthAdapter(this);
-		adapter.share(this);
+		adapter.connect(this);
 	}
 
 	@Override
