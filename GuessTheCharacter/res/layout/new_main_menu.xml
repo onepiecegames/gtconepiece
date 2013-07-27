@@ -38,8 +38,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_large"
             android:layout_marginRight="@dimen/margin_xsmall"
-            android:layout_weight="1"
-            android:onClick="showAbout" />
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/resetButton"
@@ -50,8 +49,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_large"
             android:layout_marginLeft="@dimen/margin_xsmall"
-            android:layout_weight="1"
-            android:onClick="resetData" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <Button
@@ -65,8 +63,7 @@
         android:background="@drawable/fb_btn"
         android:text="@string/label_signin"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_xlarge"
-        android:onClick="fbAction" />
+        android:textSize="@dimen/font_xlarge" />
     
     <Button
         android:id="@+id/playButton"

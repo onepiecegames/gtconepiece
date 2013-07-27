@@ -47,6 +47,24 @@ public class MainMenuPage extends GTCActivity {
 								AboutUsPage.class));
 					}
 				});
+		
+		findViewById(R.id.resetButton).setOnClickListener(
+				new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						
+					}
+				});
+		
+		findViewById(R.id.facebookButton).setOnClickListener(
+				new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+					
+					}
+				});
 
 		((Button) findViewById(R.id.playButton)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/roboto_bold.ttf"));
