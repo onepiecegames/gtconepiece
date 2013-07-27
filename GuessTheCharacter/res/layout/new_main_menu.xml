@@ -123,4 +123,14 @@
         android:textColor="@color/white"
         android:textSize="@dimen/font_large" />
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="@dimen/speech_height"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/banner"
+        android:layout_above="@id/bottomBar"
+        android:scaleType="fitEnd"
+        android:src="@drawable/luffy_punkhazard" />
+
 </RelativeLayout>
