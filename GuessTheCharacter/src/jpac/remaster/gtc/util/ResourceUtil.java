@@ -48,7 +48,7 @@ public class ResourceUtil {
 			IMAGE_CACHE.put(
 					GAME_LOGO,
 					decodeSampledBitmapFromResource(contextRef.getResources(),
-							R.drawable.game_logo, DeviceInfo.SCREEN_WIDTH,
+							R.drawable.game_logo, SysInfo.SCREEN_WIDTH,
 							loadDimension(R.dimen.logo_height)));
 		}
 
@@ -56,7 +56,7 @@ public class ResourceUtil {
 			IMAGE_CACHE.put(
 					GAME_DONE_MASCOT,
 					decodeSampledBitmapFromResource(contextRef.getResources(),
-							R.drawable.luffy_congrats, DeviceInfo.SCREEN_WIDTH,
+							R.drawable.luffy_congrats, SysInfo.SCREEN_WIDTH,
 							loadDimension(R.dimen.badge_height)));
 		}
 
@@ -65,7 +65,7 @@ public class ResourceUtil {
 					GAME_CONTINUE,
 					decodeSampledBitmapFromResource(contextRef.getResources(),
 							R.drawable.to_be_continued,
-							DeviceInfo.SCREEN_WIDTH,
+							SysInfo.SCREEN_WIDTH,
 							loadDimension(R.dimen.badge_height)));
 		}
 	}

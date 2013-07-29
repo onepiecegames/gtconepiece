@@ -3,10 +3,10 @@ package jpac.remaster.gtc;
 import jpac.remaster.gtc.core.GTCActivity;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
-import jpac.remaster.gtc.util.DeviceInfo;
 import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.ResourceLoader;
 import jpac.remaster.gtc.util.ResourceUtil;
+import jpac.remaster.gtc.util.SysInfo;
 import jpac.remaster.gtc.util.social.SocialDataManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -30,8 +30,8 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 
-		DeviceInfo.init(this);
-
+		SysInfo.loadScreenInfo(this);
+		
 		final TextView loadingLabel = (TextView) findViewById(R.id.loadingLabel);
 		loadingLabel.setTypeface(FontUtil.getFont(getAssets(),
 				"font/roboto_thin.ttf"));
