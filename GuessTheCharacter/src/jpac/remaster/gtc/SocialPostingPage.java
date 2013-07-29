@@ -1,17 +1,17 @@
 package jpac.remaster.gtc;
 
-import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.core.GTCPopupActivity;
 import jpac.remaster.gtc.util.ResourceUtil;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.DialogListener;
 import jpac.remaster.gtc.util.social.SocialAuthAdapter;
+import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
 import jpac.remaster.gtc.util.social.SocialAuthError;
 import jpac.remaster.gtc.util.social.SocialAuthListener;
-import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
 import android.os.Bundle;
 
-public class SocialPostingPage extends GTCActivity implements DialogListener,
-		SocialAuthListener<Integer> {
+public class SocialPostingPage extends GTCPopupActivity implements
+		DialogListener, SocialAuthListener<Integer> {
 
 	public static final String ACTION_SHARE = "Share";
 	public static final String ACTION_SIGN_IN = "Sign In";

@@ -1,13 +1,13 @@
 package jpac.remaster.gtc;
 
-import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.core.GTCPopupActivity;
 import jpac.remaster.gtc.util.FontUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class SocialPopup extends GTCActivity {
+public class SocialPopup extends GTCPopupActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
