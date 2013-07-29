@@ -43,7 +43,8 @@ public class GameFinishedPage extends GTCActivity {
 		((TextView) findViewById(R.id.titleLabel)).setTypeface(ds);
 		((TextView) findViewById(R.id.finishLabel)).setTypeface(ds);
 
-		((Button) findViewById(R.id.continueButton)).setTypeface(ResourceManager.getFont("roboto_bold.ttf"));
+		((Button) findViewById(R.id.continueButton))
+				.setTypeface(ResourceManager.getFont("roboto_bold.ttf"));
 	}
 
 	@Override

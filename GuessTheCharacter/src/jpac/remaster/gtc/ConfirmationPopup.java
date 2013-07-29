@@ -39,7 +39,8 @@ public class ConfirmationPopup extends GTCPopupActivity {
 					}
 				});
 
-		((TextView) findViewById(R.id.title)).setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
+		((TextView) findViewById(R.id.title)).setTypeface(ResourceManager
+				.getFont("digitalstrip.ttf"));
 	}
 
 }

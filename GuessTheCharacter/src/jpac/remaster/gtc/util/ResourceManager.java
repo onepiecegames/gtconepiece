@@ -51,15 +51,15 @@ public class ResourceManager {
 	// A static context reference used for resource operations.
 	// ========================================================================
 	private static Context contextRef;
-	
+
 	// ========================================================================
 	// The cache for image bitmaps and fonts.
 	// ========================================================================
-	private static HashMap<String, Bitmap> imageCache 
-		= new HashMap<String, Bitmap>(20);
-	private static HashMap<String, Typeface> fontCache 
-		= new HashMap<String, Typeface>(20);
-	
+	private static HashMap<String, Bitmap> imageCache = new HashMap<String, Bitmap>(
+			20);
+	private static HashMap<String, Typeface> fontCache = new HashMap<String, Typeface>(
+			20);
+
 	// ========================================================================
 	// List of bitmap keys ready for recycling.
 	// ========================================================================
@@ -95,21 +95,21 @@ public class ResourceManager {
 		return ResourceManager.contextRef.getResources().getDimensionPixelSize(
 				id);
 	}
-	
+
 	/**************************************************************************
 	 * Load an array of string from array.xml given the resource id.
 	 *************************************************************************/
 	public static String[] loadStringArray(int id) {
 		return ResourceManager.contextRef.getResources().getStringArray(id);
 	}
-	
+
 	/**************************************************************************
 	 * Load an animation file from the res/anim folder given the resource id.
 	 *************************************************************************/
 	public static Animation loadAnimation(int id) {
 		return AnimationUtils.loadAnimation(contextRef, id);
 	}
-	
+
 	/**************************************************************************
 	 * Load an image from res/drawable folder and resize it accordingly to the
 	 * provided width and height.
@@ -138,7 +138,7 @@ public class ResourceManager {
 		options.inJustDecodeBounds = false;
 		return BitmapFactory.decodeResource(res, resId, options);
 	}
-	
+
 	/**************************************************************************
 	 * Calculate the in sample size of a bitmap.
 	 *************************************************************************/
@@ -166,7 +166,7 @@ public class ResourceManager {
 
 		return inSampleSize;
 	}
-	
+
 	/**************************************************************************
 	 * Load a bitmap from the res/drawable folder given the resource id and the
 	 * specified width and height.
@@ -176,8 +176,8 @@ public class ResourceManager {
 		if (!ResourceManager.imageCache.containsKey(idAsText)) {
 			try {
 				Bitmap bitmap = decodeSampledBitmapFromResource(
-						ResourceManager.contextRef.getResources(),
-						id, width, height);
+						ResourceManager.contextRef.getResources(), id, width,
+						height);
 				ResourceManager.imageCache.put(idAsText, bitmap);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -186,7 +186,7 @@ public class ResourceManager {
 		}
 		return ResourceManager.imageCache.get(idAsText);
 	}
-	
+
 	/**************************************************************************
 	 * Load a bitmap from the assets folder given the name of the file.
 	 *************************************************************************/
@@ -197,15 +197,15 @@ public class ResourceManager {
 						Constants.IMAGE_LOCATION + name + ".png");
 				Bitmap bitmap = BitmapFactory.decodeStream(is);
 				ResourceManager.imageCache.put(name, bitmap);
-			} catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
 			}
 		}
-		
+
 		return ResourceManager.imageCache.get(name);
 	}
-	
+
 	/**************************************************************************
 	 * Mark the bitmap ready for recycling.
 	 *************************************************************************/
@@ -217,7 +217,7 @@ public class ResourceManager {
 			}
 		}
 	}
-	
+
 	/**************************************************************************
 	 * You can force the recycling of bitmaps at any point in the application
 	 * lifecycle. This will not check if list already hits threshold.
@@ -225,7 +225,7 @@ public class ResourceManager {
 	public static void forceRecycle() {
 		recycle();
 	}
-	
+
 	/**************************************************************************
 	 * Performs bitmap recycling for all images included in the for recycle
 	 * list. This will clear the list afterwards.
@@ -251,13 +251,13 @@ public class ResourceManager {
 	private static boolean isReadyForRecycling() {
 		return forRecycle.size() > Constants.RECYCLE_THRESHOLD;
 	}
-	
+
 	/**************************************************************************
-	 * Dispose all resources used by this manager. Make sure to call this
-	 * method only when the application is finishing.
+	 * Dispose all resources used by this manager. Make sure to call this method
+	 * only when the application is finishing.
 	 *************************************************************************/
 	public static void cleanup() {
-		
+
 		if (imageCache != null) {
 			// recycle all images in the cache
 			Iterator<String> keys = imageCache.keySet().iterator();
@@ -267,16 +267,16 @@ public class ResourceManager {
 			recycle();
 			imageCache.clear();
 		}
-		
+
 		if (fontCache != null) {
 			// clear fonts
 			fontCache.clear();
 		}
-		
+
 		// make context reference null
 		contextRef = null;
 	}
-	
+
 	/**************************************************************************
 	 * Retrieve a font from the cache.
 	 *************************************************************************/
@@ -334,7 +334,7 @@ public class ResourceManager {
 			return false;
 		}
 	}
-	
+
 	/**************************************************************************
 	 * Load data content from an internal file and return it as a string.
 	 *************************************************************************/

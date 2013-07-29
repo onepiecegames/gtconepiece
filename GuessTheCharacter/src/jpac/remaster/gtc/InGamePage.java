@@ -83,8 +83,8 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			final ImageView puzzle1 = (ImageView) findViewById(R.id.puzzleImage1);
 
 			try {
-				puzzle1.setImageBitmap(ResourceManager.loadBitmapFromAsset(puzzle
-						.getImageId()));
+				puzzle1.setImageBitmap(ResourceManager
+						.loadBitmapFromAsset(puzzle.getImageId()));
 			} catch (RuntimeException e) {
 				finish();
 			}
@@ -99,8 +99,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	private void updateLevel() {
 		final TextView level = (TextView) findViewById(R.id.currLevelLabel);
 		level.setText("" + UserDataManager.checkLevel());
-		level.setTypeface(ResourceManager
-				.getFont("digitalstrip.ttf"));
+		level.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
 
 		((TextView) findViewById(R.id.levelLabel)).setTypeface(ResourceManager
 				.getFont("digitalstrip.ttf"));
@@ -111,7 +110,8 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 		gold.setText("" + UserDataManager.checkGold());
 		gold.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
 
-		((TextView) findViewById(R.id.goldLabel)).setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
+		((TextView) findViewById(R.id.goldLabel)).setTypeface(ResourceManager
+				.getFont("digitalstrip.ttf"));
 	}
 
 	private void updatePuzzleDifficulty() {
@@ -229,7 +229,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				break;
 			case REQUEST_SHARE_FACEBOOK:
 				if (SocialUtil.isNetworkAvailable(getApplicationContext())) {
-//					Util.captureView(findViewById(R.id.gamepage));
+					// Util.captureView(findViewById(R.id.gamepage));
 					Intent intent = new Intent(this, SocialPostingPage.class);
 					intent.putExtra("action", SocialPostingPage.ACTION_SHARE);
 					startActivityForResult(intent, REQUEST_PUBLISH_FEED);

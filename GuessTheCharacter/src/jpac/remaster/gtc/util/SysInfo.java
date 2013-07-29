@@ -31,7 +31,7 @@ public class SysInfo {
 
 	// ========================================================================
 	// These are the application modes.
-	// 
+	//
 	// DEBUG - this will enable debug specific codes in the application
 	// RELEASE - the application is ready for release
 	// ========================================================================

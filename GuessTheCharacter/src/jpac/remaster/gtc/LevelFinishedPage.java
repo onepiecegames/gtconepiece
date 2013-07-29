@@ -50,8 +50,8 @@ public class LevelFinishedPage extends GTCActivity {
 		((TextView) findViewById(R.id.amountLabel)).setTypeface(ds);
 		((TextView) findViewById(R.id.goldLabel)).setTypeface(ds);
 
-		((Button) findViewById(R.id.continueButton)).setTypeface(ResourceManager
-				.getFont("roboto_bold.ttf"));
+		((Button) findViewById(R.id.continueButton))
+				.setTypeface(ResourceManager.getFont("roboto_bold.ttf"));
 	}
 
 	@Override

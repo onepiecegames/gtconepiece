@@ -33,7 +33,8 @@ public class SocialPopup extends GTCPopupActivity {
 					}
 				});
 
-		((TextView) findViewById(R.id.title)).setTypeface(ResourceManager.getFont("facebook.otf"));
+		((TextView) findViewById(R.id.title)).setTypeface(ResourceManager
+				.getFont("facebook.otf"));
 	}
 
 }

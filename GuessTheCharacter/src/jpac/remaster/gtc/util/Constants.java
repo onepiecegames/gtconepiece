@@ -41,7 +41,7 @@ public class Constants {
 	// This is the standard amount user receive after solving a puzzle.
 	// ========================================================================
 	public static final int PUZZLE_PRIZE = 2;
-	
+
 	// ========================================================================
 	// This is the standard amount user receive after solving a puzzle.
 	// ========================================================================

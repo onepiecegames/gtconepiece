@@ -26,6 +26,7 @@ public class AboutUsPage extends GTCActivity {
 		WebView webView = (WebView) findViewById(R.id.aboutHTML);
 		webView.loadUrl("file:///android_asset/data/about.html");
 
-		((TextView) findViewById(R.id.pageTitle)).setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
+		((TextView) findViewById(R.id.pageTitle)).setTypeface(ResourceManager
+				.getFont("digitalstrip.ttf"));
 	}
 }

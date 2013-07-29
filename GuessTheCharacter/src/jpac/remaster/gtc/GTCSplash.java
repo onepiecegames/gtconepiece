@@ -29,7 +29,7 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		setContentView(R.layout.splash);
 
 		SysInfo.loadScreenInfo(this);
-		
+
 		final TextView loadingLabel = (TextView) findViewById(R.id.loadingLabel);
 		loadingLabel.setTypeface(ResourceManager.getFont("roboto_thin.ttf"));
 

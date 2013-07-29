@@ -40,9 +40,9 @@ public class SocialPostingPage extends GTCPopupActivity implements
 	public void onComplete(Bundle values) {
 		try {
 			if (action.compareTo(ACTION_SHARE) == 0) {
-//				adapter.uploadImageAsync("Help! Who is this character?",
-//						"guess_the_character.png",
-//						Util.getCapturedImage(), 1, this);
+				// adapter.uploadImageAsync("Help! Who is this character?",
+				// "guess_the_character.png",
+				// Util.getCapturedImage(), 1, this);
 			} else if (action.compareTo(ACTION_SIGN_OUT) == 0) {
 				if (adapter.signOut(Provider.FACEBOOK.toString())) {
 					setResult(RESULT_OK);
