@@ -124,7 +124,7 @@ public class SocialAuthAdapter {
 		}
 		context = ctx;
 		currentProvider = provider;
-	
+
 		// Initialize socialauth manager if not already done
 		if (socialAuthManager != null) {
 			// If SocialAuthManager is not null and contains Provider Id, send
@@ -150,7 +150,7 @@ public class SocialAuthAdapter {
 				loadConfig(ctx);
 
 			} catch (Exception e) {
-				
+
 			}
 			connectProvider(ctx, provider);
 		}
@@ -287,7 +287,7 @@ public class SocialAuthAdapter {
 						} catch (Exception e) {
 							dialogListener.onError(new SocialAuthError(
 									"Token Error", e));
-							
+
 							socialAuthManager = new SocialAuthManager();
 							try {
 								loadConfig(ctx);
@@ -335,7 +335,7 @@ public class SocialAuthAdapter {
 			return false;
 		}
 	}
-	
+
 	public void updateStatus(final String message,
 			final SocialAuthListener<Integer> listener,
 			final boolean shareOption) {
@@ -433,7 +433,7 @@ public class SocialAuthAdapter {
 
 			new Thread(runnable).start();
 		} else {
-			
+
 		}
 	}
 

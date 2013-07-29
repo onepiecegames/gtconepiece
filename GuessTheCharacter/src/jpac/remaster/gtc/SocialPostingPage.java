@@ -10,21 +10,22 @@ import jpac.remaster.gtc.util.social.SocialAuthListener;
 import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
 import android.os.Bundle;
 
-public class SocialPostingPage extends GTCActivity implements DialogListener, SocialAuthListener<Integer> {
+public class SocialPostingPage extends GTCActivity implements DialogListener,
+		SocialAuthListener<Integer> {
 
 	public static final String ACTION_SHARE = "Share";
 	public static final String ACTION_SIGN_IN = "Sign In";
 	public static final String ACTION_SIGN_OUT = "Sign Out";
-	
+
 	private SocialAuthAdapter adapter;
-	
+
 	private String action;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loading);
-		
+
 		action = getIntent().getStringExtra("action");
 
 		adapter = new SocialAuthAdapter(this);
@@ -40,8 +41,7 @@ public class SocialPostingPage extends GTCActivity implements DialogListener, So
 	public void onComplete(Bundle values) {
 		try {
 			if (action.compareTo(ACTION_SHARE) == 0) {
-				adapter.uploadImageAsync(
-						"Help! Who is this character?",
+				adapter.uploadImageAsync("Help! Who is this character?",
 						"guess_the_character.png",
 						ResourceUtil.getCapturedImage(), 1, this);
 			} else if (action.compareTo(ACTION_SIGN_OUT) == 0) {
@@ -62,7 +62,8 @@ public class SocialPostingPage extends GTCActivity implements DialogListener, So
 
 	@Override
 	public void onError(SocialAuthError e) {
-		Util.displayToast(getApplicationContext(), "Error posting on your timeline.");
+		Util.displayToast(getApplicationContext(),
+				"Error posting on your timeline.");
 		finish();
 	}
 
@@ -78,10 +79,10 @@ public class SocialPostingPage extends GTCActivity implements DialogListener, So
 
 	@Override
 	public void onExecute(String provider, Integer t) {
-		Util.displayToast(getApplicationContext(), "Successfully posted on your timeline.");
+		Util.displayToast(getApplicationContext(),
+				"Successfully posted on your timeline.");
 		setResult(RESULT_OK);
 		finish();
 	}
-	
-	
+
 }

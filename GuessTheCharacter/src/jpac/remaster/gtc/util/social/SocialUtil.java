@@ -26,8 +26,9 @@ public final class SocialUtil {
 	public static int UI_DENSITY;
 	public static int UI_SIZE;
 	public static int UI_RESOLUTION;
-	
-	public static boolean isConnected(final Context context, final Provider provider) {
+
+	public static boolean isConnected(final Context context,
+			final Provider provider) {
 
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
@@ -48,7 +49,8 @@ public final class SocialUtil {
 				first = false;
 			else
 				sb.append("&");
-			sb.append(URLEncoder.encode(key) + "=" + URLEncoder.encode(parameters.getString(key)));
+			sb.append(URLEncoder.encode(key) + "="
+					+ URLEncoder.encode(parameters.getString(key)));
 		}
 		return sb.toString();
 	}
@@ -61,7 +63,8 @@ public final class SocialUtil {
 			for (String parameter : array) {
 				String v[] = parameter.split("=");
 				if (v.length > 1) {
-					params.put(URLDecoder.decode(v[0]), v.length > 1 ? URLDecoder.decode(v[1]) : null);
+					params.put(URLDecoder.decode(v[0]),
+							v.length > 1 ? URLDecoder.decode(v[1]) : null);
 				}
 			}
 		}
@@ -86,7 +89,8 @@ public final class SocialUtil {
 			return false;
 		}
 
-		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connMgr = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
 
 		NetworkInfo netInfo = connMgr.getActiveNetworkInfo();
 		return netInfo != null && netInfo.isConnected();
@@ -96,7 +100,8 @@ public final class SocialUtil {
 	public static void getDisplayDpi(Context ctx) {
 
 		DisplayMetrics dm = new DisplayMetrics();
-		WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
+		WindowManager wm = (WindowManager) ctx
+				.getSystemService(Context.WINDOW_SERVICE);
 		wm.getDefaultDisplay().getMetrics(dm);
 
 		double x = Math.pow(dm.widthPixels / dm.xdpi, 2);
@@ -172,5 +177,5 @@ public final class SocialUtil {
 		} catch (Exception e) {
 			// Caught exception here
 		}
-	} 
+	}
 }

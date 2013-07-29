@@ -23,7 +23,7 @@ public class MainMenuPage extends GTCActivity {
 	private static final int REQUEST_ACKNOWLEDGE_RESET = 2;
 	private static final int REQUEST_FACEBOOK_ACTION = 3;
 	private static final int REQUEST_FACEBOOK_SIGN = 4;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,30 +57,37 @@ public class MainMenuPage extends GTCActivity {
 								AboutUsPage.class));
 					}
 				});
-		
+
 		findViewById(R.id.resetButton).setOnClickListener(
 				new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
-						Intent intent = new Intent(MainMenuPage.this, ConfirmationPopup.class);
+						Intent intent = new Intent(MainMenuPage.this,
+								ConfirmationPopup.class);
 						intent.putExtra("title", "Confirm Action");
-						intent.putExtra("message", "This will clear all your progress as of now. Are you sure you want to reset data?");
+						intent.putExtra(
+								"message",
+								"This will clear all your progress as of now. Are you sure you want to reset data?");
 						startActivityForResult(intent, REQUEST_RESETCONFIRM);
 					}
 				});
-		
+
 		findViewById(R.id.facebookButton).setOnClickListener(
 				new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
-						Intent intent = new Intent(MainMenuPage.this, ConfirmationPopup.class);
+						Intent intent = new Intent(MainMenuPage.this,
+								ConfirmationPopup.class);
 						intent.putExtra("title", "Confirm Action");
-						if (SocialUtil.isConnected(MainMenuPage.this, Provider.FACEBOOK)) {
-							intent.putExtra("message", "Are you sure you want to sign out from Facebook?");
+						if (SocialUtil.isConnected(MainMenuPage.this,
+								Provider.FACEBOOK)) {
+							intent.putExtra("message",
+									"Are you sure you want to sign out from Facebook?");
 						} else {
-							intent.putExtra("message", "This will connect to your Facebook account.");	
+							intent.putExtra("message",
+									"This will connect to your Facebook account.");
 						}
 						startActivityForResult(intent, REQUEST_FACEBOOK_ACTION);
 					}
@@ -88,28 +95,27 @@ public class MainMenuPage extends GTCActivity {
 
 		((Button) findViewById(R.id.playButton)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/roboto_bold.ttf"));
-		((Button) findViewById(R.id.facebookButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
+		((Button) findViewById(R.id.facebookButton)).setTypeface(FontUtil
+				.getFont(getAssets(), "font/roboto_bold.ttf"));
 		((Button) findViewById(R.id.aboutButton)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/roboto_bold.ttf"));
 		((Button) findViewById(R.id.resetButton)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/roboto_bold.ttf"));
-//
-//		try {
-//			ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
-//			imageBg.setImageBitmap(ResourceUtil
-//					.loadImage(ResourceUtil.MAIN_MASCOT_BG));
-//	
-//			ImageView logo = (ImageView) findViewById(R.id.gameLogo);
-//			logo.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_LOGO));
-//	
-//			ImageView mascot = (ImageView) findViewById(R.id.gameMascot);
-//			mascot.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_MASCOT));
-//		} catch (RuntimeException e) {
-//			finish();
-//		}
+		//
+		// try {
+		// ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
+		// imageBg.setImageBitmap(ResourceUtil
+		// .loadImage(ResourceUtil.MAIN_MASCOT_BG));
+		//
+		// ImageView logo = (ImageView) findViewById(R.id.gameLogo);
+		// logo.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_LOGO));
+		//
+		// ImageView mascot = (ImageView) findViewById(R.id.gameMascot);
+		// mascot.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_MASCOT));
+		// } catch (RuntimeException e) {
+		// finish();
+		// }
 	}
-
 
 	private void doFacebookAction() {
 		Intent intent = new Intent(this, SocialPostingPage.class);
@@ -120,7 +126,7 @@ public class MainMenuPage extends GTCActivity {
 		}
 		startActivityForResult(intent, REQUEST_FACEBOOK_SIGN);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -128,10 +134,10 @@ public class MainMenuPage extends GTCActivity {
 		level.setTypeface(FontUtil
 				.getFont(getAssets(), "font/roboto_black.ttf"));
 		level.setText("" + UserDataManager.checkLevel());
-		
+
 		TextView banner = ((TextView) findViewById(R.id.banner));
-		banner.setTypeface(FontUtil
-				.getFont(getAssets(), "font/digitalstrip.ttf"));
+		banner.setTypeface(FontUtil.getFont(getAssets(),
+				"font/digitalstrip.ttf"));
 
 		if (SocialUtil.isConnected(this, Provider.FACEBOOK)) {
 			((Button) findViewById(R.id.facebookButton)).setText("Sign Out");
@@ -139,11 +145,11 @@ public class MainMenuPage extends GTCActivity {
 			((Button) findViewById(R.id.facebookButton)).setText("Sign In");
 		}
 	}
-	
+
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_RESETCONFIRM && resultCode == RESULT_OK) {
 			resetData();
-			
+
 			Intent intent = new Intent(this, AcknowledgementPopup.class);
 			intent.putExtra("title", "Data Reset");
 			intent.putExtra("message", "Your user data has been deleted.");
@@ -151,7 +157,8 @@ public class MainMenuPage extends GTCActivity {
 		} else if (requestCode == REQUEST_ACKNOWLEDGE_RESET) {
 			startActivity(new Intent(this, GTCSplash.class));
 			finish();
-		} else if (requestCode == REQUEST_FACEBOOK_ACTION && resultCode == RESULT_OK) {
+		} else if (requestCode == REQUEST_FACEBOOK_ACTION
+				&& resultCode == RESULT_OK) {
 			doFacebookAction();
 		} else if (requestCode == REQUEST_FACEBOOK_SIGN) {
 			if (resultCode == RESULT_OK) {

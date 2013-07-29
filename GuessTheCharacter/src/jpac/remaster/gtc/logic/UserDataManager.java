@@ -122,7 +122,7 @@ public class UserDataManager {
 			USER.setGold(Constants.START_GOLD);
 			USER.setLevel(1);
 		} catch (Exception e) {
-			
+
 		}
 	}
 }

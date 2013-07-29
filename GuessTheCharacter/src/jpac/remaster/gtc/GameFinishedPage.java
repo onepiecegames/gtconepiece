@@ -46,15 +46,14 @@ public class GameFinishedPage extends GTCActivity {
 			flipper.startFlipping();
 		}
 
-		Typeface ds = FontUtil.getFont(
-				getAssets(), "font/digitalstrip.ttf");
-		
+		Typeface ds = FontUtil.getFont(getAssets(), "font/digitalstrip.ttf");
+
 		((TextView) findViewById(R.id.banner)).setTypeface(ds);
 		((TextView) findViewById(R.id.titleLabel)).setTypeface(ds);
 		((TextView) findViewById(R.id.finishLabel)).setTypeface(ds);
-		
-		((Button) findViewById(R.id.continueButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
+
+		((Button) findViewById(R.id.continueButton)).setTypeface(FontUtil
+				.getFont(getAssets(), "font/roboto_bold.ttf"));
 	}
 
 	@Override

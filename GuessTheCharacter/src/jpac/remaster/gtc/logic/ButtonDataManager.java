@@ -92,7 +92,7 @@ public class ButtonDataManager {
 		try {
 			context.deleteFile(filename);
 		} catch (Exception e) {
-			
+
 		}
 	}
 }

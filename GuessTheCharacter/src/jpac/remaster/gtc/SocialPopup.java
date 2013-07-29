@@ -32,7 +32,7 @@ public class SocialPopup extends GTCActivity {
 						finish();
 					}
 				});
-		
+
 		((TextView) findViewById(R.id.title)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/facebook.otf"));
 	}

@@ -12,7 +12,7 @@ public class SocialDataManager {
 	private static final String FILENAME = "facebook_posted.raw";
 
 	private static int idOfLastPosted = -1;
-	
+
 	public static void loadData(Context context) {
 		String content = null;
 
@@ -36,7 +36,7 @@ public class SocialDataManager {
 			try {
 				idOfLastPosted = Integer.valueOf(content);
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}
@@ -57,11 +57,11 @@ public class SocialDataManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static boolean checkIfPosted(int id) {
 		return idOfLastPosted == id;
 	}
-	
+
 	public static void updatePosted(int id) {
 		idOfLastPosted = id;
 	}
@@ -71,7 +71,7 @@ public class SocialDataManager {
 			context.deleteFile(FILENAME);
 			idOfLastPosted = -1;
 		} catch (Exception e) {
-			
+
 		}
 	}
 }

@@ -90,10 +90,10 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				finish();
 			}
 			updatePuzzleDifficulty();
-			
+
 			final TextView clue = (TextView) findViewById(R.id.categoryLabel);
-			clue.setTypeface(FontUtil.getFont(
-				getAssets(), "font/digitalstrip.ttf"));
+			clue.setTypeface(FontUtil.getFont(getAssets(),
+					"font/digitalstrip.ttf"));
 			clue.setText(puzzle.getCategory());
 		}
 	}
@@ -101,19 +101,18 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	private void updateLevel() {
 		final TextView level = (TextView) findViewById(R.id.currLevelLabel);
 		level.setText("" + UserDataManager.checkLevel());
-		level.setTypeface(FontUtil.getFont(
-				getAssets(), "font/digitalstrip.ttf"));
+		level.setTypeface(FontUtil
+				.getFont(getAssets(), "font/digitalstrip.ttf"));
 
-		((TextView) findViewById(R.id.levelLabel)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/digitalstrip.ttf"));
+		((TextView) findViewById(R.id.levelLabel)).setTypeface(FontUtil
+				.getFont(getAssets(), "font/digitalstrip.ttf"));
 	}
 
 	private void updateGold() {
 		final TextView gold = (TextView) findViewById(R.id.amountLabel);
 		gold.setText("" + UserDataManager.checkGold());
-		gold.setTypeface(FontUtil.getFont(
-				getAssets(), "font/digitalstrip.ttf"));
-		
+		gold.setTypeface(FontUtil.getFont(getAssets(), "font/digitalstrip.ttf"));
+
 		((TextView) findViewById(R.id.goldLabel)).setTypeface(FontUtil.getFont(
 				getAssets(), "font/digitalstrip.ttf"));
 	}
@@ -234,8 +233,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			case REQUEST_SHARE_FACEBOOK:
 				if (SocialUtil.isNetworkAvailable(getApplicationContext())) {
 					ResourceUtil.captureView(findViewById(R.id.gamepage));
-					Intent intent = new Intent(this,
-							SocialPostingPage.class);
+					Intent intent = new Intent(this, SocialPostingPage.class);
 					intent.putExtra("action", SocialPostingPage.ACTION_SHARE);
 					startActivityForResult(intent, REQUEST_PUBLISH_FEED);
 				} else {

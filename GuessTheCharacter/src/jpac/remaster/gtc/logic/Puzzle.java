@@ -3,22 +3,22 @@ package jpac.remaster.gtc.logic;
 public class Puzzle {
 
 	public static enum Category {
-		
+
 		WEAPON,
-		
+
 		ABILITY,
-		
+
 		CLOTHING,
-		
+
 		MARKS,
-		
+
 		ACCESSORY,
-		
+
 		BODY,
-		
+
 		FACE;
 	}
-	
+
 	private String cleanAnswer;
 
 	private int difficulty;
@@ -30,11 +30,11 @@ public class Puzzle {
 	private long randomSeed;
 
 	private String rawAnswer;
-	
+
 	private Category category;
-	
-	public Puzzle(String rawAnswer, Category category, long randomSeed, String imageId1, int id,
-			int difficulty) {
+
+	public Puzzle(String rawAnswer, Category category, long randomSeed,
+			String imageId1, int id, int difficulty) {
 		super();
 		this.rawAnswer = rawAnswer;
 		this.randomSeed = randomSeed;
@@ -52,7 +52,7 @@ public class Puzzle {
 
 	public String getFormattedAnswer() {
 		String formattedAnswer = "";
-		
+
 		if (rawAnswer.contains("-:")) {
 			formattedAnswer = rawAnswer.replace("-:", "");
 		} else if (rawAnswer.contains(":")) {
@@ -60,7 +60,7 @@ public class Puzzle {
 		} else {
 			formattedAnswer = rawAnswer;
 		}
-		
+
 		return formattedAnswer;
 	}
 
@@ -87,7 +87,7 @@ public class Puzzle {
 	public String getRawAnswer() {
 		return rawAnswer;
 	}
-	
+
 	public String getCategory() {
 		return category.name();
 	}
