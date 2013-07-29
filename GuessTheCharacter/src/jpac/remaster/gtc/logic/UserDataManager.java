@@ -5,8 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import jpac.remaster.gtc.util.SysInfo.Constants;
-
+import jpac.remaster.gtc.util.Constants;
 import android.content.Context;
 
 public class UserDataManager {
