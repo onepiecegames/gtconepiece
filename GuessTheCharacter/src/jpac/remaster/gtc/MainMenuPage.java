@@ -4,12 +4,13 @@ import jpac.remaster.gtc.core.GTCActivity;
 import jpac.remaster.gtc.logic.ButtonDataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
-import jpac.remaster.gtc.util.FontUtil;
+import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
 import jpac.remaster.gtc.util.social.SocialDataManager;
 import jpac.remaster.gtc.util.social.SocialUtil;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -87,14 +88,11 @@ public class MainMenuPage extends GTCActivity {
 					}
 				});
 
-		((Button) findViewById(R.id.playButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
-		((Button) findViewById(R.id.facebookButton)).setTypeface(FontUtil
-				.getFont(getAssets(), "font/roboto_bold.ttf"));
-		((Button) findViewById(R.id.aboutButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
-		((Button) findViewById(R.id.resetButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
+		Typeface roboto = ResourceManager.getFont("roboto_bold.ttf");
+		((Button) findViewById(R.id.playButton)).setTypeface(roboto);
+		((Button) findViewById(R.id.facebookButton)).setTypeface(roboto);
+		((Button) findViewById(R.id.aboutButton)).setTypeface(roboto);
+		((Button) findViewById(R.id.resetButton)).setTypeface(roboto);
 		//
 		// try {
 		// ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
@@ -125,13 +123,11 @@ public class MainMenuPage extends GTCActivity {
 	protected void onResume() {
 		super.onResume();
 		TextView level = ((TextView) findViewById(R.id.currLevelLabel));
-		level.setTypeface(FontUtil
-				.getFont(getAssets(), "font/roboto_black.ttf"));
+		level.setTypeface(ResourceManager.getFont("roboto_black.ttf"));
 		level.setText("" + UserDataManager.checkLevel());
 
 		TextView banner = ((TextView) findViewById(R.id.banner));
-		banner.setTypeface(FontUtil.getFont(getAssets(),
-				"font/digitalstrip.ttf"));
+		banner.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
 
 		if (SocialUtil.isConnected(this, Provider.FACEBOOK)) {
 			((Button) findViewById(R.id.facebookButton)).setText("Sign Out");

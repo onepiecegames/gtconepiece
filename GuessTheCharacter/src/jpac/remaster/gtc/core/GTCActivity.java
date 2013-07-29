@@ -16,7 +16,7 @@
 package jpac.remaster.gtc.core;
 
 import jpac.remaster.gtc.GTCSplash;
-import jpac.remaster.gtc.util.ResourceUtil;
+import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import android.app.Activity;
 import android.content.Intent;
@@ -91,7 +91,7 @@ public abstract class GTCActivity extends Activity {
 
 		setFullscreenWindow();
 
-		ResourceUtil.setContextRef(this);
+		ResourceManager.setContextReference(this);
 		Util.log(this.getClass().getName() + "[onCreate]");
 	}
 

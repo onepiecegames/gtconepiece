@@ -1,8 +1,7 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
-import jpac.remaster.gtc.util.FontUtil;
-import jpac.remaster.gtc.util.ResourceUtil;
+import jpac.remaster.gtc.util.ResourceManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,16 +26,15 @@ public class LevelFinishedPage extends GTCActivity {
 						Intent intent = new Intent(getApplicationContext(),
 								InGamePage.class);
 						startActivity(intent);
-						ResourceUtil.forceRecycleImages();
 						finish();
 					}
 				});
 
 		String id = getIntent().getStringExtra("image");
 		ImageView image = (ImageView) findViewById(R.id.puzzleImage);
-		image.setImageBitmap(ResourceUtil.loadPuzzleImage(id));
+		image.setImageBitmap(ResourceManager.loadBitmapFromAsset(id));
 
-		Typeface ds = FontUtil.getFont(getAssets(), "font/digitalstrip.ttf");
+		Typeface ds = ResourceManager.getFont("digitalstrip.ttf");
 
 		int amount = getIntent().getIntExtra("prize", 0);
 		((TextView) findViewById(R.id.amountLabel)).setText("" + amount);
@@ -52,15 +50,14 @@ public class LevelFinishedPage extends GTCActivity {
 		((TextView) findViewById(R.id.amountLabel)).setTypeface(ds);
 		((TextView) findViewById(R.id.goldLabel)).setTypeface(ds);
 
-		((Button) findViewById(R.id.continueButton)).setTypeface(FontUtil
-				.getFont(getAssets(), "font/roboto_bold.ttf"));
+		((Button) findViewById(R.id.continueButton)).setTypeface(ResourceManager
+				.getFont("roboto_bold.ttf"));
 	}
 
 	@Override
 	public void onBackPressed() {
 		Intent intent = new Intent(getApplicationContext(), InGamePage.class);
 		startActivity(intent);
-		ResourceUtil.forceRecycleImages();
 		finish();
 	}
 }

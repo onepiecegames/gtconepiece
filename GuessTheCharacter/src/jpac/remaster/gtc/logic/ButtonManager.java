@@ -3,8 +3,7 @@ package jpac.remaster.gtc.logic;
 import java.util.ArrayList;
 
 import jpac.remaster.gtc.R;
-import jpac.remaster.gtc.util.FontUtil;
-import jpac.remaster.gtc.util.ResourceUtil;
+import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import android.app.Activity;
 import android.content.Context;
@@ -47,8 +46,7 @@ public class ButtonManager {
 	}
 
 	public void init(Activity activity, String answer) {
-		fontBold = FontUtil.getFont(activity.getAssets(),
-				"font/roboto_bold.ttf");
+		fontBold = ResourceManager.getFont("roboto_bold.ttf");
 
 		final ViewGroup choiceLayer1 = (ViewGroup) activity
 				.findViewById(R.id.choiceLayer1);
@@ -166,7 +164,7 @@ public class ButtonManager {
 			LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
 			params.setMargins(0, 0, 0,
-					ResourceUtil.loadDimension(R.dimen.margin_small));
+					ResourceManager.loadDimension(R.dimen.margin_small));
 			sublayout.setLayoutParams(params);
 			sublayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
@@ -186,13 +184,13 @@ public class ButtonManager {
 		}
 	}
 
-	private final int ANSWER_WIDTH = ResourceUtil
+	private final int ANSWER_WIDTH = ResourceManager
 			.loadDimension(R.dimen.answer_box_button);
-	private final int ANSWER_HEIGHT = ResourceUtil
+	private final int ANSWER_HEIGHT = ResourceManager
 			.loadDimension(R.dimen.box_button);
-	private final int ANSWER_MARGIN = ResourceUtil
+	private final int ANSWER_MARGIN = ResourceManager
 			.loadDimension(R.dimen.margin_xsmall);
-	private final int ANSWER_TEXT_SIZE = ResourceUtil
+	private final int ANSWER_TEXT_SIZE = ResourceManager
 			.loadDimension(R.dimen.font_normal);
 
 	private Button initAnswerButton(Context context, String text) {

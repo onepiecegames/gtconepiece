@@ -2,14 +2,14 @@
 <resources>
 
     <string-array name="fonts">
-        <item >roboto_black</item>
-        <item >roboto_bold</item>
-        <item >roboto_condensed</item>
-        <item >roboto_light</item>
-        <item >roboto_medium</item>
-        <item >roboto_regular</item>
-        <item >digitalstrip</item>
-        <item >facebook</item>
+        <item >roboto_black.ttf</item>
+        <item >roboto_bold.ttf</item>
+        <item >roboto_condensed.ttf</item>
+        <item >roboto_light.ttf</item>
+        <item >roboto_medium.ttf</item>
+        <item >roboto_regular.ttf</item>
+        <item >digitalstrip.ttf</item>
+        <item >facebook.otf</item>
     </string-array>
     
     <string name="app_name">Guess The Character: One Piece</string>

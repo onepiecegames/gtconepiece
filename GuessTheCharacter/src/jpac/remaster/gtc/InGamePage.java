@@ -7,8 +7,7 @@ import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserActionListener;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.Constants;
-import jpac.remaster.gtc.util.FontUtil;
-import jpac.remaster.gtc.util.ResourceUtil;
+import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.SocialDataManager;
 import jpac.remaster.gtc.util.social.SocialUtil;
@@ -84,7 +83,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			final ImageView puzzle1 = (ImageView) findViewById(R.id.puzzleImage1);
 
 			try {
-				puzzle1.setImageBitmap(ResourceUtil.loadPuzzleImage(puzzle
+				puzzle1.setImageBitmap(ResourceManager.loadBitmapFromAsset(puzzle
 						.getImageId()));
 			} catch (RuntimeException e) {
 				finish();
@@ -92,8 +91,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			updatePuzzleDifficulty();
 
 			final TextView clue = (TextView) findViewById(R.id.categoryLabel);
-			clue.setTypeface(FontUtil.getFont(getAssets(),
-					"font/digitalstrip.ttf"));
+			clue.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
 			clue.setText(puzzle.getCategory());
 		}
 	}
@@ -101,20 +99,19 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	private void updateLevel() {
 		final TextView level = (TextView) findViewById(R.id.currLevelLabel);
 		level.setText("" + UserDataManager.checkLevel());
-		level.setTypeface(FontUtil
-				.getFont(getAssets(), "font/digitalstrip.ttf"));
+		level.setTypeface(ResourceManager
+				.getFont("digitalstrip.ttf"));
 
-		((TextView) findViewById(R.id.levelLabel)).setTypeface(FontUtil
-				.getFont(getAssets(), "font/digitalstrip.ttf"));
+		((TextView) findViewById(R.id.levelLabel)).setTypeface(ResourceManager
+				.getFont("digitalstrip.ttf"));
 	}
 
 	private void updateGold() {
 		final TextView gold = (TextView) findViewById(R.id.amountLabel);
 		gold.setText("" + UserDataManager.checkGold());
-		gold.setTypeface(FontUtil.getFont(getAssets(), "font/digitalstrip.ttf"));
+		gold.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
 
-		((TextView) findViewById(R.id.goldLabel)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/digitalstrip.ttf"));
+		((TextView) findViewById(R.id.goldLabel)).setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
 	}
 
 	private void updatePuzzleDifficulty() {
@@ -232,7 +229,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				break;
 			case REQUEST_SHARE_FACEBOOK:
 				if (SocialUtil.isNetworkAvailable(getApplicationContext())) {
-					ResourceUtil.captureView(findViewById(R.id.gamepage));
+//					Util.captureView(findViewById(R.id.gamepage));
 					Intent intent = new Intent(this, SocialPostingPage.class);
 					intent.putExtra("action", SocialPostingPage.ACTION_SHARE);
 					startActivityForResult(intent, REQUEST_PUBLISH_FEED);
@@ -274,7 +271,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 		intent.putExtra("answer", puzzle.getFormattedAnswer());
 		startActivity(intent);
 
-		ResourceUtil.forRecycle(puzzle.getImageId());
+		ResourceManager.queueBitmapForRecycle(puzzle.getImageId());
 
 		finish();
 	}

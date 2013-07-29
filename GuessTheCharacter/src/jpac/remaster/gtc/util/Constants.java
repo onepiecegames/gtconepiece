@@ -41,4 +41,15 @@ public class Constants {
 	// This is the standard amount user receive after solving a puzzle.
 	// ========================================================================
 	public static final int PUZZLE_PRIZE = 2;
+	
+	// ========================================================================
+	// This is the standard amount user receive after solving a puzzle.
+	// ========================================================================
+	public static final int RECYCLE_THRESHOLD = 10;
+
+	// ========================================================================
+	// The location of files in the asset folder
+	// ========================================================================
+	public static final String FONT_LOCATION = "font/";
+	public static final String IMAGE_LOCATION = "puzzle/";
 }
