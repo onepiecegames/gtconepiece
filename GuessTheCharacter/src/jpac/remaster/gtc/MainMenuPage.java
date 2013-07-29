@@ -5,7 +5,6 @@ import jpac.remaster.gtc.logic.ButtonDataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.FontUtil;
-import jpac.remaster.gtc.util.SysInfo;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
 import jpac.remaster.gtc.util.social.SocialDataManager;
@@ -28,11 +27,6 @@ public class MainMenuPage extends GTCActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_main_menu);
-
-		if (!SysInfo.splash) {
-			startActivity(new Intent(getApplicationContext(), GTCSplash.class));
-			return;
-		}
 
 		findViewById(R.id.playButton).setOnClickListener(new OnClickListener() {
 

@@ -81,7 +81,7 @@ public class Util {
 	}
 
 	public static void log(String message) {
-		if (SysInfo.AppMode.isDebug()) {
+		if (SysInfo.isDebug()) {
 			Log.v("LOG", message);
 		}
 	}

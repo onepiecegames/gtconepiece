@@ -7,7 +7,6 @@ import jpac.remaster.gtc.util.DeviceInfo;
 import jpac.remaster.gtc.util.FontUtil;
 import jpac.remaster.gtc.util.ResourceLoader;
 import jpac.remaster.gtc.util.ResourceUtil;
-import jpac.remaster.gtc.util.SysInfo;
 import jpac.remaster.gtc.util.social.SocialDataManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -80,7 +79,6 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		protected void onPostExecute(Void result) {
 			startActivity(new Intent(getApplicationContext(),
 					MainMenuPage.class));
-			SysInfo.splash = true;
 			finish();
 		}
 
