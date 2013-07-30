@@ -1,14 +1,43 @@
+/******************************************************************************
+ * Copyright 2013
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package jpac.remaster.gtc.logic;
 
 import jpac.remaster.gtc.logic.Puzzle.Category;
 
+/******************************************************************************
+ * This factory class is responsible for creating puzzle objects given an
+ * integer id.
+ * 
+ * @author JP Carabuena
+ * @since 1.0
+ *****************************************************************************/
 public class PuzzleFactory {
 
+	// ========================================================================
+	// The current total puzzles in the game.
+	// ========================================================================
 	public static final int TOTAL_PUZZLE = 250;
 
+	/**************************************************************************
+	 * Returns a puzzle given an integer id.
+	 *************************************************************************/
 	public static Puzzle getPuzzleById(int id) {
 
 		switch (id) {
+		/* Version 1.0 Puzzles */
 		case 0:
 			return new Puzzle("JIMBEI", Category.CLOTHING, 237846237, "125415",
 					id, 2);
@@ -286,7 +315,7 @@ public class PuzzleFactory {
 					id, 2);
 		case 99:
 			return new Puzzle("APOO", Category.FACE, 9991236, "998761", id, 2);
-			// Version 2.0
+		/* Version 2.0 */
 		case 100:
 			return new Puzzle("VANDER:DECKEN", Category.CLOTHING, 113287,
 					"000113", id, 2);
@@ -673,20 +702,8 @@ public class PuzzleFactory {
 		case 249:
 			return new Puzzle("RAYLEIGH", Category.FACE, 210032, "595519", id,
 					2);
-
 		default:
 			return null;
-			/*
-			 * case 0: return new Puzzle("LUFFY", 34857934, "000001", id, 1,
-			 * "This is Monkey D. Luffy's trademark strawhat given to him by Red Haired Shanks. It earned him his epithet \"Strawhat Luffy\"."
-			 * ); case 9: return new Puzzle("BARTO-:LOMEO", 32234682, "551941",
-			 * id, 3,
-			 * "Bartolomeo has a mark just below his right eye similar to this symbol."
-			 * ); case 17: return new Puzzle("NICO:ROBIN", 1231572, "910044",
-			 * id, 3,
-			 * "This is the design of Nico Robin's casual dress as seen in the Film Strong World."
-			 * ); default: return null;
-			 */
 		}
 	}
 }
