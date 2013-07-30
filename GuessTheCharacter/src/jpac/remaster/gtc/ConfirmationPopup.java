@@ -5,7 +5,6 @@ import jpac.remaster.gtc.util.ResourceManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
 
 public class ConfirmationPopup extends GTCPopupActivity {
 
@@ -17,10 +16,10 @@ public class ConfirmationPopup extends GTCPopupActivity {
 		String title = getIntent().getStringExtra("title");
 		String message = getIntent().getStringExtra("message");
 
-		((TextView) findViewById(R.id.title)).setText(title);
-		((TextView) findViewById(R.id.message)).setText(message);
+		setText(R.id.title, title);
+		setText(R.id.message, message);
 
-		findViewById(R.id.okButton).setOnClickListener(new OnClickListener() {
+		setOnClickListener(R.id.okButton, new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -29,18 +28,16 @@ public class ConfirmationPopup extends GTCPopupActivity {
 			}
 		});
 
-		findViewById(R.id.cancelButton).setOnClickListener(
-				new OnClickListener() {
+		setOnClickListener(R.id.cancelButton, new OnClickListener() {
 
-					@Override
-					public void onClick(View arg0) {
-						setResult(RESULT_CANCELED);
-						finish();
-					}
-				});
+			@Override
+			public void onClick(View arg0) {
+				setResult(RESULT_CANCELED);
+				finish();
+			}
+		});
 
-		((TextView) findViewById(R.id.title)).setTypeface(ResourceManager
-				.getFont("digitalstrip.ttf"));
+		setTypeface(R.id.title, ResourceManager.getFont("digitalstrip.ttf"));
 	}
 
 }

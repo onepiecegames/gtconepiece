@@ -205,6 +205,21 @@ public abstract class GTCActivity extends Activity {
 			}
 		}
 	}
+
+	/**************************************************************************
+	 * Set the image drawable of the specified ImageView or ImageButton.
+	 *************************************************************************/
+	public void setImageResource(int id, int resId) {
+		View view = findViewById(id);
+		
+		if (view != null) {
+			if (view instanceof ImageView) {
+				((ImageView) view).setImageResource(resId);
+			} else if (view instanceof ImageButton) {
+				((ImageButton) view).setImageResource(resId);
+			}
+		}
+	}
 	
 	/**************************************************************************
 	 * Start an animation for the specified view.

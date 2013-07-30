@@ -13,8 +13,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class GTCSplash extends GTCActivity implements ResourceLoader {
 
@@ -30,8 +28,7 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 
 		SysInfo.loadScreenInfo(this);
 
-		final TextView loadingLabel = (TextView) findViewById(R.id.loadingLabel);
-		loadingLabel.setTypeface(ResourceManager.getFont("roboto_thin.ttf"));
+		setTypeface(R.id.loadingLabel, ResourceManager.getFont("roboto_thin.ttf"));
 
 		LoadResourceHandler handler = new LoadResourceHandler(this);
 		handler.sendEmptyMessageDelayed(0, 1000);
@@ -53,8 +50,8 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 
 	@Override
 	public void doLoading() {
-		findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-		findViewById(R.id.loadingLabel).setVisibility(View.VISIBLE);
+		setVisibility(R.id.progressBar, View.VISIBLE);
+		setVisibility(R.id.loadingLabel, View.VISIBLE);
 		new ResourcesLoaderTask().execute();
 	}
 
@@ -62,8 +59,7 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			((ProgressBar) findViewById(R.id.progressBar))
-					.incrementProgressBy(100);
+			getProgressBar(R.id.progressBar).incrementProgressBy(100);
 			ResourceManager.loadSystemFonts();
 			PuzzleManager.init(getApplicationContext());
 			UserDataManager.init(getApplicationContext());

@@ -17,8 +17,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class InGamePage extends GTCActivity implements UserActionListener {
 
@@ -41,7 +39,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_page);
 
-		findViewById(R.id.backButton).setOnClickListener(new OnClickListener() {
+		setOnClickListener(R.id.backButton, new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -80,60 +78,47 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			buttonManager.setAnswerDoneListener(this);
 			buttonManager.loadData(this);
 
-			final ImageView puzzle1 = (ImageView) findViewById(R.id.puzzleImage1);
-
 			try {
-				puzzle1.setImageBitmap(ResourceManager
-						.loadBitmapFromAsset(puzzle.getImageId()));
+				setImage(
+						R.id.puzzleImage1,
+						ResourceManager.loadBitmapFromAsset(puzzle.getImageId()));
 			} catch (RuntimeException e) {
 				finish();
 			}
 			updatePuzzleDifficulty();
 
-			final TextView clue = (TextView) findViewById(R.id.categoryLabel);
-			clue.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
-			clue.setText(puzzle.getCategory());
+			setTypeface(R.id.categoryLabel, ResourceManager.getFont("digitalstrip.ttf"));
+			setText(R.id.categoryLabel, puzzle.getCategory());
 		}
 	}
 
 	private void updateLevel() {
-		final TextView level = (TextView) findViewById(R.id.currLevelLabel);
-		level.setText("" + UserDataManager.checkLevel());
-		level.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
-
-		((TextView) findViewById(R.id.levelLabel)).setTypeface(ResourceManager
-				.getFont("digitalstrip.ttf"));
+		setText(R.id.currLevelLabel, "" + UserDataManager.checkLevel());
+		setTypeface(R.id.currLevelLabel, ResourceManager.getFont("digitalstrip.ttf"));
+		setTypeface(R.id.levelLabel, ResourceManager.getFont("digitalstrip.ttf"));
 	}
 
 	private void updateGold() {
-		final TextView gold = (TextView) findViewById(R.id.amountLabel);
-		gold.setText("" + UserDataManager.checkGold());
-		gold.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
-
-		((TextView) findViewById(R.id.goldLabel)).setTypeface(ResourceManager
-				.getFont("digitalstrip.ttf"));
+		setText(R.id.amountLabel, "" + UserDataManager.checkGold());
+		setTypeface(R.id.amountLabel, ResourceManager.getFont("digitalstrip.ttf"));
+		setTypeface(R.id.goldLabel, ResourceManager.getFont("digitalstrip.ttf"));
 	}
 
 	private void updatePuzzleDifficulty() {
 		int level = puzzle.getDifficulty();
-
-		final ImageView level1 = (ImageView) findViewById(R.id.level1);
-		final ImageView level2 = (ImageView) findViewById(R.id.level2);
-		final ImageView level3 = (ImageView) findViewById(R.id.level3);
-		final ImageView level4 = (ImageView) findViewById(R.id.level4);
-		final ImageView level5 = (ImageView) findViewById(R.id.level5);
-
+		int drawable = R.drawable.level_full;
+		
 		switch (level) {
 		case 5:
-			level5.setImageResource(R.drawable.level_full);
+			setImageResource(R.id.level5, drawable);
 		case 4:
-			level4.setImageResource(R.drawable.level_full);
+			setImageResource(R.id.level4, drawable);
 		case 3:
-			level3.setImageResource(R.drawable.level_full);
+			setImageResource(R.id.level3, drawable);
 		case 2:
-			level2.setImageResource(R.drawable.level_full);
+			setImageResource(R.id.level2, drawable);
 		case 1:
-			level1.setImageResource(R.drawable.level_full);
+			setImageResource(R.id.level1, drawable);
 		}
 	}
 
@@ -256,7 +241,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			showLevelComplete();
 		} else {
 			Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
-			findViewById(R.id.answers).startAnimation(shake);
+			startAnimation(R.id.answers, shake);
 		}
 	}
 

@@ -14,8 +14,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class MainMenuPage extends GTCActivity {
 
@@ -29,7 +27,7 @@ public class MainMenuPage extends GTCActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_main_menu);
 
-		findViewById(R.id.playButton).setOnClickListener(new OnClickListener() {
+		setOnClickListener(R.id.playButton, new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -43,70 +41,52 @@ public class MainMenuPage extends GTCActivity {
 			}
 		});
 
-		findViewById(R.id.aboutButton).setOnClickListener(
-				new OnClickListener() {
+		setOnClickListener(R.id.aboutButton, new OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						startActivity(new Intent(MainMenuPage.this,
-								AboutUsPage.class));
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainMenuPage.this, AboutUsPage.class));
+			}
+		});
 
-		findViewById(R.id.resetButton).setOnClickListener(
-				new OnClickListener() {
+		setOnClickListener(R.id.resetButton, new OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MainMenuPage.this,
-								ConfirmationPopup.class);
-						intent.putExtra("title", "Confirm Action");
-						intent.putExtra(
-								"message",
-								"This will clear all your progress as of now. Are you sure you want to reset data?");
-						startActivityForResult(intent, REQUEST_RESETCONFIRM);
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainMenuPage.this,
+						ConfirmationPopup.class);
+				intent.putExtra("title", "Confirm Action");
+				intent.putExtra(
+						"message",
+						"This will clear all your progress as of now. Are you sure you want to reset data?");
+				startActivityForResult(intent, REQUEST_RESETCONFIRM);
+			}
+		});
 
-		findViewById(R.id.facebookButton).setOnClickListener(
-				new OnClickListener() {
+		setOnClickListener(R.id.facebookButton, new OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MainMenuPage.this,
-								ConfirmationPopup.class);
-						intent.putExtra("title", "Confirm Action");
-						if (SocialUtil.isConnected(MainMenuPage.this,
-								Provider.FACEBOOK)) {
-							intent.putExtra("message",
-									"Are you sure you want to sign out from Facebook?");
-						} else {
-							intent.putExtra("message",
-									"This will connect to your Facebook account.");
-						}
-						startActivityForResult(intent, REQUEST_FACEBOOK_ACTION);
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainMenuPage.this,
+						ConfirmationPopup.class);
+				intent.putExtra("title", "Confirm Action");
+				if (SocialUtil
+						.isConnected(MainMenuPage.this, Provider.FACEBOOK)) {
+					intent.putExtra("message",
+							"Are you sure you want to sign out from Facebook?");
+				} else {
+					intent.putExtra("message",
+							"This will connect to your Facebook account.");
+				}
+				startActivityForResult(intent, REQUEST_FACEBOOK_ACTION);
+			}
+		});
 
 		Typeface roboto = ResourceManager.getFont("roboto_bold.ttf");
-		((Button) findViewById(R.id.playButton)).setTypeface(roboto);
-		((Button) findViewById(R.id.facebookButton)).setTypeface(roboto);
-		((Button) findViewById(R.id.aboutButton)).setTypeface(roboto);
-		((Button) findViewById(R.id.resetButton)).setTypeface(roboto);
-		//
-		// try {
-		// ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
-		// imageBg.setImageBitmap(ResourceUtil
-		// .loadImage(ResourceUtil.MAIN_MASCOT_BG));
-		//
-		// ImageView logo = (ImageView) findViewById(R.id.gameLogo);
-		// logo.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_LOGO));
-		//
-		// ImageView mascot = (ImageView) findViewById(R.id.gameMascot);
-		// mascot.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_MASCOT));
-		// } catch (RuntimeException e) {
-		// finish();
-		// }
+		setTypeface(R.id.playButton, roboto);
+		setTypeface(R.id.facebookButton, roboto);
+		setTypeface(R.id.aboutButton, roboto);
+		setTypeface(R.id.resetButton, roboto);
 	}
 
 	private void doFacebookAction() {
@@ -122,17 +102,15 @@ public class MainMenuPage extends GTCActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		TextView level = ((TextView) findViewById(R.id.currLevelLabel));
-		level.setTypeface(ResourceManager.getFont("roboto_black.ttf"));
-		level.setText("" + UserDataManager.checkLevel());
+		setTypeface(R.id.currLevelLabel, ResourceManager.getFont("roboto_black.ttf"));
+		setText(R.id.currLevelLabel, "" + UserDataManager.checkLevel());
 
-		TextView banner = ((TextView) findViewById(R.id.banner));
-		banner.setTypeface(ResourceManager.getFont("digitalstrip.ttf"));
+		setTypeface(R.id.banner, ResourceManager.getFont("digitalstrip.ttf"));
 
 		if (SocialUtil.isConnected(this, Provider.FACEBOOK)) {
-			((Button) findViewById(R.id.facebookButton)).setText("Sign Out");
+			setText(R.id.facebookButton, ResourceManager.loadString(R.string.label_signout));
 		} else {
-			((Button) findViewById(R.id.facebookButton)).setText("Sign In");
+			setText(R.id.facebookButton, ResourceManager.loadString(R.string.label_signin));
 		}
 	}
 
