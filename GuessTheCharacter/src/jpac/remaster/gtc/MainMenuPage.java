@@ -6,9 +6,11 @@ import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
-import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
+import jpac.remaster.gtc.util.social.GTCAuthAdapter;
 import jpac.remaster.gtc.util.social.SocialDataManager;
-import jpac.remaster.gtc.util.social.SocialUtil;
+
+import org.brickred.socialauth.android.SocialAuthAdapter.Provider;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -70,8 +72,7 @@ public class MainMenuPage extends GTCActivity {
 				Intent intent = new Intent(MainMenuPage.this,
 						ConfirmationPopup.class);
 				intent.putExtra("title", "Confirm Action");
-				if (SocialUtil
-						.isConnected(MainMenuPage.this, Provider.FACEBOOK)) {
+				if (GTCAuthAdapter.isConnected(MainMenuPage.this, Provider.FACEBOOK)) {
 					intent.putExtra("message",
 							"Are you sure you want to sign out from Facebook?");
 				} else {
@@ -91,7 +92,7 @@ public class MainMenuPage extends GTCActivity {
 
 	private void doFacebookAction() {
 		Intent intent = new Intent(this, SocialPostingPage.class);
-		if (SocialUtil.isConnected(this, Provider.FACEBOOK)) {
+		if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {
 			intent.putExtra("action", SocialPostingPage.ACTION_SIGN_OUT);
 		} else {
 			intent.putExtra("action", SocialPostingPage.ACTION_SIGN_IN);
@@ -107,7 +108,7 @@ public class MainMenuPage extends GTCActivity {
 
 		setTypeface(R.id.banner, ResourceManager.getFont("digitalstrip.ttf"));
 
-		if (SocialUtil.isConnected(this, Provider.FACEBOOK)) {
+		if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {
 			setText(R.id.facebookButton, ResourceManager.loadString(R.string.label_signout));
 		} else {
 			setText(R.id.facebookButton, ResourceManager.loadString(R.string.label_signin));

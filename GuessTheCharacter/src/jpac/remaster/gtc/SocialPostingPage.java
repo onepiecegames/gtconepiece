@@ -2,11 +2,13 @@ package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCPopupActivity;
 import jpac.remaster.gtc.util.Util;
-import jpac.remaster.gtc.util.social.DialogListener;
-import jpac.remaster.gtc.util.social.SocialAuthAdapter;
-import jpac.remaster.gtc.util.social.SocialAuthAdapter.Provider;
-import jpac.remaster.gtc.util.social.SocialAuthError;
-import jpac.remaster.gtc.util.social.SocialAuthListener;
+import jpac.remaster.gtc.util.social.GTCAuthAdapter;
+
+import org.brickred.socialauth.android.DialogListener;
+import org.brickred.socialauth.android.SocialAuthAdapter.Provider;
+import org.brickred.socialauth.android.SocialAuthError;
+import org.brickred.socialauth.android.SocialAuthListener;
+
 import android.os.Bundle;
 
 public class SocialPostingPage extends GTCPopupActivity implements
@@ -16,7 +18,7 @@ public class SocialPostingPage extends GTCPopupActivity implements
 	public static final String ACTION_SIGN_IN = "Sign In";
 	public static final String ACTION_SIGN_OUT = "Sign Out";
 
-	private SocialAuthAdapter adapter;
+	private GTCAuthAdapter adapter;
 
 	private String action;
 
@@ -27,8 +29,8 @@ public class SocialPostingPage extends GTCPopupActivity implements
 
 		action = getStringExtra("action");
 
-		adapter = new SocialAuthAdapter(this);
-		adapter.connect(this);
+		adapter = new GTCAuthAdapter(this);
+		adapter.connectToFacebook(this);
 	}
 
 	@Override

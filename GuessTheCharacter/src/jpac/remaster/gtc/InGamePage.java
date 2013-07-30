@@ -9,8 +9,8 @@ import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.Constants;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
+import jpac.remaster.gtc.util.social.GTCAuthAdapter;
 import jpac.remaster.gtc.util.social.SocialDataManager;
-import jpac.remaster.gtc.util.social.SocialUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -213,7 +213,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				showLevelComplete();
 				break;
 			case REQUEST_SHARE_FACEBOOK:
-				if (SocialUtil.isNetworkAvailable(getApplicationContext())) {
+				if (GTCAuthAdapter.isNetworkAvailable(getApplicationContext())) {
 					// Util.captureView(findViewById(R.id.gamepage));
 					Intent intent = new Intent(this, SocialPostingPage.class);
 					intent.putExtra("action", SocialPostingPage.ACTION_SHARE);
