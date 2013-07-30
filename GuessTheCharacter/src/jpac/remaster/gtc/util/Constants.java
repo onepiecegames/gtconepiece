@@ -52,4 +52,9 @@ public class Constants {
 	// ========================================================================
 	public static final String FONT_LOCATION = "font/";
 	public static final String IMAGE_LOCATION = "puzzle/";
+	
+	// ========================================================================
+	// A string consisting of the standard alphabet characters.
+	// ========================================================================
+	public static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 }
