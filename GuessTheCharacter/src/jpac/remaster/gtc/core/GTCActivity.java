@@ -20,9 +20,21 @@ import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 /******************************************************************************
  * Superclass for all activity in this application. All activities must extend
@@ -122,4 +134,145 @@ public abstract class GTCActivity extends Activity {
 		return this.getClass().getName();
 	}
 
+	/* View Related Methods */
+	
+	/**************************************************************************
+	 * Set the visibility of a specified view.
+	 *************************************************************************/
+	public void setVisibility(int id, int visibility) {
+		View view = findViewById(id);
+		
+		if (view != null) {
+			view.setVisibility(visibility);
+		}
+	}
+	
+	/**************************************************************************
+	 * Set the text of a specified TextView or Button.
+	 *************************************************************************/
+	public void setText(int id, String text) {
+		View view = findViewById(id);
+		
+		if (view != null) {
+			if (view instanceof TextView) {
+				((TextView) view).setText(text);
+			} else if (view instanceof Button) {
+				((Button) view).setText(text);
+			}
+		}
+	}
+
+	/**************************************************************************
+	 * Set the font for a specified TextView or Button.
+	 *************************************************************************/
+	public void setTypeface(int id, Typeface font) {
+		View view = findViewById(id);
+		
+		if (view != null) {
+			if (view instanceof TextView) {
+				((TextView) view).setTypeface(font);
+			} else if (view instanceof Button) {
+				((Button) view).setTypeface(font);
+			}
+		}
+	}
+	
+	/**************************************************************************
+	 * Set an onClickListener for a specified view.
+	 *************************************************************************/
+	public void setOnClickListener(int id, OnClickListener listener) {
+		findViewById(id).setOnClickListener(listener);
+	}
+	
+	/**************************************************************************
+	 * Set the background drawable of a specified view.
+	 *************************************************************************/
+	public void setBackground(int id, int bg) {
+		findViewById(id).setBackgroundResource(bg);
+	}
+	
+	/**************************************************************************
+	 * Set the image source of the specified ImageView or ImageButton.
+	 *************************************************************************/
+	public void setImage(int id, Bitmap image) {
+		View view = findViewById(id);
+		
+		if (view != null) {
+			if (view instanceof ImageView) {
+				((ImageView) view).setImageBitmap(image);
+			} else if (view instanceof ImageButton) {
+				((ImageButton) view).setImageBitmap(image);
+			}
+		}
+	}
+	
+	/**************************************************************************
+	 * Start an animation for the specified view.
+	 *************************************************************************/
+	public void startAnimation(int id, Animation anim) {
+		findViewById(id).startAnimation(anim);
+	}
+	
+	/**************************************************************************
+	 * Returns a TextView given a resource id. Make sure that the id supplied
+	 * is of a TextView to prevent ClassCastException.
+	 *************************************************************************/
+	public TextView getTextView(int id) {
+		return (TextView) findViewById(id);
+	}
+
+	/**************************************************************************
+	 * Returns a Button given a resource id. Make sure that the id supplied is
+	 * of a Button to prevent ClassCastException.
+	 *************************************************************************/	
+	public Button getButton(int id) {
+		return (Button) findViewById(id);
+	}
+
+	/**************************************************************************
+	 * Returns a ImageButton given a resource id. Make sure that the id
+	 * supplied is of an ImageButton to prevent ClassCastException.
+	 *************************************************************************/
+	public ImageButton getImageButton(int id) {
+		return (ImageButton) findViewById(id);
+	}
+
+	/**************************************************************************
+	 * Returns a ImageView given a resource id. Make sure that the id supplied
+	 * is of a ImageView to prevent ClassCastException.
+	 *************************************************************************/
+	public ImageView getImageView(int id) {
+		return (ImageView) findViewById(id);
+	}
+
+	/**************************************************************************
+	 * Returns a WebView given a resource id. Make sure that the id supplied
+	 * is of a WebView to prevent ClassCastException.
+	 *************************************************************************/
+	public WebView getWebView(int id) {
+		return (WebView) findViewById(id);
+	}
+
+	/**************************************************************************
+	 * Returns a ViewFlipper given a resource id. Make sure that the id
+	 * supplied is of a ViewFlipper to prevent ClassCastException.
+	 *************************************************************************/
+	public ViewFlipper getViewFlipper(int id) {
+		return (ViewFlipper) findViewById(id);
+	}
+
+	/**************************************************************************
+	 * Returns a ProgressBar given a resource id. Make sure that the id supplied
+	 * is of a ProgressBar to prevent ClassCastException.
+	 *************************************************************************/
+	public ProgressBar getProgressBar(int id) {
+		return (ProgressBar) findViewById(id);
+	}
+
+	/**************************************************************************
+	 * Returns a View given a resource id.
+	 *************************************************************************/
+	public View getView(int id) {
+		return findViewById(id);
+	}
 }
