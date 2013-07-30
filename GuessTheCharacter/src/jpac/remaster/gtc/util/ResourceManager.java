@@ -282,9 +282,9 @@ public class ResourceManager {
 	 *************************************************************************/
 	public static Typeface getFont(String font) {
 		if (fontCache.containsKey(Constants.FONT_LOCATION + font)) {
-			return fontCache.get(font);
+			return fontCache.get(Constants.FONT_LOCATION + font);
 		}
-		return loadFont(font);
+		return loadFont(Constants.FONT_LOCATION + font);
 	}
 
 	/**************************************************************************
