@@ -57,4 +57,19 @@ public class Constants {
 	// A string consisting of the standard alphabet characters.
 	// ========================================================================
 	public static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	
+	// ========================================================================
+	// An integer constant representing a not applicable value.
+	// ========================================================================
+	public static final int NA = -1;
+
+	// ========================================================================
+	// Standard starting level.
+	// ========================================================================
+	public static final int START_LEVEL = 1;
+
+	// ========================================================================
+	// Default username. Currently does not have any use.
+	// ========================================================================
+	public static final String DEFAULT_USER = "default_user";
 }
