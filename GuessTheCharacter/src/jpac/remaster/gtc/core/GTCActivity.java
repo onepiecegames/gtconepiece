@@ -290,4 +290,18 @@ public abstract class GTCActivity extends Activity {
 	public View getView(int id) {
 		return findViewById(id);
 	}
+	
+	/**************************************************************************
+	 * Returns a string extra given the name.
+	 *************************************************************************/
+	public String getStringExtra(String name) {
+		return getIntent().getStringExtra(name);
+	}
+	
+	/**************************************************************************
+	 * Returns an integer extra given the name.
+	 *************************************************************************/
+	public int getIntExtra(String name) {
+		return getIntent().getIntExtra(name, 0);
+	}
 }

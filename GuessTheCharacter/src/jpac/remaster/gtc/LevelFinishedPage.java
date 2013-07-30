@@ -26,16 +26,16 @@ public class LevelFinishedPage extends GTCActivity {
 			}
 		});
 
-		String id = getIntent().getStringExtra("image");
+		String id = getStringExtra("image");
 		setImage(R.id.puzzleImage, ResourceManager.loadBitmapFromAsset(id));
 
 		Typeface ds = ResourceManager.getFont("digitalstrip.ttf");
 
-		int amount = getIntent().getIntExtra("prize", 0);
+		int amount = getIntExtra("prize");
 		setText(R.id.amountLabel, "" + amount);
 		setTypeface(R.id.amountLabel, ds);
 
-		String desc = getIntent().getStringExtra("answer");
+		String desc = getStringExtra("answer");
 		setText(R.id.answer, desc);
 		setTypeface(R.id.answer, ds);
 

@@ -25,7 +25,7 @@ public class SocialPostingPage extends GTCPopupActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loading);
 
-		action = getIntent().getStringExtra("action");
+		action = getStringExtra("action");
 
 		adapter = new SocialAuthAdapter(this);
 		adapter.connect(this);

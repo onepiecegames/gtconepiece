@@ -13,8 +13,8 @@ public class ConfirmationPopup extends GTCPopupActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pop_confirm);
 
-		String title = getIntent().getStringExtra("title");
-		String message = getIntent().getStringExtra("message");
+		String title = getStringExtra("title");
+		String message = getStringExtra("message");
 
 		setText(R.id.title, title);
 		setText(R.id.message, message);
