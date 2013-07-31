@@ -16,6 +16,7 @@
 package jpac.remaster.gtc.core;
 
 import jpac.remaster.gtc.GTCSplash;
+import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import android.app.Activity;
@@ -104,6 +105,7 @@ public abstract class GTCActivity extends Activity {
 		setFullscreenWindow();
 
 		ResourceManager.setContextReference(this);
+		DataManager.setContextReference(this);
 		Util.log(this.getClass().getName() + "[onCreate]");
 	}
 

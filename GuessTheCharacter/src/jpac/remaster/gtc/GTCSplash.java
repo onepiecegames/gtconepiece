@@ -1,8 +1,8 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
-import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.ResourceLoader;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.SysInfo;
@@ -62,7 +62,7 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 			getProgressBar(R.id.progressBar).incrementProgressBy(100);
 			ResourceManager.loadSystemFonts();
 			PuzzleManager.init(getApplicationContext());
-			UserDataManager.init(getApplicationContext());
+			DataManager.init();
 			SocialDataManager.loadData(getApplicationContext());
 			return null;
 		}

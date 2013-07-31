@@ -94,7 +94,11 @@ public class Constants {
 	// Internal files
 	// ========================================================================
 	public static final String FILE_USER_DATA = "default_user.sav";
-	public static final String FILE_SOCIAL_DATA = "facebook_posted.raw";
 	public static final String FILE_PUZZLE_DATA = "solved_puzzle.raw";
 	public static final String FILE_BUTTON_DATA = "btn.sav";
+
+	// ========================================================================
+	// SharedPreferences
+	// ========================================================================
+	public static final String SHARED_PREFERENCES = "gtc_prefs";
 }

@@ -1,13 +1,11 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
-import jpac.remaster.gtc.logic.ButtonDataManager;
+import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
-import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.GTCAuthAdapter;
-import jpac.remaster.gtc.util.social.SocialDataManager;
 
 import org.brickred.socialauth.android.SocialAuthAdapter.Provider;
 
@@ -103,7 +101,7 @@ public class MainMenuPage extends GTCActivity {
 		super.onResume();
 		setTypeface(R.id.currLevelLabel,
 				ResourceManager.getFont("roboto_black.ttf"));
-		setText(R.id.currLevelLabel, "" + UserDataManager.checkLevel());
+		setText(R.id.currLevelLabel, "" + DataManager.checkLevel());
 
 		setTypeface(R.id.banner, ResourceManager.getFont("digitalstrip.ttf"));
 
@@ -136,9 +134,9 @@ public class MainMenuPage extends GTCActivity {
 	}
 
 	private void resetData() {
-		UserDataManager.resetData(this);
-		PuzzleManager.resetData(this);
-		SocialDataManager.resetData(this);
-		ButtonDataManager.resetData(this);
+		DataManager.reset();
+//		PuzzleManager.resetData(this);
+//		SocialDataManager.resetData(this);
+//		ButtonDataManager.resetData(this);
 	}
 }

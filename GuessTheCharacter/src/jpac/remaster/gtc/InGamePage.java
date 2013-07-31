@@ -1,11 +1,11 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.logic.ButtonManager;
 import jpac.remaster.gtc.logic.Puzzle;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserActionListener;
-import jpac.remaster.gtc.logic.UserDataManager;
 import jpac.remaster.gtc.util.Constants;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
@@ -51,10 +51,10 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 
 		if (PuzzleManager.isFinished()) {
 			puzzle = null;
-		} else if (UserDataManager.checkCurrentPuzzleId() == -1) {
+		} else if (DataManager.checkCurrentPuzzleId() == -1) {
 			puzzle = PuzzleManager.getNextPuzzle();
 		} else {
-			puzzle = PuzzleManager.getPuzzleById(UserDataManager
+			puzzle = PuzzleManager.getPuzzleById(DataManager
 					.checkCurrentPuzzleId());
 		}
 		PuzzleManager.currentPuzzle = puzzle;
@@ -69,7 +69,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			if (SocialDataManager.checkIfPosted(puzzle.getId())) {
 				alreadyPosted = true;
 			}
-			UserDataManager.updatePuzzle("" + puzzle.getId());
+			DataManager.updatePuzzle(puzzle.getId());
 
 			buttonManager.init(this, puzzle.getAnswer());
 			buttonManager.setChoices(PuzzleManager.createChoiceSet(
@@ -94,7 +94,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 
 	private void updateLevel() {
-		setText(R.id.currLevelLabel, "" + UserDataManager.checkLevel());
+		setText(R.id.currLevelLabel, "" + DataManager.checkLevel());
 		setTypeface(R.id.currLevelLabel,
 				ResourceManager.getFont("digitalstrip.ttf"));
 		setTypeface(R.id.levelLabel,
@@ -102,7 +102,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 
 	private void updateGold() {
-		setText(R.id.amountLabel, "" + UserDataManager.checkGold());
+		setText(R.id.amountLabel, "" + DataManager.checkGold());
 		setTypeface(R.id.amountLabel,
 				ResourceManager.getFont("digitalstrip.ttf"));
 		setTypeface(R.id.goldLabel, ResourceManager.getFont("digitalstrip.ttf"));
@@ -127,7 +127,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 
 	public void removeLetter(View v) {
-		if (UserDataManager.isGoldEnough(Constants.REMOVE_COST)) {
+		if (DataManager.isGoldEnough(Constants.REMOVE_COST)) {
 			showConfirmUseHint("Pay " + Constants.REMOVE_COST
 					+ " gold to remove an incorrect letter from the choices.",
 					REQUEST_CONFIRM_REMOVE);
@@ -137,7 +137,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 
 	public void revealLetter(View v) {
-		if (UserDataManager.isGoldEnough(Constants.REVEAL_COST)) {
+		if (DataManager.isGoldEnough(Constants.REVEAL_COST)) {
 			showConfirmUseHint("Pay " + Constants.REVEAL_COST
 					+ " gold to reveal a correct letter.",
 					REQUEST_CONFIRM_REVEAL);
@@ -147,7 +147,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 
 	public void solvePuzzle(View v) {
-		if (UserDataManager.isGoldEnough(Constants.SOLVE_COST)) {
+		if (DataManager.isGoldEnough(Constants.SOLVE_COST)) {
 			showConfirmUseHint("Pay " + Constants.SOLVE_COST
 					+ " gold to solve the puzzle.", REQUEST_CONFIRM_SOLVE);
 		} else {
@@ -203,17 +203,17 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				break;
 			case REQUEST_CONFIRM_REMOVE:
 				if (buttonManager.removeLetter(puzzle.getAnswer())) {
-					UserDataManager.spendGold(Constants.REMOVE_COST);
+					DataManager.spendGold(Constants.REMOVE_COST);
 				} else {
 					Util.displayToast(this, "No more letter to remove");
 				}
 				break;
 			case REQUEST_CONFIRM_REVEAL:
-				UserDataManager.spendGold(Constants.REVEAL_COST);
+				DataManager.spendGold(Constants.REVEAL_COST);
 				buttonManager.revealLetter(puzzle.getAnswer());
 				break;
 			case REQUEST_CONFIRM_SOLVE:
-				UserDataManager.spendGold(Constants.SOLVE_COST);
+				DataManager.spendGold(Constants.SOLVE_COST);
 				showLevelComplete();
 				break;
 			case REQUEST_SHARE_FACEBOOK:
@@ -252,8 +252,8 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	private void showLevelComplete() {
 		PuzzleManager.markAsSolved(puzzle.getId());
 		int prize = puzzle.getDifficulty() * Constants.PUZZLE_PRIZE;
-		UserDataManager.earnGold(prize);
-		UserDataManager.levelUp();
+		DataManager.earnGold(prize);
+		DataManager.levelUp();
 		Intent intent = new Intent(this, LevelFinishedPage.class);
 		intent.putExtra("prize", prize);
 		intent.putExtra("image", puzzle.getImageId());
@@ -269,7 +269,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	protected void onDestroy() {
 		super.onDestroy();
 		buttonManager.saveData(this, puzzle);
-		UserDataManager.saveData(this);
+//		DataManager.saveData(this);
 		PuzzleManager.saveData(this);
 		SocialDataManager.saveData(this);
 	}
