@@ -17,7 +17,10 @@ package jpac.remaster.gtc.util;
 
 import java.util.Random;
 
+import jpac.remaster.gtc.R;
+import jpac.remaster.gtc.core.GTCPopupActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -101,7 +104,8 @@ public class Util {
 		// generate random characters
 		for (int i = 0; i < n; i++) {
 			int index = specialRand.nextInt(len);
-			generatedStrings[i] = Constants.ALPHABET.substring(index, index + 1);
+			generatedStrings[i] = Constants.ALPHABET
+					.substring(index, index + 1);
 		}
 
 		// add the offset
@@ -151,5 +155,74 @@ public class Util {
 		if (SysInfo.isDebug()) {
 			Log.v("LOG", message);
 		}
+	}
+
+	/**************************************************************************
+	 * Creates the default popup intent.
+	 *************************************************************************/
+	private static Intent createPopup(Context context, String title,
+			String message) {
+		Intent intent = new Intent(context, GTCPopupActivity.class);
+
+		intent.putExtra(Constants.POP_TITLE, title);
+		intent.putExtra(Constants.POP_MESSAGE, message);
+		intent.putExtra(Constants.POP_BUTTON1, Constants.OK_BUTTON);
+		intent.putExtra(Constants.POP_BUTTON2, Constants.CANCEL_BUTTON);
+		intent.putExtra(Constants.POP_TITLE_FONT, "digitalstrip.ttf");
+
+		return intent;
+	}
+
+	/**************************************************************************
+	 * Creates a confirmation popup. This is also the default popup.
+	 *************************************************************************/
+	public static Intent createConfirmPopup(Context context, String title,
+			String message) {
+		return createPopup(context, title, message);
+	}
+
+	/**************************************************************************
+	 * Creates an acknowledge popup.
+	 *************************************************************************/
+	public static Intent createAcknowledgePopup(Context context, String title,
+			String message) {
+		Intent intent = createPopup(context, title, message);
+
+		intent.putExtra(Constants.POP_SINGLE_BUTTON, true);
+		intent.putExtra(Constants.POP_BUTTON1,
+				ResourceManager.loadString(R.string.label_close));
+
+		return intent;
+	}
+
+	/**************************************************************************
+	 * Creates a customized confirmation popup.
+	 *************************************************************************/
+	public static Intent createCustomConfirmPopup(Context context,
+			String title, String message, String titleFont, int bannerResource,
+			String buttonText1, String buttonText2) {
+		Intent intent = createConfirmPopup(context, title, message);
+
+		intent.putExtra(Constants.POP_TITLE_FONT, titleFont);
+		intent.putExtra(Constants.POP_BANNER_RES, bannerResource);
+		intent.putExtra(Constants.POP_BUTTON1, buttonText1);
+		intent.putExtra(Constants.POP_BUTTON2, buttonText2);
+
+		return intent;
+	}
+
+	/**************************************************************************
+	 * Creates a customized acknowledgement popup.
+	 *************************************************************************/
+	public static Intent createCustomAcknowledgePopup(Context context,
+			String title, String message, String titleFont, int bannerResource,
+			String buttonText) {
+		Intent intent = createAcknowledgePopup(context, title, message);
+
+		intent.putExtra(Constants.POP_TITLE_FONT, titleFont);
+		intent.putExtra(Constants.POP_BANNER_RES, bannerResource);
+		intent.putExtra(Constants.POP_BUTTON1, buttonText);
+
+		return intent;
 	}
 }
