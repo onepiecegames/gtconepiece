@@ -89,5 +89,12 @@ public class Constants {
 	public static final String POP_BUTTON2 = "button2";
 	public static final String POP_BANNER_RES = "banner_resource";
 	public static final String POP_TITLE_FONT = "title_font";
-	
+
+	// ========================================================================
+	// Internal files
+	// ========================================================================
+	public static final String FILE_USER_DATA = "default_user.sav";
+	public static final String FILE_SOCIAL_DATA = "facebook_posted.raw";
+	public static final String FILE_PUZZLE_DATA = "solved_puzzle.raw";
+	public static final String FILE_BUTTON_DATA = "btn.sav";
 }
