@@ -72,4 +72,22 @@ public class Constants {
 	// Default username. Currently does not have any use.
 	// ========================================================================
 	public static final String DEFAULT_USER = "default_user";
+	
+	// ========================================================================
+	// Default values for popup buttons.
+	// ========================================================================
+	public static final String OK_BUTTON = "OK";
+	public static final String CANCEL_BUTTON = "Cancel";
+
+	// ========================================================================
+	// Intent key for popup activities.
+	// ========================================================================
+	public static final String POP_TITLE = "title";
+	public static final String POP_MESSAGE = "message";
+	public static final String POP_SINGLE_BUTTON = "single_button";
+	public static final String POP_BUTTON1 = "button1";
+	public static final String POP_BUTTON2 = "button2";
+	public static final String POP_BANNER_RES = "banner_resource";
+	public static final String POP_TITLE_FONT = "title_font";
+	
 }

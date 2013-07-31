@@ -304,4 +304,11 @@ public abstract class GTCActivity extends Activity {
 	public int getIntExtra(String name) {
 		return getIntent().getIntExtra(name, 0);
 	}
+
+	/**************************************************************************
+	 * Returns a boolean extra given the name.
+	 *************************************************************************/
+	public boolean getBooleanExtra(String name) {
+		return getIntent().getBooleanExtra(name, false);
+	}
 }

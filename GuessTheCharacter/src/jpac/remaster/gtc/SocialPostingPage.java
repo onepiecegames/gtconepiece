@@ -1,6 +1,6 @@
 package jpac.remaster.gtc;
 
-import jpac.remaster.gtc.core.GTCPopupActivity;
+import jpac.remaster.gtc.core.GTCActivity;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.GTCAuthAdapter;
 
@@ -11,7 +11,7 @@ import org.brickred.socialauth.android.SocialAuthListener;
 
 import android.os.Bundle;
 
-public class SocialPostingPage extends GTCPopupActivity implements
+public class SocialPostingPage extends GTCActivity implements
 		DialogListener, SocialAuthListener<Integer> {
 
 	public static final String ACTION_SHARE = "Share";

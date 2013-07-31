@@ -44,13 +44,7 @@
             android:screenOrientation="portrait"  >
         </activity>
         <activity
-            android:name=".ConfirmationPopup"
-            android:label="@string/app_name"
-            android:theme="@style/DialogTheme"
-            android:screenOrientation="portrait"  >
-        </activity>
-        <activity
-            android:name=".AcknowledgementPopup"
+            android:name="jpac.remaster.gtc.core.GTCPopupActivity"
             android:label="@string/app_name"
             android:theme="@style/DialogTheme"
             android:screenOrientation="portrait"  >
@@ -63,12 +57,6 @@
         <activity
             android:name=".LevelFinishedPage"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"  >
-        </activity>
-        <activity
-            android:name=".SocialPopup"
-            android:label="@string/app_name"
-            android:theme="@style/DialogTheme"
             android:screenOrientation="portrait"  >
         </activity>
         <activity

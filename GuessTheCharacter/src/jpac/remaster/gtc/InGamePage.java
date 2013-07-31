@@ -87,27 +87,31 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			}
 			updatePuzzleDifficulty();
 
-			setTypeface(R.id.categoryLabel, ResourceManager.getFont("digitalstrip.ttf"));
+			setTypeface(R.id.categoryLabel,
+					ResourceManager.getFont("digitalstrip.ttf"));
 			setText(R.id.categoryLabel, puzzle.getCategory());
 		}
 	}
 
 	private void updateLevel() {
 		setText(R.id.currLevelLabel, "" + UserDataManager.checkLevel());
-		setTypeface(R.id.currLevelLabel, ResourceManager.getFont("digitalstrip.ttf"));
-		setTypeface(R.id.levelLabel, ResourceManager.getFont("digitalstrip.ttf"));
+		setTypeface(R.id.currLevelLabel,
+				ResourceManager.getFont("digitalstrip.ttf"));
+		setTypeface(R.id.levelLabel,
+				ResourceManager.getFont("digitalstrip.ttf"));
 	}
 
 	private void updateGold() {
 		setText(R.id.amountLabel, "" + UserDataManager.checkGold());
-		setTypeface(R.id.amountLabel, ResourceManager.getFont("digitalstrip.ttf"));
+		setTypeface(R.id.amountLabel,
+				ResourceManager.getFont("digitalstrip.ttf"));
 		setTypeface(R.id.goldLabel, ResourceManager.getFont("digitalstrip.ttf"));
 	}
 
 	private void updatePuzzleDifficulty() {
 		int level = puzzle.getDifficulty();
 		int drawable = R.drawable.level_full;
-		
+
 		switch (level) {
 		case 5:
 			setImageResource(R.id.level5, drawable);
@@ -153,39 +157,39 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 
 	public void askFacebook(View v) {
 		if (alreadyPosted) {
-			Intent intent = new Intent(this, AcknowledgementPopup.class);
-			intent.putExtra("title", "Facebook");
-			intent.putExtra(
-					"message",
-					"You've already posted this image.\n\nCheck the comments section to know what your friends think.");
-			startActivityForResult(intent, REQUEST_SHOW_ACKNOWLEDGE);
+			startActivityForResult(
+					Util.createAcknowledgePopup(
+							this,
+							"Facebook",
+							"You've already posted this image.\n\nCheck the comments"
+									+ " section to know what your friends think."),
+					REQUEST_SHOW_ACKNOWLEDGE);
 		} else {
-			startActivityForResult(new Intent(this, SocialPopup.class),
-					REQUEST_SHARE_FACEBOOK);
+			startActivityForResult(Util.createCustomConfirmPopup(this,
+					ResourceManager.loadString(R.string.label_social),
+					ResourceManager.loadString(R.string.label_social_message),
+					"facebook.otf", R.color.chambray,
+					ResourceManager.loadString(R.string.label_share),
+					Constants.CANCEL_BUTTON), REQUEST_SHARE_FACEBOOK);
 		}
 	}
 
 	private void showConfirmUseHint(String message, int requestCode) {
-		Intent intent = new Intent(this, ConfirmationPopup.class);
-		intent.putExtra("title", "Confirm Use Hint");
-		intent.putExtra("message", message);
-		startActivityForResult(intent, requestCode);
+		startActivityForResult(
+				Util.createConfirmPopup(this, "Confirm Use Hint", message),
+				requestCode);
 	}
 
 	private void showInsufficientGold(int cost) {
-		Intent intent = new Intent(this, AcknowledgementPopup.class);
-		intent.putExtra("title", "Insufficient Gold");
-		intent.putExtra("message", "You need at least " + cost
-				+ " Gold to ues this hint.");
-		startActivityForResult(intent, REQUEST_SHOW_ACKNOWLEDGE);
+		startActivityForResult(Util.createAcknowledgePopup(this,
+				"Insufficient Gold", "You need at least " + cost
+						+ " Gold to ues this hint."), REQUEST_SHOW_ACKNOWLEDGE);
 	}
 
 	@Override
 	public void onBackPressed() {
-		Intent intent = new Intent(this, ConfirmationPopup.class);
-		intent.putExtra("title", "Confirm Action");
-		intent.putExtra("message", "Return to Main Menu?");
-		startActivityForResult(intent, REQUEST_SHOW_CONFIRM_BACK);
+		startActivityForResult(Util.createConfirmPopup(this, "Confirm Action",
+				"Return to Main Menu?"), REQUEST_SHOW_CONFIRM_BACK);
 		return;
 	}
 
