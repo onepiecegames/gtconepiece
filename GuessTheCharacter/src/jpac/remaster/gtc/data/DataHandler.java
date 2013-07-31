@@ -54,7 +54,7 @@ public abstract class DataHandler {
 	 * invoking the {@link #handle(Bundle)} method before loading the data.
 	 *************************************************************************/
 	public abstract Data load();
-
+	
 	/**************************************************************************
 	 * Register a data state listener to this handler.
 	 *************************************************************************/
@@ -68,5 +68,16 @@ public abstract class DataHandler {
 	public boolean removeDataStateListener(DataStateListener listener) {
 		return dataStateListeners.remove(listener);
 	}
-	
+
+	/**************************************************************************
+	 * Send notification to all data state listeners that the data has been
+	 * updated.
+	 *************************************************************************/
+	public void sendDataUpdateNotification(Data data, long timeStamp) {
+		int n = dataStateListeners.size();
+		
+		for (int i=0; i<n; i++) {
+			dataStateListeners.get(i).onDataUpdate(data, timeStamp);
+		}
+	}
 }

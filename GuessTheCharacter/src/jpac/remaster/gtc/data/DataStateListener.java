@@ -24,11 +24,6 @@ package jpac.remaster.gtc.data;
 public interface DataStateListener {
 
 	/**************************************************************************
-	 * Notify the receiver that the data has been created.
-	 *************************************************************************/
-	public void onDataCreate(Data data);
-	
-	/**************************************************************************
 	 * Notify the receiver that the data has been updated.
 	 *************************************************************************/
 	public void onDataUpdate(Data data, long timeStamp);

@@ -359,4 +359,11 @@ public class ResourceManager {
 
 		return content;
 	}
+
+	/**************************************************************************
+	 * Checks if the specified file exist in internal storage.
+	 *************************************************************************/
+	public static boolean isFileExist(String filename) {
+		return contextRef.getFileStreamPath(filename).exists();
+	}
 }

@@ -25,7 +25,7 @@ public interface Data {
 	/**************************************************************************
 	 * Returns the identification name for this data.
 	 *************************************************************************/
-	public String identify();
+	public long identify();
 	
 	/**************************************************************************
 	 * Checks if the contents of data is valid.
@@ -36,4 +36,9 @@ public interface Data {
 	 * Returns the content of the data as a bundle object.
 	 *************************************************************************/
 	public Bundle readContent();
+	
+	/**************************************************************************
+	 * Update the contents of the data using a bundle object.
+	 *************************************************************************/
+	public void updateContent(Bundle bundle);
 }

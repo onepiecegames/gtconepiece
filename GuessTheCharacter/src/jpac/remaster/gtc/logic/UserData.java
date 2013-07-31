@@ -1,55 +1,51 @@
 package jpac.remaster.gtc.logic;
 
-public class UserData {
+import jpac.remaster.gtc.data.Data;
+import jpac.remaster.gtc.util.Constants;
+import android.os.Bundle;
 
-	private String username = "default_user";
+public class UserData implements Data {
 
-	private int level = 1;
+	public static final long IDENTIFIER = 7465682526L; 
+	
+	private String username = Constants.DEFAULT_USER;
 
-	private int gold = 50;
+	private int level = Constants.START_LEVEL;
 
-	private String currentPuzzle = "X";
+	private int gold = Constants.START_GOLD;
 
-	public String getUsername() {
-		return username;
+	private int currentPuzzle = Constants.NA;
+
+	@Override
+	public long identify() {
+		return IDENTIFIER;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	@Override
+	public boolean isValid() {
+		return true;
 	}
 
-	public int getLevel() {
-		return level;
+	@Override
+	public Bundle readContent() {
+		Bundle bundle = new Bundle(5);
+		
+		bundle.putLong("id", IDENTIFIER);
+		bundle.putString("username", username);
+		bundle.putInt("level", level);
+		bundle.putInt("gold", gold);
+		bundle.putInt("current_puzzle", currentPuzzle);
+		
+		return bundle;
 	}
 
-	public void setLevel(String data) {
-		this.level = Integer.valueOf(data);
-	}
-
-	public int getGold() {
-		return gold;
-	}
-
-	public void setGold(String data) {
-		this.gold = Integer.valueOf(data);
-	}
-
-	public int getCurrentPuzzle() {
-		if (currentPuzzle.compareTo("X") == 0) {
-			return -1;
+	@Override
+	public void updateContent(Bundle bundle) {
+		if (bundle.getInt("id") == IDENTIFIER) {
+			username = bundle.getString("username");
+			level = bundle.getInt("level");
+			gold = bundle.getInt("gold");
+			currentPuzzle = bundle.getInt("current_puzzle");
 		}
-		return Integer.valueOf(currentPuzzle);
-	}
-
-	public void setCurrentPuzzle(String currentPuzzle) {
-		this.currentPuzzle = currentPuzzle;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public void setGold(int gold) {
-		this.gold = gold;
 	}
 }
