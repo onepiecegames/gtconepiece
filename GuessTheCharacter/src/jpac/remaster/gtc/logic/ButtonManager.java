@@ -71,7 +71,6 @@ public class ButtonManager {
 			answers = new ArrayList<AnswerButton>(20);
 		}
 		answers.clear();
-		DataManager.createLockState(puzzle.getAnswer().length());
 
 		if (indices == null) {
 			indices = new ArrayList<Integer>(20);
@@ -90,29 +89,23 @@ public class ButtonManager {
 		answerCharacter = puzzle.getAnswer();
 
 		choiceClicked = 0;
-		
-		String puzzleInfo = DataManager.getPuzzleInfo();
-		String removedButtonMeta = DataManager.getRemovedButtons();
-		String lockStateMeta = DataManager.getLockedState();
-		
-		Util.displayToast(activity, "ButtonMeta=["+puzzleInfo+"%"+removedButtonMeta+"%"+lockStateMeta+"]");
-		
-		setData(puzzleInfo, removedButtonMeta, lockStateMeta);
-		
+
 		DataManager.updatePuzzleInfo(puzzle.getId(), puzzle.getAnswer());
 	}
 
-	private void setData(String puzzleInfo, String removed, String answered) {
+	public void setData(String puzzleInfo, String removed, String locked) {
 		String curr = PuzzleManager.currentPuzzle.getId() + "@"
 				+ PuzzleManager.currentPuzzle.getAnswer();
 
-		Util.log(curr + " == " + puzzleInfo);
-		Util.log("isEqual? " + (curr == puzzleInfo));
 		if (curr.compareTo(puzzleInfo) == 0) {
 			// has removed
+			Util.log("Removed: " + removed);
+
 			if (removed != null && removed.length() > 0) {
+
 				if (removed.length() > 1) {
 					String[] removedLetters = removed.split(":");
+					Util.log("Count: " + removedLetters.length);
 					int n = removedLetters.length;
 					ChoiceButton btn;
 					for (int i = 0; i < n; i++) {
@@ -138,6 +131,7 @@ public class ButtonManager {
 						} else {
 							btn = layer2[i - 7];
 						}
+						Util.log("Button: " + btn.getText());
 						if (btn.getText().compareTo(removed) == 0) {
 							btn.remove();
 							indices.remove(Integer.valueOf(i));
@@ -148,12 +142,13 @@ public class ButtonManager {
 			}
 
 			// has answered
-			if (answered != null) {
-				int n = answered.length();
+			if (locked != null) {
+				String[] answeredLetters = locked.split("@");
+				int n = answeredLetters.length;
 
 				for (int i = 0; i < n; i++) {
-					String current = answered.substring(i, i+1);
-					if (current.compareTo("O") != 0) {
+					String current = answeredLetters[i];
+					if (current.compareTo("#") != 0) {
 						AnswerButton ans = answers.get(i);
 						ChoiceButton btn;
 						int layer, index;
@@ -432,7 +427,6 @@ public class ButtonManager {
 		public void remove() {
 			this.makeInvisible();
 			this.setState(STATE_REMOVED);
-			DataManager.addRemovedButton(getText());
 		}
 
 		public boolean isIdle() {
@@ -465,7 +459,7 @@ public class ButtonManager {
 		private Button btn;
 
 		private int idx;
-		
+
 		private int layer;
 
 		private int index;
@@ -518,7 +512,7 @@ public class ButtonManager {
 			this.locked = true;
 			// disable the button
 			this.disable();
-			DataManager.lock(idx);
+			// DataManager.lock(idx);
 		}
 
 		public void reset() {
@@ -572,6 +566,7 @@ public class ButtonManager {
 						choiceClicked--;
 						indices.remove(Integer.valueOf(index));
 						btn.remove();
+						DataManager.addRemovedButton(btn.getText());
 						return true;
 					}
 				} else {
@@ -582,6 +577,7 @@ public class ButtonManager {
 				if (!answer.contains(btn.getText())) {
 					indices.remove(Integer.valueOf(index));
 					btn.remove();
+					DataManager.addRemovedButton(btn.getText());
 					return true;
 				} else {
 					filteredIndex.add(index);
@@ -628,6 +624,7 @@ public class ButtonManager {
 						}
 						if (btn.isIdle()) {
 							btn.remove();
+							DataManager.addRemovedButton(btn.getText());
 							return true;
 						} else if (btn.isSelected()) {
 							String txt = btn.getText();
@@ -641,6 +638,8 @@ public class ButtonManager {
 								}
 								if (temp.isIdle() && temp.isEqualTo(txt)) {
 									temp.remove();
+									DataManager
+											.addRemovedButton(temp.getText());
 									return true;
 								}
 							}
@@ -658,8 +657,12 @@ public class ButtonManager {
 									choiceReset(x, y);
 									if (x == 1) {
 										layer1[y].remove();
+										DataManager.addRemovedButton(layer1[y]
+												.getText());
 									} else {
 										layer2[y].remove();
+										DataManager.addRemovedButton(layer2[y]
+												.getText());
 									}
 									return true;
 								}
@@ -691,7 +694,7 @@ public class ButtonManager {
 					if (btn.isIdle() && btn.isEqualTo(answer.charAt(index))) {
 						ans.setText(answer.charAt(index) + "");
 						ans.lockButton();
-						DataManager.lock(index);
+						DataManager.updateLockState(createLockState());
 						choiceClicked++;
 						lockChoiceButton(ans);
 						if (choiceClicked == n) {
@@ -713,6 +716,7 @@ public class ButtonManager {
 										temp.getIndex(), answer.charAt(index)
 												+ "");
 								ans.lockButton();
+								DataManager.updateLockState(createLockState());
 								btn.setAnswerIndex(index);
 								if (choiceClicked == n) {
 									String sequence = "";
@@ -758,6 +762,7 @@ public class ButtonManager {
 							choiceReset(x2, y2);
 							ans.changeContent(x1, y1, btn.getText());
 							ans.lockButton();
+							DataManager.updateLockState(createLockState());
 							if (choiceClicked == n) {
 								String sequence = "";
 								for (int l = 0; l < n; l++) {
@@ -788,6 +793,7 @@ public class ButtonManager {
 								btn.setAnswerIndex(i);
 								ans.changeContent(x1, y1, letter);
 								ans.lockButton();
+								DataManager.updateLockState(createLockState());
 								if (choiceClicked == n) {
 									String sequence = "";
 									for (int l = 0; l < n; l++) {
@@ -805,6 +811,21 @@ public class ButtonManager {
 		}
 	}
 
+	private String createLockState() {
+		AnswerButton ans;
+		String lockState = "";
+		int n = answers.size();
+		for (int i = 0; i < n; i++) {
+			ans = answers.get(i);
+			if (ans.isLocked()) {
+				lockState += ans.getText() + "@";
+			} else {
+				lockState += "#@";
+			}
+		}
+		return lockState;
+	}
+
 	private void lockChoiceButton(AnswerButton btn) {
 		for (int i = 0; i < 14; i++) {
 			if (i < 7) {
@@ -820,9 +841,5 @@ public class ButtonManager {
 				}
 			}
 		}
-	}
-
-	public void setData(String[] metadata) {
-		
 	}
 }

@@ -22,7 +22,6 @@ import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.logic.UserData;
 import jpac.remaster.gtc.util.Constants;
 import jpac.remaster.gtc.util.ResourceManager;
-import jpac.remaster.gtc.util.Util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -108,7 +107,7 @@ public class DataManager {
 		
 		String locked = prefs.getString("button_locked", null);
 		if (locked != null) {
-			buttonMetadata.setLockedMetadata(locked);
+			buttonMetadata.setLockedButton(locked);
 		}
 	}
 
@@ -184,18 +183,8 @@ public class DataManager {
 			}
 
 			// update locked button state
-			String locked = "";
-			String[] state = metadata[2].split("@");
-			if (state != null) {
-				int n = state.length;
-				for (int i = 0; i < n; i++) {
-					if (state[i].compareTo("#") == 0) {
-						locked = locked.concat("X");
-					} else {
-						locked = locked.concat("O");
-					}
-				}
-			}
+			String locked = metadata[2];
+			
 			if (locked.length() > 0) {
 				updateStringPrefs("button_locked", locked);
 			}
@@ -252,6 +241,11 @@ public class DataManager {
 		List<String> removed = buttonMetadata.getRemovedButtons();
 		updateStringPrefs("button_removed", parseRemovedButton(removed));
 	}
+	
+	public static void updateLockState(String state) {
+		buttonMetadata.setLockedButton(state);
+		updateStringPrefs("button_locked", state);
+	}
 
 	private static String parseRemovedButton(List<String> removedButtons) {
 		String removed = "";
@@ -268,38 +262,13 @@ public class DataManager {
 		}
 		return removed;
 	}
-
+	
 	public static String getRemovedButtons() {
 		return parseRemovedButton(buttonMetadata.getRemovedButtons());
 	}
 
-	public static void lock(int i) {
-		buttonMetadata.lock(i);
-		updateStringPrefs("button_locked",
-				parseLockedButton(buttonMetadata.getLockState()));
-	}
-
-	private static String parseLockedButton(boolean[] lockState) {
-		int n = lockState.length;
-		String locked = "";
-
-		for (int i = 0; i < n; i++) {
-			if (lockState[i]) {
-				locked = locked.concat("X");
-			} else {
-				locked = locked.concat("O");
-			}
-		}
-
-		return locked;
-	}
-	
-	public static void createLockState(int n) {
-		buttonMetadata.initLockState(n);
-	}
-	
-	public static String getLockedState() {
-		return parseLockedButton(buttonMetadata.getLockState());
+	public static String getLockedButtons() {
+		return buttonMetadata.getLockedButton();
 	}
 	
 	public static String getPuzzleInfo() {
@@ -346,8 +315,6 @@ public class DataManager {
 	}
 
 	private static void updateIntPrefs(String key, int value) {
-		Util.displayToast(contextRef, "Added ["+key+"="+value+"]");
-		
 		SharedPreferences prefs = contextRef.getSharedPreferences(
 				Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
@@ -356,9 +323,7 @@ public class DataManager {
 		editor.commit();
 	}
 
-	private static void updateStringPrefs(String key, String value) {
-		Util.displayToast(contextRef, "Added ["+key+"="+value+"]");
-		
+	private static void updateStringPrefs(String key, String value) {		
 		SharedPreferences prefs = contextRef.getSharedPreferences(
 				Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();

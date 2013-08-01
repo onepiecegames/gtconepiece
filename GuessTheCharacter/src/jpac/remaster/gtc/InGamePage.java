@@ -31,8 +31,6 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 
 	private ButtonManager buttonManager;
 
-	private boolean alreadyPosted = false;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,9 +63,6 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			startActivity(new Intent(this, GameFinishedPage.class));
 			finish();
 		} else {
-			if (DataManager.checkIfPosted(puzzle.getId())) {
-				alreadyPosted = true;
-			}
 			DataManager.updatePuzzle(puzzle.getId());
 
 			buttonManager.init(this, puzzle);
@@ -75,6 +70,13 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 					puzzle.getAnswer(), puzzle.getRandomSeed()));
 			buttonManager.initAnswerField(this, puzzle.getRawAnswer());
 			buttonManager.setAnswerDoneListener(this);
+
+
+			String puzzleInfo = DataManager.getPuzzleInfo();
+			String removedButtonMeta = DataManager.getRemovedButtons();
+			String lockStateMeta = DataManager.getLockedButtons();
+
+			buttonManager.setData(puzzleInfo, removedButtonMeta, lockStateMeta);
 			
 			try {
 				setImage(
@@ -154,7 +156,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 
 	public void askFacebook(View v) {
-		if (alreadyPosted) {
+		if (DataManager.checkIfPosted(puzzle.getId())) {
 			startActivityForResult(
 					Util.createAcknowledgePopup(
 							this,
@@ -227,7 +229,6 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				break;
 			case REQUEST_PUBLISH_FEED:
 				DataManager.updatePosted(puzzle.getId());
-				alreadyPosted = true;
 				break;
 			default:
 				break;
