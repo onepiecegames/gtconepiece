@@ -3,6 +3,7 @@ package jpac.remaster.gtc.logic;
 import java.util.ArrayList;
 
 import jpac.remaster.gtc.R;
+import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import android.app.Activity;
@@ -45,7 +46,7 @@ public class ButtonManager {
 		layer2 = new ChoiceButton[7];
 	}
 
-	public void init(Activity activity, String answer) {
+	public void init(Activity activity, Puzzle puzzle) {
 		fontBold = ResourceManager.getFont("roboto_bold.ttf");
 
 		final ViewGroup choiceLayer1 = (ViewGroup) activity
@@ -70,6 +71,7 @@ public class ButtonManager {
 			answers = new ArrayList<AnswerButton>(20);
 		}
 		answers.clear();
+		DataManager.createLockState(puzzle.getAnswer().length());
 
 		if (indices == null) {
 			indices = new ArrayList<Integer>(20);
@@ -85,9 +87,100 @@ public class ButtonManager {
 		}
 		filteredIndex.clear();
 
-		answerCharacter = answer;
+		answerCharacter = puzzle.getAnswer();
 
 		choiceClicked = 0;
+		
+		String puzzleInfo = DataManager.getPuzzleInfo();
+		String removedButtonMeta = DataManager.getRemovedButtons();
+		String lockStateMeta = DataManager.getLockedState();
+		
+		Util.displayToast(activity, "ButtonMeta=["+puzzleInfo+"%"+removedButtonMeta+"%"+lockStateMeta+"]");
+		
+		setData(puzzleInfo, removedButtonMeta, lockStateMeta);
+		
+		DataManager.updatePuzzleInfo(puzzle.getId(), puzzle.getAnswer());
+	}
+
+	private void setData(String puzzleInfo, String removed, String answered) {
+		String curr = PuzzleManager.currentPuzzle.getId() + "@"
+				+ PuzzleManager.currentPuzzle.getAnswer();
+
+		Util.log(curr + " == " + puzzleInfo);
+		Util.log("isEqual? " + (curr == puzzleInfo));
+		if (curr.compareTo(puzzleInfo) == 0) {
+			// has removed
+			if (removed != null && removed.length() > 0) {
+				if (removed.length() > 1) {
+					String[] removedLetters = removed.split(":");
+					int n = removedLetters.length;
+					ChoiceButton btn;
+					for (int i = 0; i < n; i++) {
+						for (int j = 0; j < 14; j++) {
+							if (j < 7) {
+								btn = layer1[j];
+							} else {
+								btn = layer2[j - 7];
+							}
+							if (btn.getText().compareTo(removedLetters[i]) == 0
+									&& btn.isIdle()) {
+								btn.remove();
+								indices.remove(Integer.valueOf(j));
+								break;
+							}
+						}
+					}
+				} else {
+					ChoiceButton btn;
+					for (int i = 0; i < 14; i++) {
+						if (i < 7) {
+							btn = layer1[i];
+						} else {
+							btn = layer2[i - 7];
+						}
+						if (btn.getText().compareTo(removed) == 0) {
+							btn.remove();
+							indices.remove(Integer.valueOf(i));
+							break;
+						}
+					}
+				}
+			}
+
+			// has answered
+			if (answered != null) {
+				int n = answered.length();
+
+				for (int i = 0; i < n; i++) {
+					String current = answered.substring(i, i+1);
+					if (current.compareTo("O") != 0) {
+						AnswerButton ans = answers.get(i);
+						ChoiceButton btn;
+						int layer, index;
+						for (int j = 0; j < 14; j++) {
+							if (j < 7) {
+								btn = layer1[j];
+								layer = 1;
+								index = j;
+							} else {
+								btn = layer2[j - 7];
+								layer = 2;
+								index = j - 7;
+							}
+							if (btn.isIdle()
+									&& btn.getText().compareTo(current) == 0) {
+								btn.select(i);
+								ans.changeContent(layer, index, current);
+								ans.lockButton();
+								choiceClicked++;
+								indices.remove(Integer.valueOf(j));
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	class OnChoiceClickListener implements OnClickListener {
@@ -339,6 +432,7 @@ public class ButtonManager {
 		public void remove() {
 			this.makeInvisible();
 			this.setState(STATE_REMOVED);
+			DataManager.addRemovedButton(getText());
 		}
 
 		public boolean isIdle() {
@@ -370,6 +464,8 @@ public class ButtonManager {
 
 		private Button btn;
 
+		private int idx;
+		
 		private int layer;
 
 		private int index;
@@ -378,6 +474,8 @@ public class ButtonManager {
 
 		public AnswerButton(Button btn) {
 			this.btn = btn;
+			this.idx = ButtonManager.this.answers.size();
+			Util.log("Index ANS: " + idx);
 		}
 
 		public boolean isLocked() {
@@ -420,6 +518,7 @@ public class ButtonManager {
 			this.locked = true;
 			// disable the button
 			this.disable();
+			DataManager.lock(idx);
 		}
 
 		public void reset() {
@@ -433,6 +532,14 @@ public class ButtonManager {
 
 		public boolean isEqualTo(char text) {
 			return this.isEqualTo(String.valueOf(text));
+		}
+
+		public int getIdx() {
+			return idx;
+		}
+
+		public void setIdx(int idx) {
+			this.idx = idx;
 		}
 	}
 
@@ -584,6 +691,7 @@ public class ButtonManager {
 					if (btn.isIdle() && btn.isEqualTo(answer.charAt(index))) {
 						ans.setText(answer.charAt(index) + "");
 						ans.lockButton();
+						DataManager.lock(index);
 						choiceClicked++;
 						lockChoiceButton(ans);
 						if (choiceClicked == n) {
@@ -714,101 +822,7 @@ public class ButtonManager {
 		}
 	}
 
-	public void loadData(Context context) {
-		ButtonDataManager.loadData(context, this);
-	}
-
-	public void saveData(Context context, Puzzle puzzle) {
-		if (puzzle != null) {
-			ButtonDataManager
-					.saveData(context, puzzle, layer1, layer2, answers);
-		}
-	}
-
 	public void setData(String[] metadata) {
-		if (metadata == null) {
-			return;
-		}
-
-		String curr = PuzzleManager.currentPuzzle.getAnswer() + "@"
-				+ PuzzleManager.currentPuzzle.getId();
-
-		if (curr.compareTo(metadata[0]) == 0) {
-			String removed = metadata[1];
-			String answered = metadata[2];
-
-			// has removed
-			if (removed != null && removed.length() > 0) {
-				if (removed.length() > 1) {
-					String[] removedLetters = removed.split("@");
-					int n = removedLetters.length;
-					ChoiceButton btn;
-					for (int i = 0; i < n; i++) {
-						for (int j = 0; j < 14; j++) {
-							if (j < 7) {
-								btn = layer1[j];
-							} else {
-								btn = layer2[j - 7];
-							}
-							if (btn.getText().compareTo(removedLetters[i]) == 0
-									&& btn.isIdle()) {
-								btn.remove();
-								indices.remove(Integer.valueOf(j));
-								break;
-							}
-						}
-					}
-				} else {
-					ChoiceButton btn;
-					for (int i = 0; i < 14; i++) {
-						if (i < 7) {
-							btn = layer1[i];
-						} else {
-							btn = layer2[i - 7];
-						}
-						if (btn.getText().compareTo(removed) == 0) {
-							btn.remove();
-							indices.remove(Integer.valueOf(i));
-							break;
-						}
-					}
-				}
-			}
-
-			// has answered
-			if (answered != null) {
-				String[] answeredLetters = answered.split("@");
-				int n = answeredLetters.length;
-
-				for (int i = 0; i < n; i++) {
-					String current = answeredLetters[i];
-					if (current.compareTo("#") != 0) {
-						AnswerButton ans = answers.get(i);
-						ChoiceButton btn;
-						int layer, index;
-						for (int j = 0; j < 14; j++) {
-							if (j < 7) {
-								btn = layer1[j];
-								layer = 1;
-								index = j;
-							} else {
-								btn = layer2[j - 7];
-								layer = 2;
-								index = j - 7;
-							}
-							if (btn.isIdle()
-									&& btn.getText().compareTo(current) == 0) {
-								btn.select(i);
-								ans.changeContent(layer, index, current);
-								ans.lockButton();
-								choiceClicked++;
-								indices.remove(Integer.valueOf(j));
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
+		
 	}
 }

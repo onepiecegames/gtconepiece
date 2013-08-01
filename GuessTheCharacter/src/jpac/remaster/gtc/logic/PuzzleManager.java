@@ -1,6 +1,5 @@
 package jpac.remaster.gtc.logic;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,7 +10,7 @@ import android.content.Context;
 
 public class PuzzleManager {
 
-	private static ArrayList<Integer> solvedPuzzles;
+	private static ArrayList<Integer> solvedPuzzles = new ArrayList<Integer>(50);
 
 	private static final String FILENAME = "solved_puzzle.raw";
 
@@ -20,10 +19,6 @@ public class PuzzleManager {
 	public static ArrayList<Integer> smartLoader;
 
 	public static void init(Context context) {
-		solvedPuzzles = new ArrayList<Integer>(50);
-
-		loadData(context);
-
 		smartLoader = new ArrayList<Integer>();
 		smartLoad();
 	}
@@ -39,32 +34,7 @@ public class PuzzleManager {
 		}
 	}
 
-	private static void loadData(Context context) {
-		String content = null;
-
-		try {
-			FileInputStream fis = context.openFileInput(FILENAME);
-
-			if (fis != null) {
-				byte[] input = new byte[fis.available()];
-				while (fis.read(input) != -1) {
-					content += new String(input);
-				}
-				fis.close();
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (content != null) {
-			String[] data = content.split("\n");
-			populateList(data);
-		}
-	}
-
-	private static void populateList(String[] data) {
+	public static void populateList(String[] data) {
 		int n = data.length;
 
 		for (int i = 1; i < n; i++) {

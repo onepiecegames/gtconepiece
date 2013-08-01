@@ -10,7 +10,6 @@ import jpac.remaster.gtc.util.Constants;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.GTCAuthAdapter;
-import jpac.remaster.gtc.util.social.SocialDataManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -66,18 +65,17 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			startActivity(new Intent(this, GameFinishedPage.class));
 			finish();
 		} else {
-			if (SocialDataManager.checkIfPosted(puzzle.getId())) {
+			if (DataManager.checkIfPosted(puzzle.getId())) {
 				alreadyPosted = true;
 			}
 			DataManager.updatePuzzle(puzzle.getId());
 
-			buttonManager.init(this, puzzle.getAnswer());
+			buttonManager.init(this, puzzle);
 			buttonManager.setChoices(PuzzleManager.createChoiceSet(
 					puzzle.getAnswer(), puzzle.getRandomSeed()));
 			buttonManager.initAnswerField(this, puzzle.getRawAnswer());
 			buttonManager.setAnswerDoneListener(this);
-			buttonManager.loadData(this);
-
+			
 			try {
 				setImage(
 						R.id.puzzleImage1,
@@ -228,7 +226,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				}
 				break;
 			case REQUEST_PUBLISH_FEED:
-				SocialDataManager.updatePosted(puzzle.getId());
+				DataManager.updatePosted(puzzle.getId());
 				alreadyPosted = true;
 				break;
 			default:
@@ -268,10 +266,6 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		buttonManager.saveData(this, puzzle);
-//		DataManager.saveData(this);
-		PuzzleManager.saveData(this);
-		SocialDataManager.saveData(this);
 	}
 
 }
