@@ -1,3 +1,18 @@
+/******************************************************************************
+ * Copyright 2013
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
@@ -14,6 +29,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+/******************************************************************************
+ * This activity is the splash screen of this application. It displays a
+ * silhouette of the current version mascot and the developer logo. It is
+ * responsible for loading and initializing managers in the background.
+ * 
+ * @author JP Carabuena
+ * @since 1.0
+ *****************************************************************************/
 public class GTCSplash extends GTCActivity implements ResourceLoader {
 
 	@Override
@@ -35,13 +58,26 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		SysInfo.loadScreenInfo(this);
 
 		LoadResourceHandler handler = new LoadResourceHandler(this);
+		// a delay before executing load
 		handler.sendEmptyMessageDelayed(0, Constants.SPLASH_DELAY);
 	}
 
+	/**************************************************************************
+	 * A handler for initializing the resource loading.
+	 * 
+	 * @author JP Carabuena
+	 * @since 1.0
+	 *************************************************************************/
 	static class LoadResourceHandler extends Handler {
 
+		// ====================================================================
+		// An instance of a resource loader.
+		// ====================================================================
 		private final ResourceLoader loader;
 
+		/**********************************************************************
+		 * Construct a new load resource handler.
+		 *********************************************************************/
 		public LoadResourceHandler(ResourceLoader loader) {
 			this.loader = loader;
 		}
@@ -57,6 +93,12 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		new ResourcesLoaderTask().execute();
 	}
 
+	/**************************************************************************
+	 * An asynchronous task for initializing and loading resources.
+	 * 
+	 * @author JP Carabuena
+	 * @since 1.0
+	 *************************************************************************/
 	class ResourcesLoaderTask extends AsyncTask<Void, Void, Void> {
 
 		@Override
