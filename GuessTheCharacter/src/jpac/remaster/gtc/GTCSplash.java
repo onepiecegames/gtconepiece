@@ -1,23 +1,18 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
-import jpac.remaster.gtc.logic.UserDataManager;
-import jpac.remaster.gtc.util.DeviceInfo;
-import jpac.remaster.gtc.util.FontUtil;
+import jpac.remaster.gtc.util.Constants;
 import jpac.remaster.gtc.util.ResourceLoader;
-import jpac.remaster.gtc.util.ResourceUtil;
+import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.SysInfo;
-import jpac.remaster.gtc.util.social.SocialDataManager;
 import android.content.Intent;
-import android.content.res.AssetManager;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class GTCSplash extends GTCActivity implements ResourceLoader {
 
@@ -27,18 +22,21 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 	}
 
 	@Override
+	protected void onRestart() {
+		super.onRestart();
+		finish();
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 
-		DeviceInfo.init(this);
-
-		final TextView loadingLabel = (TextView) findViewById(R.id.loadingLabel);
-		loadingLabel.setTypeface(FontUtil.getFont(getAssets(),
-				"font/roboto_thin.ttf"));
+		SysInfo.loadScreenInfo(this);
 
 		LoadResourceHandler handler = new LoadResourceHandler(this);
-		handler.sendEmptyMessageDelayed(0, 1000);
+		// a delay before executing load
+		handler.sendEmptyMessageDelayed(0, Constants.SPLASH_DELAY);
 	}
 
 	static class LoadResourceHandler extends Handler {
@@ -57,31 +55,26 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 
 	@Override
 	public void doLoading() {
-		findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-		findViewById(R.id.loadingLabel).setVisibility(View.VISIBLE);
-		new ResourcesLoaderTask().execute(getAssets());
+		new ResourcesLoaderTask().execute();
 	}
 
-	class ResourcesLoaderTask extends AsyncTask<AssetManager, Void, Void> {
+	class ResourcesLoaderTask extends AsyncTask<Void, Void, Void> {
 
 		@Override
-		protected Void doInBackground(AssetManager... params) {
-			((ProgressBar) findViewById(R.id.progressBar))
-					.incrementProgressBy(100);
-			FontUtil.loadSystemFonts(params[0]);
-			ResourceUtil.loadMainImages();
+		protected Void doInBackground(Void... params) {
+			ResourceManager.loadSystemFonts();
 			PuzzleManager.init(getApplicationContext());
-			UserDataManager.init(getApplicationContext());
-			SocialDataManager.loadData(getApplicationContext());
+			DataManager.init();
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
+			SharedPreferences prefs = GTCSplash.this.getSharedPreferences("splash", MODE_PRIVATE);
+			prefs.edit().putBoolean("loaded", true).commit();
+			
 			startActivity(new Intent(getApplicationContext(),
 					MainMenuPage.class));
-			SysInfo.splash = true;
-			finish();
 		}
 
 	}

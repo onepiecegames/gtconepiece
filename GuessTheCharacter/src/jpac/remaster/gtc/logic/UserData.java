@@ -1,49 +1,16 @@
 package jpac.remaster.gtc.logic;
 
+import jpac.remaster.gtc.util.Constants;
+
 public class UserData {
 
-	private String username = "default_user";
+	private String username = Constants.DEFAULT_USER;
 
-	private int level = 1;
+	private int level = Constants.START_LEVEL;
 
-	private int gold = 50;
+	private int gold = Constants.START_GOLD;
 
-	private String currentPuzzle = "X";
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(String data) {
-		this.level = Integer.valueOf(data);
-	}
-
-	public int getGold() {
-		return gold;
-	}
-
-	public void setGold(String data) {
-		this.gold = Integer.valueOf(data);
-	}
-
-	public int getCurrentPuzzle() {
-		if (currentPuzzle.compareTo("X") == 0) {
-			return -1;
-		}
-		return Integer.valueOf(currentPuzzle);
-	}
-
-	public void setCurrentPuzzle(String currentPuzzle) {
-		this.currentPuzzle = currentPuzzle;
-	}
+	private int currentPuzzle = Constants.NA;
 
 	public void setLevel(int level) {
 		this.level = level;
@@ -51,5 +18,25 @@ public class UserData {
 
 	public void setGold(int gold) {
 		this.gold = gold;
+	}
+
+	public void setCurrentPuzzle(int currentPuzzle) {
+		this.currentPuzzle = currentPuzzle;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public int getCurrentPuzzle() {
+		return currentPuzzle;
 	}
 }
