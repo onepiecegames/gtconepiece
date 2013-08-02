@@ -99,13 +99,10 @@ public class ButtonManager {
 
 		if (curr.compareTo(puzzleInfo) == 0) {
 			// has removed
-			Util.log("Removed: " + removed);
-
 			if (removed != null && removed.length() > 0) {
 
 				if (removed.length() > 1) {
 					String[] removedLetters = removed.split(":");
-					Util.log("Count: " + removedLetters.length);
 					int n = removedLetters.length;
 					ChoiceButton btn;
 					for (int i = 0; i < n; i++) {
@@ -131,7 +128,6 @@ public class ButtonManager {
 						} else {
 							btn = layer2[i - 7];
 						}
-						Util.log("Button: " + btn.getText());
 						if (btn.getText().compareTo(removed) == 0) {
 							btn.remove();
 							indices.remove(Integer.valueOf(i));
@@ -469,7 +465,6 @@ public class ButtonManager {
 		public AnswerButton(Button btn) {
 			this.btn = btn;
 			this.idx = ButtonManager.this.answers.size();
-			Util.log("Index ANS: " + idx);
 		}
 
 		public boolean isLocked() {
