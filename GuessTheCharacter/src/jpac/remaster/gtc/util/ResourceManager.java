@@ -30,6 +30,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -37,10 +38,8 @@ import android.view.animation.AnimationUtils;
  * This class manages all the resources that are needed in the game. These are
  * the functions which will be provided by this manager:
  * 
- * - Image Loading and Caching
- * - Font Loading and Caching
- * - Loading resources from res folder via id
- * - Loading and saving internal files
+ * - Image Loading and Caching - Font Loading and Caching - Loading resources
+ * from res folder via id - Loading and saving internal files
  * 
  * @author JP Carabuena
  * @since 2.0
@@ -64,6 +63,11 @@ public class ResourceManager {
 	// List of bitmap keys ready for recycling.
 	// ========================================================================
 	private static ArrayList<String> forRecycle = new ArrayList<String>(20);
+
+	// ========================================================================
+	// The capture image of a view.
+	// ========================================================================
+	private static Bitmap capturedImage;
 
 	/**************************************************************************
 	 * Set the reference context. This must be the context of the current active
@@ -365,5 +369,25 @@ public class ResourceManager {
 	 *************************************************************************/
 	public static boolean isFileExist(String filename) {
 		return contextRef.getFileStreamPath(filename).exists();
+	}
+
+	/**************************************************************************
+	 * Capture the image of a specified view.
+	 *************************************************************************/
+	public static void captureView(View v) {
+		if (capturedImage != null) {
+			capturedImage.recycle();
+			capturedImage = null;
+		}
+
+		v.setDrawingCacheEnabled(true);
+		capturedImage = v.getDrawingCache();
+	}
+
+	/**************************************************************************
+	 * Returns the last captured image.
+	 *************************************************************************/
+	public static Bitmap getCapturedImage() {
+		return capturedImage;
 	}
 }

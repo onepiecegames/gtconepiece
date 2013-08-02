@@ -277,7 +277,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 				break;
 			case REQUEST_SHARE_FACEBOOK:
 				if (GTCAuthAdapter.isNetworkAvailable(getApplicationContext())) {
-					// Util.captureView(findViewById(R.id.gamepage));
+					ResourceManager.captureView(findViewById(R.id.gamepage));
 					Intent intent = new Intent(this, SocialPostingPage.class);
 					intent.putExtra("action", SocialPostingPage.ACTION_SHARE);
 					startActivityForResult(intent, REQUEST_PUBLISH_FEED);
