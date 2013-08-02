@@ -1,41 +1,69 @@
 package jpac.remaster.gtc.util;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.view.Display;
+import android.view.WindowManager;
+
 public class SysInfo {
 
-	public static class AppMode {
+	public static final int DEBUG = 1;
+	public static final int RELEASE = 2;
 
-		public static final int DEBUG = 1;
+	private static int mode = RELEASE;
 
-		public static final int RELEASE = 2;
-
-		// change the value for this before releasing
-		private static int mode = RELEASE;
-
-		public static boolean isDebug() {
-			return mode == DEBUG;
-		}
-
-		public static boolean isRelease() {
-			return mode == RELEASE;
-		}
-
-		public static int getMode() {
-			return mode;
-		}
+	public static boolean isDebug() {
+		return mode == DEBUG;
 	}
 
-	public static class Constants {
-
-		public static final int REVEAL_COST = 12;
-		public static final int REMOVE_COST = 8;
-		public static final int SOLVE_COST = 30;
-		public static final int UNLOCK_COST = 15;
-		public static final int COST_FREE = 0; // for debugging only
-
-		public static final int START_GOLD = 50;
-
-		public static final int PUZZLE_PRIZE = 2;
+	public static boolean isRelease() {
+		return mode == RELEASE;
 	}
 
-	public static boolean splash = false;
+	public static double SCREEN_SIZE = -1;
+	public static double SCREEN_DENSITY = -1;
+	public static int SCREEN_WIDTH, SCREEN_HEIGHT;
+
+	public static void loadScreenInfo(Context context) {
+		getScreenSize(context);
+		getScreenDensity(context);
+		getScreenDimensions(context);
+	}
+
+	@SuppressWarnings("deprecation")
+	private static void getScreenDimensions(Context context) {
+		WindowManager wm = (WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+
+		SCREEN_WIDTH = display.getWidth();
+		SCREEN_HEIGHT = display.getHeight();
+	}
+
+	/**************************************************************************
+	 * Retrieve the screen density.
+	 * 
+	 * 0.75 - ldpi
+	 * 1.0	- mdpi
+	 * 1.5	- hdpi
+	 * 2.0	- xhdpi
+	 * 3.0	- xxhdpi
+	 * 4.0	- xxxhdpi
+	 *************************************************************************/
+	private static void getScreenDensity(Context context) {
+		SCREEN_DENSITY = context.getResources().getDisplayMetrics().density;
+	}
+
+	/**************************************************************************
+	 * Retrieve the screen size classification.
+	 * 
+	 * 1.0	- small
+	 * 2.0	- normal
+	 * 3.0	- large
+	 * 4.0	- xlarge
+	 *************************************************************************/
+	private static void getScreenSize(Context context) {
+		SCREEN_SIZE = context.getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+	}
 }

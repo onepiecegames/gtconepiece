@@ -1,30 +1,40 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
+import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
-import jpac.remaster.gtc.logic.UserDataManager;
-import jpac.remaster.gtc.util.FontUtil;
-import jpac.remaster.gtc.util.SysInfo;
+import jpac.remaster.gtc.util.ResourceManager;
+import jpac.remaster.gtc.util.Util;
+import jpac.remaster.gtc.util.social.GTCAuthAdapter;
+
+import org.brickred.socialauth.android.SocialAuthAdapter.Provider;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class MainMenuPage extends GTCActivity {
+
+	private static final int REQUEST_RESETCONFIRM = 1;
+	private static final int REQUEST_ACKNOWLEDGE_RESET = 2;
+	private static final int REQUEST_FACEBOOK_ACTION = 3;
+	private static final int REQUEST_FACEBOOK_SIGN = 4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_main_menu);
 
-		if (!SysInfo.splash) {
-			startActivity(new Intent(getApplicationContext(), GTCSplash.class));
-			return;
+		// this is to fix multiple instance of main menu
+		SharedPreferences prefs = getSharedPreferences("splash", MODE_PRIVATE);
+		if (!prefs.getBoolean("loaded", false)) {
+			finish();
 		}
-
-		findViewById(R.id.playButton).setOnClickListener(new OnClickListener() {
+		
+		setOnClickListener(R.id.playButton, new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -38,68 +48,107 @@ public class MainMenuPage extends GTCActivity {
 			}
 		});
 
-		findViewById(R.id.aboutButton).setOnClickListener(
-				new OnClickListener() {
+		setOnClickListener(R.id.aboutButton, new OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						startActivity(new Intent(MainMenuPage.this,
-								AboutUsPage.class));
-					}
-				});
-		
-		findViewById(R.id.resetButton).setOnClickListener(
-				new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						
-					}
-				});
-		
-		findViewById(R.id.facebookButton).setOnClickListener(
-				new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-					
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainMenuPage.this, AboutUsPage.class));
+			}
+		});
 
-		((Button) findViewById(R.id.playButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
-		((Button) findViewById(R.id.facebookButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
-		((Button) findViewById(R.id.aboutButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
-		((Button) findViewById(R.id.resetButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
-//
-//		try {
-//			ImageView imageBg = (ImageView) findViewById(R.id.imageBG);
-//			imageBg.setImageBitmap(ResourceUtil
-//					.loadImage(ResourceUtil.MAIN_MASCOT_BG));
-//	
-//			ImageView logo = (ImageView) findViewById(R.id.gameLogo);
-//			logo.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_LOGO));
-//	
-//			ImageView mascot = (ImageView) findViewById(R.id.gameMascot);
-//			mascot.setImageBitmap(ResourceUtil.loadImage(ResourceUtil.GAME_MASCOT));
-//		} catch (RuntimeException e) {
-//			finish();
-//		}
+		setOnClickListener(R.id.resetButton, new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivityForResult(
+						Util.createConfirmPopup(
+								MainMenuPage.this,
+								"Confirm Action",
+								"This will clear all your progress as of now. Are you sure you want to reset data?"),
+						REQUEST_RESETCONFIRM);
+			}
+		});
+
+		setOnClickListener(R.id.facebookButton, new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String message;
+				if (GTCAuthAdapter.isConnected(MainMenuPage.this,
+						Provider.FACEBOOK)) {
+					message = "Are you sure you want to sign out from Facebook?";
+				} else {
+					message = "This will connect to your Facebook account.";
+				}
+				startActivityForResult(Util.createConfirmPopup(
+						MainMenuPage.this, "Confirm Action", message),
+						REQUEST_FACEBOOK_ACTION);
+			}
+		});
+
+		Typeface roboto = ResourceManager.getFont("roboto_bold.ttf");
+		setTypeface(R.id.playButton, roboto);
+		setTypeface(R.id.facebookButton, roboto);
+		setTypeface(R.id.aboutButton, roboto);
+		setTypeface(R.id.resetButton, roboto);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		SharedPreferences prefs = getSharedPreferences("splash", MODE_PRIVATE);
+		prefs.edit().putBoolean("loaded", false).commit();
+	}
+
+	private void doFacebookAction() {
+		Intent intent = new Intent(this, SocialPostingPage.class);
+		if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {
+			intent.putExtra("action", SocialPostingPage.ACTION_SIGN_OUT);
+		} else {
+			intent.putExtra("action", SocialPostingPage.ACTION_SIGN_IN);
+		}
+		startActivityForResult(intent, REQUEST_FACEBOOK_SIGN);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		TextView level = ((TextView) findViewById(R.id.currLevelLabel));
-		level.setTypeface(FontUtil
-				.getFont(getAssets(), "font/roboto_black.ttf"));
-		level.setText("" + UserDataManager.checkLevel());
-		
-		TextView banner = ((TextView) findViewById(R.id.banner));
-		banner.setTypeface(FontUtil
-				.getFont(getAssets(), "font/digitalstrip.ttf"));
+		setTypeface(R.id.currLevelLabel,
+				ResourceManager.getFont("roboto_black.ttf"));
+		setText(R.id.currLevelLabel, "" + DataManager.checkLevel());
+
+		setTypeface(R.id.banner, ResourceManager.getFont("digitalstrip.ttf"));
+
+		if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {
+			setText(R.id.facebookButton,
+					ResourceManager.loadString(R.string.label_signout));
+		} else {
+			setText(R.id.facebookButton,
+					ResourceManager.loadString(R.string.label_signin));
+		}
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_RESETCONFIRM && resultCode == RESULT_OK) {
+			DataManager.reset();
+			startActivityForResult(Util.createAcknowledgePopup(this,
+					"Data Reset", "Your user data has been deleted."),
+					REQUEST_ACKNOWLEDGE_RESET);
+		} else if (requestCode == REQUEST_ACKNOWLEDGE_RESET) {
+			onResume();
+		} else if (requestCode == REQUEST_FACEBOOK_ACTION
+				&& resultCode == RESULT_OK) {
+			doFacebookAction();
+		} else if (requestCode == REQUEST_FACEBOOK_SIGN) {
+			if (resultCode == RESULT_OK) {
+				if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {
+					Util.displayToast(this, "You are now connected to Facebook.");
+				} else {
+					Util.displayToast(this, "Logged Out");	
+				}
+			}
+		}
 	}
 }

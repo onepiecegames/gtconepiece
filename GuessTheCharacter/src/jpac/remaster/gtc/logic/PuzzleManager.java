@@ -1,9 +1,5 @@
 package jpac.remaster.gtc.logic;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import jpac.remaster.gtc.util.Util;
@@ -11,44 +7,29 @@ import android.content.Context;
 
 public class PuzzleManager {
 
-	private static ArrayList<Integer> solvedPuzzles;
-
-	private static final String FILENAME = "solved_puzzle.raw";
+	private static ArrayList<Integer> solvedPuzzles = new ArrayList<Integer>(50);
 
 	public static Puzzle currentPuzzle = null;
 
+	public static ArrayList<Integer> smartLoader;
+
 	public static void init(Context context) {
-		solvedPuzzles = new ArrayList<Integer>(50);
-
-		loadData(context);
+		smartLoader = new ArrayList<Integer>();
+		smartLoad();
 	}
 
-	private static void loadData(Context context) {
-		String content = null;
-
-		try {
-			FileInputStream fis = context.openFileInput(FILENAME);
-
-			if (fis != null) {
-				byte[] input = new byte[fis.available()];
-				while (fis.read(input) != -1) {
-					content += new String(input);
-				}
-				fis.close();
+	private static void smartLoad() {
+		while (smartLoader.size() < 10) {
+			int index = -1;
+			while (index == -1 || solvedPuzzles.contains(index)
+					|| smartLoader.contains(index)) {
+				index = Util.randInt(PuzzleFactory.TOTAL_PUZZLE);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (content != null) {
-			String[] data = content.split("\n");
-			populateList(data);
+			smartLoader.add(index);
 		}
 	}
 
-	private static void populateList(String[] data) {
+	public static void populateList(String[] data) {
 		int n = data.length;
 
 		for (int i = 1; i < n; i++) {
@@ -56,43 +37,6 @@ public class PuzzleManager {
 				solvedPuzzles.add(Integer.valueOf(data[i]));
 			}
 		}
-	}
-
-	public static void saveData(Context context) {
-		String content = null;
-
-		content = getDataAsRaw();
-
-		if (content == "") {
-			return;
-		}
-
-		content = "puzzle-id\n" + content;
-
-		try {
-			FileOutputStream fos = context.openFileOutput(FILENAME,
-					Context.MODE_PRIVATE);
-			fos.write(content.getBytes());
-			fos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static String getDataAsRaw() {
-		String content = "";
-		int n = solvedPuzzles.size();
-
-		for (int i = 0; i < n; i++) {
-			content += "" + solvedPuzzles.get(i);
-			if (i != n - 1) {
-				content += "\n";
-			}
-		}
-
-		return content;
 	}
 
 	public static void markAsSolved(int id) {
@@ -106,9 +50,18 @@ public class PuzzleManager {
 
 		int index = -1;
 
-		while (index == -1 || solvedPuzzles.contains(index)) {
-			index = Util.randInt(PuzzleFactory.TOTAL_PUZZLE);
+		if (smartLoader.size() < 3
+				&& (PuzzleFactory.TOTAL_PUZZLE - solvedPuzzles.size()) > 1) {
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					smartLoad();
+				}
+			}).start();
 		}
+
+		index = smartLoader.remove(0);
 
 		return PuzzleFactory.getPuzzleById(index);
 	}
