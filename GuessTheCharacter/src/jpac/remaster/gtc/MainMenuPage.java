@@ -1,18 +1,3 @@
-/******************************************************************************
- * Copyright 2013
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
@@ -31,24 +16,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-/******************************************************************************
- * This activity is the main menu of this application, the main starting point
- * of the game. From this page,  you can do any of the following:
- * 
- * 1. Start the Game
- * 2. Sign in or Sign out from Facebook
- * 3. Check game info
- * 4. Reset data
- * 5. Close the Game
- * 
- * @author JP Carabuena
- * @since 1.0
- *****************************************************************************/
 public class MainMenuPage extends GTCActivity {
 
-	// ========================================================================
-	// Request Codes
-	// ========================================================================
 	private static final int REQUEST_RESETCONFIRM = 1;
 	private static final int REQUEST_ACKNOWLEDGE_RESET = 2;
 	private static final int REQUEST_FACEBOOK_ACTION = 3;
@@ -132,9 +101,6 @@ public class MainMenuPage extends GTCActivity {
 		prefs.edit().putBoolean("loaded", false).commit();
 	}
 
-	/**************************************************************************
-	 * Perform facebook action depending on the token state.
-	 *************************************************************************/
 	private void doFacebookAction() {
 		Intent intent = new Intent(this, SocialPostingPage.class);
 		if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {

@@ -1,8 +1,5 @@
 package jpac.remaster.gtc.logic;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import jpac.remaster.gtc.util.Util;
@@ -11,8 +8,6 @@ import android.content.Context;
 public class PuzzleManager {
 
 	private static ArrayList<Integer> solvedPuzzles = new ArrayList<Integer>(50);
-
-	private static final String FILENAME = "solved_puzzle.raw";
 
 	public static Puzzle currentPuzzle = null;
 
@@ -42,43 +37,6 @@ public class PuzzleManager {
 				solvedPuzzles.add(Integer.valueOf(data[i]));
 			}
 		}
-	}
-
-	public static void saveData(Context context) {
-		String content = null;
-
-		content = getDataAsRaw();
-
-		if (content == "") {
-			return;
-		}
-
-		content = "puzzle-id\n" + content;
-
-		try {
-			FileOutputStream fos = context.openFileOutput(FILENAME,
-					Context.MODE_PRIVATE);
-			fos.write(content.getBytes());
-			fos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static String getDataAsRaw() {
-		String content = "";
-		int n = solvedPuzzles.size();
-
-		for (int i = 0; i < n; i++) {
-			content += "" + solvedPuzzles.get(i);
-			if (i != n - 1) {
-				content += "\n";
-			}
-		}
-
-		return content;
 	}
 
 	public static void markAsSolved(int id) {
@@ -130,14 +88,5 @@ public class PuzzleManager {
 		}
 
 		return puzzle;
-	}
-
-	public static void resetData(Context context) {
-		try {
-			context.deleteFile(FILENAME);
-			solvedPuzzles.clear();
-		} catch (Exception e) {
-
-		}
 	}
 }

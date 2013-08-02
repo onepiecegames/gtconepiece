@@ -1,18 +1,3 @@
-/******************************************************************************
- * Copyright 2013
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
 package jpac.remaster.gtc.util;
 
 import java.io.FileInputStream;
@@ -34,90 +19,43 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-/******************************************************************************
- * This class manages all the resources that are needed in the game. These are
- * the functions which will be provided by this manager:
- * 
- * - Image Loading and Caching - Font Loading and Caching - Loading resources
- * from res folder via id - Loading and saving internal files
- * 
- * @author JP Carabuena
- * @since 2.0
- *****************************************************************************/
 public class ResourceManager {
 
-	// ========================================================================
-	// A static context reference used for resource operations.
-	// ========================================================================
 	private static Context contextRef;
 
-	// ========================================================================
-	// The cache for image bitmaps and fonts.
-	// ========================================================================
 	private static HashMap<String, Bitmap> imageCache = new HashMap<String, Bitmap>(
 			20);
 	private static HashMap<String, Typeface> fontCache = new HashMap<String, Typeface>(
 			20);
-
-	// ========================================================================
-	// List of bitmap keys ready for recycling.
-	// ========================================================================
 	private static ArrayList<String> forRecycle = new ArrayList<String>(20);
 
-	// ========================================================================
-	// The capture image of a view.
-	// ========================================================================
 	private static Bitmap capturedImage;
 
-	/**************************************************************************
-	 * Set the reference context. This must be the context of the current active
-	 * activity.
-	 *************************************************************************/
 	public static void setContextReference(Context context) {
 		ResourceManager.contextRef = context;
 	}
 
-	/**************************************************************************
-	 * Load a string from the values.xml given the resource id.
-	 *************************************************************************/
 	public static String loadString(int id) {
 		return ResourceManager.contextRef.getResources().getString(id);
 	}
 
-	/**************************************************************************
-	 * Load a color (integer) from the colors.xml given the resource id.
-	 *************************************************************************/
 	public static int loadColor(int id) {
 		return ResourceManager.contextRef.getResources().getColor(id);
 	}
 
-	/**************************************************************************
-	 * Load the integer value of a dimension from dimensions.xml given the
-	 * resource id.
-	 *************************************************************************/
 	public static int loadDimension(int id) {
 		return ResourceManager.contextRef.getResources().getDimensionPixelSize(
 				id);
 	}
 
-	/**************************************************************************
-	 * Load an array of string from array.xml given the resource id.
-	 *************************************************************************/
 	public static String[] loadStringArray(int id) {
 		return ResourceManager.contextRef.getResources().getStringArray(id);
 	}
 
-	/**************************************************************************
-	 * Load an animation file from the res/anim folder given the resource id.
-	 *************************************************************************/
 	public static Animation loadAnimation(int id) {
 		return AnimationUtils.loadAnimation(contextRef, id);
 	}
 
-	/**************************************************************************
-	 * Load an image from res/drawable folder and resize it accordingly to the
-	 * provided width and height.
-	 *************************************************************************/
 	private static Bitmap decodeSampledBitmapFromResource(Resources res,
 			int resId, int reqWidth, int reqHeight) {
 
@@ -143,9 +81,6 @@ public class ResourceManager {
 		return BitmapFactory.decodeResource(res, resId, options);
 	}
 
-	/**************************************************************************
-	 * Calculate the in sample size of a bitmap.
-	 *************************************************************************/
 	private static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
 		// Raw height and width of image
@@ -171,10 +106,6 @@ public class ResourceManager {
 		return inSampleSize;
 	}
 
-	/**************************************************************************
-	 * Load a bitmap from the res/drawable folder given the resource id and the
-	 * specified width and height.
-	 *************************************************************************/
 	public static Bitmap loadBitmapFromDrawable(int id, int width, int height) {
 		String idAsText = String.valueOf(id);
 		if (!ResourceManager.imageCache.containsKey(idAsText)) {
@@ -191,9 +122,6 @@ public class ResourceManager {
 		return ResourceManager.imageCache.get(idAsText);
 	}
 
-	/**************************************************************************
-	 * Load a bitmap from the assets folder given the name of the file.
-	 *************************************************************************/
 	public static Bitmap loadBitmapFromAsset(String name) {
 		if (!ResourceManager.imageCache.containsKey(name)) {
 			try {
@@ -210,9 +138,6 @@ public class ResourceManager {
 		return ResourceManager.imageCache.get(name);
 	}
 
-	/**************************************************************************
-	 * Mark the bitmap ready for recycling.
-	 *************************************************************************/
 	public static void queueBitmapForRecycle(String name) {
 		if (!forRecycle.contains(name)) {
 			forRecycle.add(name);
@@ -222,18 +147,10 @@ public class ResourceManager {
 		}
 	}
 
-	/**************************************************************************
-	 * You can force the recycling of bitmaps at any point in the application
-	 * lifecycle. This will not check if list already hits threshold.
-	 *************************************************************************/
 	public static void forceRecycle() {
 		recycle();
 	}
 
-	/**************************************************************************
-	 * Performs bitmap recycling for all images included in the for recycle
-	 * list. This will clear the list afterwards.
-	 *************************************************************************/
 	private static void recycle() {
 		int n = forRecycle.size();
 
@@ -249,17 +166,10 @@ public class ResourceManager {
 		forRecycle.clear();
 	}
 
-	/**************************************************************************
-	 * Checks if the recycle list is ready for cleanup.
-	 *************************************************************************/
 	private static boolean isReadyForRecycling() {
 		return forRecycle.size() > Constants.RECYCLE_THRESHOLD;
 	}
 
-	/**************************************************************************
-	 * Dispose all resources used by this manager. Make sure to call this method
-	 * only when the application is finishing.
-	 *************************************************************************/
 	public static void cleanup() {
 
 		if (imageCache != null) {
@@ -281,9 +191,6 @@ public class ResourceManager {
 		contextRef = null;
 	}
 
-	/**************************************************************************
-	 * Retrieve a font from the cache.
-	 *************************************************************************/
 	public static Typeface getFont(String font) {
 		if (fontCache.containsKey(Constants.FONT_LOCATION + font)) {
 			return fontCache.get(Constants.FONT_LOCATION + font);
@@ -291,18 +198,12 @@ public class ResourceManager {
 		return loadFont(Constants.FONT_LOCATION + font);
 	}
 
-	/**************************************************************************
-	 * Load font from asset/font folder and add it to cache.
-	 *************************************************************************/
 	private static Typeface loadFont(String font) {
 		Typeface tf = Typeface.createFromAsset(contextRef.getAssets(), font);
 		fontCache.put(font, tf);
 		return tf;
 	}
 
-	/**************************************************************************
-	 * Load system delegated fonts.
-	 *************************************************************************/
 	public static void loadSystemFonts() {
 		String[] fonts = loadStringArray(R.array.fonts);
 		int n = fonts.length;
@@ -316,9 +217,6 @@ public class ResourceManager {
 		}
 	}
 
-	/**************************************************************************
-	 * Save a content to an internal file.
-	 *************************************************************************/
 	public static boolean saveData(String filename, String content) {
 		if (content == null || filename == null) {
 			return false;
@@ -339,9 +237,6 @@ public class ResourceManager {
 		}
 	}
 
-	/**************************************************************************
-	 * Load data content from an internal file and return it as a string.
-	 *************************************************************************/
 	public static String loadData(String filename) {
 		String content = null;
 
@@ -364,16 +259,10 @@ public class ResourceManager {
 		return content;
 	}
 
-	/**************************************************************************
-	 * Checks if the specified file exist in internal storage.
-	 *************************************************************************/
 	public static boolean isFileExist(String filename) {
 		return contextRef.getFileStreamPath(filename).exists();
 	}
 
-	/**************************************************************************
-	 * Capture the image of a specified view.
-	 *************************************************************************/
 	public static void captureView(View v) {
 		if (capturedImage != null) {
 			capturedImage.recycle();
@@ -384,9 +273,6 @@ public class ResourceManager {
 		capturedImage = v.getDrawingCache();
 	}
 
-	/**************************************************************************
-	 * Returns the last captured image.
-	 *************************************************************************/
 	public static Bitmap getCapturedImage() {
 		return capturedImage;
 	}
