@@ -10,6 +10,7 @@ import jpac.remaster.gtc.util.social.GTCAuthAdapter;
 import org.brickred.socialauth.android.SocialAuthAdapter.Provider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,11 @@ public class MainMenuPage extends GTCActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_main_menu);
 
+		SharedPreferences prefs = getSharedPreferences("splash", MODE_PRIVATE);
+		if (!prefs.getBoolean("loaded", false)) {
+			finish();
+		}
+		
 		setOnClickListener(R.id.playButton, new OnClickListener() {
 
 			@Override
@@ -84,6 +90,14 @@ public class MainMenuPage extends GTCActivity {
 		setTypeface(R.id.facebookButton, roboto);
 		setTypeface(R.id.aboutButton, roboto);
 		setTypeface(R.id.resetButton, roboto);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		SharedPreferences prefs = getSharedPreferences("splash", MODE_PRIVATE);
+		prefs.edit().putBoolean("loaded", false).commit();
 	}
 
 	private void doFacebookAction() {

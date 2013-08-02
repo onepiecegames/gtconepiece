@@ -8,6 +8,7 @@ import jpac.remaster.gtc.util.ResourceLoader;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.SysInfo;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,12 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 	@Override
 	public void onBackPressed() {
 		return;
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		finish();
 	}
 
 	@Override
@@ -62,9 +69,11 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 
 		@Override
 		protected void onPostExecute(Void result) {
+			SharedPreferences prefs = GTCSplash.this.getSharedPreferences("splash", MODE_PRIVATE);
+			prefs.edit().putBoolean("loaded", true).commit();
+			
 			startActivity(new Intent(getApplicationContext(),
 					MainMenuPage.class));
-			finish();
 		}
 
 	}
