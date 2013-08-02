@@ -165,9 +165,9 @@ public class DataManager {
 		if (content != null) {
 			String[] data = content.split("\n");
 
-			userData.setLevel(Integer.valueOf(data[0]));
-			userData.setGold(Integer.valueOf(data[1]));
-			userData.setCurrentPuzzle(Integer.valueOf(data[2]));
+			userData.setLevel(Integer.valueOf(data[1]));
+			userData.setGold(Integer.valueOf(data[2]));
+			userData.setCurrentPuzzle(Integer.valueOf(data[3]));
 
 			updateStringPrefs("username", userData.getUsername());
 			updateIntPrefs("level", userData.getLevel());
