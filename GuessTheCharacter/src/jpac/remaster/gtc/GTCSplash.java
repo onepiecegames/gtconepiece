@@ -30,7 +30,7 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		setTypeface(R.id.loadingLabel, ResourceManager.getFont("roboto_thin.ttf"));
 
 		LoadResourceHandler handler = new LoadResourceHandler(this);
-		handler.sendEmptyMessageDelayed(0, 1000);
+		handler.sendEmptyMessageDelayed(0, Constants.SPLASH_DELAY);
 	}
 
 	static class LoadResourceHandler extends Handler {

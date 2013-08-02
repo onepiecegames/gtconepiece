@@ -101,4 +101,9 @@ public class Constants {
 	// SharedPreferences
 	// ========================================================================
 	public static final String SHARED_PREFERENCES = "gtc_prefs";
+	
+	// ========================================================================
+	// Splash Delay
+	// ========================================================================
+	public static final int SPLASH_DELAY = 2000;
 }
