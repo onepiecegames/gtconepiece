@@ -87,7 +87,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/black"
-            android:contentDescription="@string/empty" />
+            android:contentDescription="@string/empty"
+            android:src="@drawable/to_be_continued" />
     </ViewFlipper>
 
 </RelativeLayout>

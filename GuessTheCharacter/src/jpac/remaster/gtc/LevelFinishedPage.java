@@ -1,16 +1,12 @@
 package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
-import jpac.remaster.gtc.util.FontUtil;
-import jpac.remaster.gtc.util.ResourceUtil;
+import jpac.remaster.gtc.util.ResourceManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class LevelFinishedPage extends GTCActivity {
 
@@ -19,49 +15,44 @@ public class LevelFinishedPage extends GTCActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.puzzle_done_page);
 
-		findViewById(R.id.continueButton).setOnClickListener(
-				new OnClickListener() {
+		setOnClickListener(R.id.continueButton, new OnClickListener() {
 
-					@Override
-					public void onClick(View arg0) {
-						Intent intent = new Intent(getApplicationContext(),
-								InGamePage.class);
-						startActivity(intent);
-						ResourceUtil.forceRecycleImages();
-						finish();
-					}
-				});
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getApplicationContext(),
+						InGamePage.class);
+				startActivity(intent);
+				finish();
+			}
+		});
 
-		String id = getIntent().getStringExtra("image");
-		ImageView image = (ImageView) findViewById(R.id.puzzleImage);
-		image.setImageBitmap(ResourceUtil.loadPuzzleImage(id));
+		String id = getStringExtra("image");
+		setImage(R.id.puzzleImage, ResourceManager.loadBitmapFromAsset(id));
 
-		Typeface ds = FontUtil.getFont(
-				getAssets(), "font/digitalstrip.ttf");
-		
-		int amount = getIntent().getIntExtra("prize", 0);
-		((TextView) findViewById(R.id.amountLabel)).setText("" + amount);
-		((TextView) findViewById(R.id.amountLabel)).setTypeface(ds);
+		Typeface ds = ResourceManager.getFont("digitalstrip.ttf");
 
-		String desc = getIntent().getStringExtra("answer");
-		((TextView) findViewById(R.id.answer)).setText(desc);
-		((TextView) findViewById(R.id.answer)).setTypeface(ds);
-		
-		((TextView) findViewById(R.id.banner)).setTypeface(ds);
-		((TextView) findViewById(R.id.titleLabel)).setTypeface(ds);
-		((TextView) findViewById(R.id.receiveLabel)).setTypeface(ds);
-		((TextView) findViewById(R.id.amountLabel)).setTypeface(ds);
-		((TextView) findViewById(R.id.goldLabel)).setTypeface(ds);
-		
-		((Button) findViewById(R.id.continueButton)).setTypeface(FontUtil.getFont(
-				getAssets(), "font/roboto_bold.ttf"));
+		int amount = getIntExtra("prize");
+		setText(R.id.amountLabel, "" + amount);
+		setTypeface(R.id.amountLabel, ds);
+
+		String desc = getStringExtra("answer");
+		setText(R.id.answer, desc);
+		setTypeface(R.id.answer, ds);
+
+		setTypeface(R.id.banner, ds);
+		setTypeface(R.id.titleLabel, ds);
+		setTypeface(R.id.receiveLabel, ds);
+		setTypeface(R.id.amountLabel, ds);
+		setTypeface(R.id.goldLabel, ds);
+
+		setTypeface(R.id.continueButton,
+				ResourceManager.getFont("roboto_bold.ttf"));
 	}
 
 	@Override
 	public void onBackPressed() {
 		Intent intent = new Intent(getApplicationContext(), InGamePage.class);
 		startActivity(intent);
-		ResourceUtil.forceRecycleImages();
 		finish();
 	}
 }
