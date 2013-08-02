@@ -143,7 +143,11 @@ public class MainMenuPage extends GTCActivity {
 			doFacebookAction();
 		} else if (requestCode == REQUEST_FACEBOOK_SIGN) {
 			if (resultCode == RESULT_OK) {
-				Util.displayToast(this, "Logged Out");
+				if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {
+					Util.displayToast(this, "You are now connected to Facebook.");
+				} else {
+					Util.displayToast(this, "Logged Out");	
+				}
 			}
 		}
 	}
