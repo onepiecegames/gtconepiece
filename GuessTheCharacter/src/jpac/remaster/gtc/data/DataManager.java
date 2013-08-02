@@ -346,4 +346,14 @@ public class DataManager {
 
 		editor.commit();
 	}
+
+	public static void clearButtonMetadata() {
+		SharedPreferences prefs = contextRef.getSharedPreferences(
+				Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		
+		editor.remove("button_removed");
+		editor.remove("button_locked");
+		editor.commit();
+	}
 }

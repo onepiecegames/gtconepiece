@@ -65,16 +65,15 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 		} else {
 			DataManager.updatePuzzle(puzzle.getId());
 
+			String puzzleInfo = DataManager.getPuzzleInfo();
+			String removedButtonMeta = DataManager.getRemovedButtons();
+			String lockStateMeta = DataManager.getLockedButtons();
+
 			buttonManager.init(this, puzzle);
 			buttonManager.setChoices(PuzzleManager.createChoiceSet(
 					puzzle.getAnswer(), puzzle.getRandomSeed()));
 			buttonManager.initAnswerField(this, puzzle.getRawAnswer());
 			buttonManager.setAnswerDoneListener(this);
-
-
-			String puzzleInfo = DataManager.getPuzzleInfo();
-			String removedButtonMeta = DataManager.getRemovedButtons();
-			String lockStateMeta = DataManager.getLockedButtons();
 
 			buttonManager.setData(puzzleInfo, removedButtonMeta, lockStateMeta);
 			
@@ -253,6 +252,9 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 		int prize = puzzle.getDifficulty() * Constants.PUZZLE_PRIZE;
 		DataManager.earnGold(prize);
 		DataManager.levelUp();
+		
+		DataManager.clearButtonMetadata();
+		
 		Intent intent = new Intent(this, LevelFinishedPage.class);
 		intent.putExtra("prize", prize);
 		intent.putExtra("image", puzzle.getImageId());
