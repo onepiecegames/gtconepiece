@@ -121,8 +121,7 @@ public class MainMenuPage extends GTCActivity {
 					"Data Reset", "Your user data has been deleted."),
 					REQUEST_ACKNOWLEDGE_RESET);
 		} else if (requestCode == REQUEST_ACKNOWLEDGE_RESET) {
-			startActivity(new Intent(this, GTCSplash.class));
-			finish();
+			onResume();
 		} else if (requestCode == REQUEST_FACEBOOK_ACTION
 				&& resultCode == RESULT_OK) {
 			doFacebookAction();
