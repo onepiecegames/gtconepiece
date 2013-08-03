@@ -2,12 +2,7 @@
 <resources>
 
     <string-array name="fonts">
-        <item >roboto_black.ttf</item>
         <item >roboto_bold.ttf</item>
-        <item >roboto_condensed.ttf</item>
-        <item >roboto_light.ttf</item>
-        <item >roboto_medium.ttf</item>
-        <item >roboto_regular.ttf</item>
         <item >digitalstrip.ttf</item>
         <item >facebook.otf</item>
     </string-array>
