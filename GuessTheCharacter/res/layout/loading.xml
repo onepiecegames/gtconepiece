@@ -10,5 +10,20 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/margin_small" />
+
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_dimen"/>
+    
+    <TextView
+        android:id="@+id/loadingLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_large"
+        android:gravity="center_horizontal" />
     
 </RelativeLayout>
