@@ -5,6 +5,7 @@ import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
+import jpac.remaster.gtc.util.social.AppRater;
 import jpac.remaster.gtc.util.social.GTCAuthAdapter;
 
 import org.brickred.socialauth.android.SocialAuthAdapter.Provider;
@@ -28,6 +29,8 @@ public class MainMenuPage extends GTCActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_main_menu);
 
+		AppRater.app_launched(this);
+		
 		// this is to fix multiple instance of main menu
 		SharedPreferences prefs = getSharedPreferences("splash", MODE_PRIVATE);
 		if (!prefs.getBoolean("loaded", false)) {
