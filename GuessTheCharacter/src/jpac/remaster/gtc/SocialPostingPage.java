@@ -79,7 +79,7 @@ public class SocialPostingPage extends GTCActivity implements
 	@Override
 	public void onError(SocialAuthError e) {
 		Util.displayToast(getApplicationContext(),
-				"Error posting on your timeline.");
+				"Cannot Connect to Facebook");
 		finish();
 	}
 
