@@ -14,6 +14,7 @@
     
     <string name="app_name">Guess The Character: One Piece</string>
     <string name="app_alias">Guess The Character</string>
+    <string name="app_version">Version 2.0 [Trafalgar Law]</string>
    
     <string name="empty"></string>
     <string name="label_play">Play</string>
@@ -34,6 +35,7 @@
 	<string name="label_social_message">Ask your facebook friends for help?</string>
 	<string name="label_signin">Sign In</string>
 	<string name="label_signout">Sign Out</string>
+	<string name="label_next">Next</string>
 	
     <string name="popup_display_1">You\'ve solved the Puzzle!</string>
     <string name="popup_display_2_1">Receive </string>
@@ -41,4 +43,13 @@
     
     <string name="finish_display_1">You\'ve solved all the Puzzle!</string>
     <string name="finish_display_2">Stay tuned for the next update!</string>
+    <string name="dev_quote">\"Learning Through Practice\"</string>
+    <string name="changelog">Changelog</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="dev_name">JP</string>    
+    <string name="dev_position">Designer/Graphics/Programmer/Tester</string>    
+    <string name="label_credits">Credits</string>
+    <string name="label_visit">Visit</string>
+    <string name="label_rate">Rate &amp; Review</string>
+    <string name="rate_detail">Like this Game? Do you have any feedbacks or violent reaction? Write a review and tell us what you feel about this app.</string>
 </resources>

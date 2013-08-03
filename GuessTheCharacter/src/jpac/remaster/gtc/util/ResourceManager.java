@@ -236,6 +236,27 @@ public class ResourceManager {
 			return false;
 		}
 	}
+	
+	public static String loadDataFromAsset(String filename) {
+		String content = null;
+		
+		try {
+            InputStream input = contextRef.getResources().getAssets().open(filename);
+             
+             int size = input.available();
+             byte[] buffer = new byte[size];
+             input.read(buffer);
+             input.close();
+ 
+             // byte buffer into a string
+             content = new String(buffer);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		return content;
+	}
 
 	public static String loadData(String filename) {
 		String content = null;

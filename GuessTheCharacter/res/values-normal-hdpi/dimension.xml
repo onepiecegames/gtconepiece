@@ -22,12 +22,14 @@
     <dimen name="margin_large">34dp</dimen>
     
     <!-- GRAPHICS -->
+	<dimen name="avatar_height">120dp</dimen>
     <dimen name="logo_height">150dp</dimen>
     <dimen name="badge_height">300dp</dimen>
     <dimen name="speech_height">200dp</dimen>
     
     <!-- TEXT -->
     <dimen name="font_normal">10dp</dimen>
+    <dimen name="font_xnormal">12dp</dimen>
     <dimen name="font_snormal">15dp</dimen>
     <dimen name="font_large">16dp</dimen>
     <dimen name="font_xlarge">24dp</dimen>

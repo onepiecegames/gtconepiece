@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_small" >
+
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="@dimen/large_button"
+        android:layout_height="@dimen/large_button"
+        android:padding="@dimen/margin_small"
+        android:background="@color/white" android:contentDescription="@string/empty"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/large_button"
+        android:textSize="@dimen/font_large"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:textColor="@color/white" />
+    
+    <Button 
+        android:id="@+id/visitButton"
+        android:layout_width="@dimen/large_button"
+        android:layout_height="@dimen/large_button"
+        android:background="@drawable/menu_btn"
+        android:text="@string/label_visit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_large" />
+    
+</LinearLayout>

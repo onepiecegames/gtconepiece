@@ -1,0 +1,14 @@
+08/02/2013 Version 2.0
+	- Added Facebook feature
+	- You can now reset data 
+	- 150 new puzzles to solve
+	- Added a 1-word clue description
+	- Some minor bug fixes
+
+07/20/2013 Version 1.2
+	- Minor bug fixes
+	- Formatting of text for level done page
+
+07/18/2013 Version 1.1
+	- Fix scaling issue with tablet
+	- Adjust font size of letters
