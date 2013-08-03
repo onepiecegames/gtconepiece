@@ -54,6 +54,7 @@ public class SocialPostingPage extends GTCActivity implements
 		try {
 			// share capture image to facebook
 			if (action.compareTo(ACTION_SHARE) == 0) {
+				 mGaTracker.sendEvent("ui_action", "facebook", "share_photo", 0L);
 				 adapter.uploadImageAsync("Help! Who is this character?",
 				 "guess_the_character.png",
 				 ResourceManager.getCapturedImage(), 1, this);
