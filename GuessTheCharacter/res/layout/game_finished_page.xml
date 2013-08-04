@@ -19,11 +19,11 @@
         android:layout_height="@dimen/button_height"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/margin_small"
-        android:background="@drawable/menu_btn"
         android:layout_marginBottom="@dimen/margin_medium"
+        android:background="@drawable/menu_btn"
         android:text="@string/label_continue"
-        android:textSize="@dimen/font_large"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_large" />
 
     <TextView
         android:id="@+id/banner"
@@ -66,19 +66,19 @@
                 android:gravity="center"
                 android:text="@string/finish_display_1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="@dimen/font_xlarge"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_xlarge" />
 
             <TextView
                 android:id="@+id/finishLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
                 android:gravity="center"
                 android:text="@string/finish_display_2"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_margin="@dimen/margin_small"
-                android:textSize="@dimen/font_large"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_large" />
         </LinearLayout>
 
         <ImageView

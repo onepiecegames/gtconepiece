@@ -21,10 +21,10 @@ public class DataManager {
 	public static final int BUTTON_STATE = 2;
 	public static final int SOLVED_PUZZLES = 3;
 
-	private static UserData userData;
-	private static ButtonMetadata buttonMetadata;
-	private static String puzzleMetadata;
-	private static int socialData;
+	private static UserData userData = new UserData();
+	private static ButtonMetadata buttonMetadata = new ButtonMetadata();
+	private static String puzzleMetadata = "";
+	private static int socialData = Constants.NA;
 
 	public static void setContextReference(Context context) {
 		DataManager.contextRef = context;

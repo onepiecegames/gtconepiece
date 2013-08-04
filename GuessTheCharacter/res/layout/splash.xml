@@ -10,7 +10,8 @@
         android:layout_height="@dimen/badge_height"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:contentDescription="@string/empty"
         android:scaleType="centerInside"
-        android:src="@drawable/logo_dark" android:contentDescription="@string/empty"/>
+        android:src="@drawable/logo_dark" />
 
 </RelativeLayout>
