@@ -2,7 +2,6 @@ package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
 import jpac.remaster.gtc.data.DataManager;
-import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.util.Constants;
 import jpac.remaster.gtc.util.ResourceLoader;
 import jpac.remaster.gtc.util.ResourceManager;
@@ -63,7 +62,6 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		@Override
 		protected Void doInBackground(Void... params) {
 			ResourceManager.loadSystemFonts();
-			PuzzleManager.init(GTCSplash.this);
 			DataManager.init();
 			return null;
 		}
