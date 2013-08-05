@@ -12,7 +12,7 @@
     <dimen name="choice_box_button">40dp</dimen>
     
     <!-- BANNERS -->
-    <dimen name="banner_height">40dp</dimen>
+    <dimen name="banner_height">30dp</dimen>
     
     <!-- MARGIN -->
     <dimen name="margin_small">5dp</dimen>
@@ -28,19 +28,19 @@
     <dimen name="speech_height">200dp</dimen>
     
     <!-- TEXT -->
-    <dimen name="font_answer">10dp</dimen>
-    <dimen name="font_normal">10dp</dimen>
-    <dimen name="font_xnormal">12dp</dimen>
-    <dimen name="font_snormal">15dp</dimen>
-    <dimen name="font_large">16dp</dimen>
-    <dimen name="font_xlarge">24dp</dimen>
-    <dimen name="font_letter">20dp</dimen>
+    <dimen name="font_answer">14dp</dimen>
+    <dimen name="font_normal">8dp</dimen>
+    <dimen name="font_xnormal">10dp</dimen>
+    <dimen name="font_snormal">12dp</dimen>
+    <dimen name="font_large">13dp</dimen>
+    <dimen name="font_xlarge">22dp</dimen>
+    <dimen name="font_letter">18dp</dimen>
     
     <!-- PUZZLE -->
-    <dimen name="puzzle_dimen">160dp</dimen>
-    <dimen name="diff_height">32dp</dimen>
+    <dimen name="puzzle_dimen">120dp</dimen>
+    <dimen name="diff_height">24dp</dimen>
     
     <!-- POPUP -->
-    <dimen name="popup_width">300dp</dimen>
-    <dimen name="small_popup_height">300dp</dimen>
+    <dimen name="popup_width">225dp</dimen>
+    <dimen name="small_popup_height">225dp</dimen>
 </resources>

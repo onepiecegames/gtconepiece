@@ -28,6 +28,7 @@
     <dimen name="speech_height">360dp</dimen>
     
     <!-- TEXT -->
+    <dimen name="font_answer">18dp</dimen>
     <dimen name="font_normal">18dp</dimen>
     <dimen name="font_xnormal">22dp</dimen>
     <dimen name="font_snormal">27dp</dimen>
