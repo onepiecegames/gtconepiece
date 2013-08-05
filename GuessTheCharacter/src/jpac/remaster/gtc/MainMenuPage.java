@@ -17,8 +17,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
 public class MainMenuPage extends GTCActivity {
 
 	private static final int REQUEST_RESETCONFIRM = 1;
@@ -134,18 +132,6 @@ public class MainMenuPage extends GTCActivity {
 			setText(R.id.facebookButton,
 					ResourceManager.loadString(R.string.label_signin));
 		}
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		EasyTracker.getInstance().activityStart(this);
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		EasyTracker.getInstance().activityStop(this);
 	}
 
 	@Override
