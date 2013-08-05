@@ -61,6 +61,7 @@ public class DataManager {
 		
 		// get puzzle metadata
 		puzzleMetadata = prefs.getString("puzzle_metadata", "");
+		PuzzleManager.populateList(puzzleMetadata.split("\n"));
 		
 		// get button metadata
 		String puzzleInfo = prefs.getString("button_puzzle_info", null);
