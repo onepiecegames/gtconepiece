@@ -60,7 +60,7 @@ public class DataManager {
 		socialData = prefs.getInt("posted_puzzle", Constants.NA);
 		
 		// get puzzle metadata
-		puzzleMetadata = prefs.getString("puzzle_metadata", null);
+		puzzleMetadata = prefs.getString("puzzle_metadata", "");
 		
 		// get button metadata
 		String puzzleInfo = prefs.getString("button_puzzle_info", null);
