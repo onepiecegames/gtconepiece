@@ -11,7 +11,7 @@ public class PuzzleManager {
 
 	public static Puzzle currentPuzzle = null;
 
-	public static ArrayList<Integer> smartLoader;
+	public static ArrayList<Integer> smartLoader = new ArrayList<Integer>();
 
 	public static void init(Context context) {
 		smartLoader = new ArrayList<Integer>();
