@@ -23,7 +23,7 @@ public class Constants {
 	// ========================================================================
 	// This is the standard amount user receive after solving a puzzle.
 	// ========================================================================
-	public static final int RECYCLE_THRESHOLD = 10;
+	public static final int RECYCLE_THRESHOLD = 5;
 
 	// ========================================================================
 	// The location of files in the asset folder
