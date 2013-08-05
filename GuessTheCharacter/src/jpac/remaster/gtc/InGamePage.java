@@ -252,6 +252,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	private void showLevelComplete() {
 		PuzzleManager.markAsSolved(puzzle.getId());
 		int prize = puzzle.getDifficulty() * Constants.PUZZLE_PRIZE;
+		DataManager.updateSolvedPuzzle(puzzle.getId());
 		DataManager.earnGold(prize);
 		DataManager.levelUp();
 		
