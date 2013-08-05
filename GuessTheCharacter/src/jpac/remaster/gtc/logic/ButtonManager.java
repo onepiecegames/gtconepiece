@@ -275,7 +275,7 @@ public class ButtonManager {
 	private final int ANSWER_MARGIN = ResourceManager
 			.loadDimension(R.dimen.margin_xsmall);
 	private final int ANSWER_TEXT_SIZE = ResourceManager
-			.loadDimension(R.dimen.font_normal);
+			.loadDimension(R.dimen.font_answer);
 
 	private Button initAnswerButton(Context context, String text) {
 		Button button = new Button(context);
