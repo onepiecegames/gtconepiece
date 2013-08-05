@@ -19,6 +19,7 @@ public class LevelFinishedPage extends GTCActivity {
 
 			@Override
 			public void onClick(View arg0) {
+				ResourceManager.forceRecycle();
 				Intent intent = new Intent(getApplicationContext(),
 						InGamePage.class);
 				startActivity(intent);
