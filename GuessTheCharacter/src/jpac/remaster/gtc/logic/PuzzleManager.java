@@ -43,7 +43,7 @@ public class PuzzleManager {
 		Util.log("Puzzles: " + puzzleList.size());
 		
 		int idxFromList = Util.randInt(puzzleList.size());
-		int puzzleIndex = puzzleList.get(idxFromList);
+		int puzzleIndex = puzzleList.remove(idxFromList);
 		
 		return PuzzleFactory.getPuzzleById(puzzleIndex);
 	}
@@ -70,5 +70,14 @@ public class PuzzleManager {
 		}
 
 		return puzzle;
+	}
+	
+	public static void reset() {
+		solvedPuzzles.clear();
+		puzzleList.clear();
+		
+		for (int i=0; i<PuzzleFactory.TOTAL_PUZZLE; i++) {
+			puzzleList.add(i);
+		}
 	}
 }

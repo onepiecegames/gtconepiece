@@ -250,6 +250,12 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 
 	private void showLevelComplete() {
+		if(puzzle == null) {
+			startActivity(new Intent(this, GameFinishedPage.class));
+			finish();
+			return;
+		}
+		
 		PuzzleManager.markAsSolved(puzzle.getId());
 		int prize = puzzle.getDifficulty() * Constants.PUZZLE_PRIZE;
 		DataManager.updateSolvedPuzzle(puzzle.getId());

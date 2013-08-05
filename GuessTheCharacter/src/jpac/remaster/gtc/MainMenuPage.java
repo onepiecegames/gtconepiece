@@ -138,6 +138,7 @@ public class MainMenuPage extends GTCActivity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_RESETCONFIRM && resultCode == RESULT_OK) {
 			DataManager.reset();
+			PuzzleManager.reset();
 			startActivityForResult(Util.createAcknowledgePopup(this,
 					"Data Reset", "Your user data has been deleted."),
 					REQUEST_ACKNOWLEDGE_RESET);
