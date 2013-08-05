@@ -44,7 +44,6 @@ public class DataManager {
 			PuzzleManager.populateList(puzzleMetadata.split("\n"));
 		}
 		loadSharedPrefs();
-		PuzzleManager.init(contextRef);
 	}
 	
 	private static void loadSharedPrefs() {
