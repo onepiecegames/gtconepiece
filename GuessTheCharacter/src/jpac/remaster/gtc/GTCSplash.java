@@ -63,7 +63,7 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		@Override
 		protected Void doInBackground(Void... params) {
 			ResourceManager.loadSystemFonts();
-			PuzzleManager.init(getApplicationContext());
+			PuzzleManager.init(GTCSplash.this);
 			DataManager.init();
 			return null;
 		}
