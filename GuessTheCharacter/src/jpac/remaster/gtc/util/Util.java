@@ -2,6 +2,8 @@ package jpac.remaster.gtc.util;
 
 import java.util.Random;
 
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
+
 import jpac.remaster.gtc.R;
 import jpac.remaster.gtc.core.GTCPopupActivity;
 import android.content.Context;
@@ -142,5 +144,14 @@ public class Util {
 		intent.putExtra(Constants.POP_BUTTON1, buttonText);
 
 		return intent;
+	}
+	
+	public static boolean showAd() {
+		int random = randInt(10);
+		if (random >= 8) {
+			AdBuddiz.getInstance().showAd();
+			return true;
+		}
+		return false;
 	}
 }

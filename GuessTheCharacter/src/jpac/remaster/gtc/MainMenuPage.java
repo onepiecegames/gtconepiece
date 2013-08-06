@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 public class MainMenuPage extends GTCActivity {
 
 	private static final int REQUEST_RESETCONFIRM = 1;
@@ -106,6 +107,12 @@ public class MainMenuPage extends GTCActivity {
 		prefs.edit().putBoolean("loaded", false).commit();
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+	    AdBuddiz.getInstance().onStart(this);
+	}
+
 	private void doFacebookAction() {
 		Intent intent = new Intent(this, SocialPostingPage.class);
 		if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {
@@ -132,6 +139,10 @@ public class MainMenuPage extends GTCActivity {
 			setText(R.id.facebookButton,
 					ResourceManager.loadString(R.string.label_signin));
 		}
+
+	    if(Util.showAd()) {
+		mGaTracker.sendEvent("sys_event", "show_ad", "show_ad", 0L);
+	    }
 	}
 
 	@Override
