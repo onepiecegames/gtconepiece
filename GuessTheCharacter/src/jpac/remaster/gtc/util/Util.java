@@ -2,14 +2,14 @@ package jpac.remaster.gtc.util;
 
 import java.util.Random;
 
-import com.purplebrain.adbuddiz.sdk.AdBuddiz;
-
 import jpac.remaster.gtc.R;
 import jpac.remaster.gtc.core.GTCPopupActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 public class Util {
 
@@ -148,7 +148,7 @@ public class Util {
 	
 	public static boolean showAd() {
 		int random = randInt(10);
-		if (random >= 8) {
+		if (random >= 6) {
 			AdBuddiz.getInstance().showAd();
 			return true;
 		}

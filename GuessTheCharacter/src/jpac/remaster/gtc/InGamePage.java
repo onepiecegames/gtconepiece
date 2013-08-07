@@ -11,6 +11,7 @@ import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.GTCAuthAdapter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +20,8 @@ import android.view.animation.AnimationUtils;
 
 public class InGamePage extends GTCActivity implements UserActionListener {
 
+	private static int skip_credits = 0;
+
 	private static final int REQUEST_SHOW_CONFIRM_BACK = 0;
 	private static final int REQUEST_SHOW_ACKNOWLEDGE = 1;
 	private static final int REQUEST_CONFIRM_REVEAL = 2;
@@ -26,6 +29,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	private static final int REQUEST_CONFIRM_SOLVE = 4;
 	private static final int REQUEST_SHARE_FACEBOOK = 5;
 	private static final int REQUEST_PUBLISH_FEED = 6;
+	private static final int REQUEST_SKIP_PUZZLE = 7;
 
 	private Puzzle puzzle;
 
@@ -34,6 +38,11 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		skip_credits = getSharedPreferences("skip_credits", MODE_PRIVATE).getInt("credits_remain", 5);
+		initializeView();
+	}
+
+	private void initializeView() {
 		setContentView(R.layout.game_page);
 
 		setOnClickListener(R.id.backButton, new OnClickListener() {
@@ -41,6 +50,33 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			@Override
 			public void onClick(View v) {
 				onBackPressed();
+			}
+		});
+
+		setOnClickListener(R.id.puzzleImage1, new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (skip_credits > 0) {
+					startActivityForResult(
+							Util.createConfirmPopup(
+									InGamePage.this,
+									"Confirm Action",
+									"You have "
+											+ skip_credits
+											+ " remaining skip credits.\n\nDo you want to skip this image?"),
+							REQUEST_SKIP_PUZZLE);
+				} else {
+					startActivityForResult(Util
+							.createAcknowledgePopup(InGamePage.this,
+									"Cannot Skip",
+									"You do not have enough skip credits. Solve this puzzle to reset credits count."), Constants.NA);
+					SharedPreferences prefs = getSharedPreferences(
+							"skip_credits", MODE_PRIVATE);
+					prefs.edit()
+							.putLong("skip_time", System.currentTimeMillis())
+							.commit();
+				}
 			}
 		});
 
@@ -78,7 +114,7 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			buttonManager.setAnswerDoneListener(this);
 
 			buttonManager.setData(puzzleInfo, removedButtonMeta, lockStateMeta);
-			
+
 			try {
 				setImage(
 						R.id.puzzleImage1,
@@ -231,6 +267,12 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 			case REQUEST_PUBLISH_FEED:
 				DataManager.updatePosted(puzzle.getId());
 				break;
+			case REQUEST_SKIP_PUZZLE:
+				skip_credits--;
+				ResourceManager.forceRecycle();
+				DataManager.updatePuzzle(-1);
+				initializeView();
+				break;
 			default:
 				break;
 			}
@@ -250,27 +292,26 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	}
 
 	private void showLevelComplete() {
-		if(puzzle == null) {
+		if (puzzle == null) {
 			startActivity(new Intent(this, GameFinishedPage.class));
 			finish();
 			return;
 		}
-		
+
+		skip_credits = 5;
 		PuzzleManager.markAsSolved(puzzle.getId());
 		int prize = puzzle.getDifficulty() * Constants.PUZZLE_PRIZE;
 		DataManager.updateSolvedPuzzle(puzzle.getId());
 		DataManager.earnGold(prize);
 		DataManager.levelUp();
-		
+
 		DataManager.clearButtonMetadata();
-		
+
 		Intent intent = new Intent(this, LevelFinishedPage.class);
 		intent.putExtra("prize", prize);
 		intent.putExtra("image", puzzle.getImageId());
 		intent.putExtra("answer", puzzle.getFormattedAnswer());
 		startActivity(intent);
-
-		ResourceManager.queueBitmapForRecycle(puzzle.getImageId());
 
 		finish();
 	}
@@ -278,6 +319,8 @@ public class InGamePage extends GTCActivity implements UserActionListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		SharedPreferences prefs = getSharedPreferences("skip_credits", MODE_PRIVATE);
+		prefs.edit().putInt("credits_remain", skip_credits).commit();
 	}
 
 }

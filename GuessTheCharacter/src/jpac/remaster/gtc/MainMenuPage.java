@@ -3,6 +3,7 @@ package jpac.remaster.gtc;
 import jpac.remaster.gtc.core.GTCActivity;
 import jpac.remaster.gtc.data.DataManager;
 import jpac.remaster.gtc.logic.PuzzleManager;
+import jpac.remaster.gtc.util.Constants;
 import jpac.remaster.gtc.util.ResourceManager;
 import jpac.remaster.gtc.util.Util;
 import jpac.remaster.gtc.util.social.AppRater;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.purplebrain.adbuddiz.sdk.AdBuddiz;
+
 public class MainMenuPage extends GTCActivity {
 
 	private static final int REQUEST_RESETCONFIRM = 1;
@@ -31,18 +33,20 @@ public class MainMenuPage extends GTCActivity {
 		setContentView(R.layout.new_main_menu);
 
 		AppRater.app_launched(this);
-		
+		checkOneTimeBonus();
+
 		// this is to fix multiple instance of main menu
 		SharedPreferences prefs = getSharedPreferences("splash", MODE_PRIVATE);
 		if (!prefs.getBoolean("loaded", false)) {
 			finish();
 		}
-		
+
 		setOnClickListener(R.id.playButton, new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				mGaTracker.sendEvent("ui_action", "button_press", "play_button", 0L);
+				mGaTracker.sendEvent("ui_action", "button_press",
+						"play_button", 0L);
 				if (PuzzleManager.isFinished()) {
 					startActivity(new Intent(MainMenuPage.this,
 							GameFinishedPage.class));
@@ -57,7 +61,8 @@ public class MainMenuPage extends GTCActivity {
 
 			@Override
 			public void onClick(View v) {
-				mGaTracker.sendEvent("ui_action", "button_press", "about_button", 0L);
+				mGaTracker.sendEvent("ui_action", "button_press",
+						"about_button", 0L);
 				startActivity(new Intent(MainMenuPage.this, AboutUsPage.class));
 			}
 		});
@@ -99,6 +104,23 @@ public class MainMenuPage extends GTCActivity {
 		setTypeface(R.id.resetButton, roboto);
 	}
 
+	private void checkOneTimeBonus() {
+		SharedPreferences prefs = getSharedPreferences("bonus", MODE_PRIVATE);
+		boolean received = prefs.getBoolean("receive_bonus", false);
+
+		if (!received) {
+			prefs.edit().putBoolean("receive_bonus", true).commit();
+			DataManager.earnGold(40);
+			startActivityForResult(
+					Util.createAcknowledgePopup(
+							this,
+							"Bonus Gold",
+							"Thank you for playing Guess the Character: One Piece.\n\nAs a token of " +
+							"appreciation, here is 40 bonus gold. Enjoy the game."),
+					Constants.NA);
+		}
+	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -110,7 +132,10 @@ public class MainMenuPage extends GTCActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-	    AdBuddiz.getInstance().onStart(this);
+		AdBuddiz.getInstance().onStart(this);
+		if (Util.showAd()) {
+			mGaTracker.sendEvent("event", "show_ad", "ads", 0L);
+		}
 	}
 
 	private void doFacebookAction() {
@@ -139,10 +164,6 @@ public class MainMenuPage extends GTCActivity {
 			setText(R.id.facebookButton,
 					ResourceManager.loadString(R.string.label_signin));
 		}
-
-	    if(Util.showAd()) {
-		mGaTracker.sendEvent("sys_event", "show_ad", "show_ad", 0L);
-	    }
 	}
 
 	@Override
@@ -150,6 +171,8 @@ public class MainMenuPage extends GTCActivity {
 		if (requestCode == REQUEST_RESETCONFIRM && resultCode == RESULT_OK) {
 			DataManager.reset();
 			PuzzleManager.reset();
+			getSharedPreferences("skip_credits", MODE_PRIVATE).edit().clear()
+					.commit();
 			startActivityForResult(Util.createAcknowledgePopup(this,
 					"Data Reset", "Your user data has been deleted."),
 					REQUEST_ACKNOWLEDGE_RESET);
@@ -161,9 +184,10 @@ public class MainMenuPage extends GTCActivity {
 		} else if (requestCode == REQUEST_FACEBOOK_SIGN) {
 			if (resultCode == RESULT_OK) {
 				if (GTCAuthAdapter.isConnected(this, Provider.FACEBOOK)) {
-					Util.displayToast(this, "You are now connected to Facebook.");
+					Util.displayToast(this,
+							"You are now connected to Facebook.");
 				} else {
-					Util.displayToast(this, "Logged Out");	
+					Util.displayToast(this, "Logged Out");
 				}
 			}
 		}

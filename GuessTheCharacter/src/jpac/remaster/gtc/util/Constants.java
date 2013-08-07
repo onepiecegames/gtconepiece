@@ -84,4 +84,6 @@ public class Constants {
 	// Splash Delay
 	// ========================================================================
 	public static final int SPLASH_DELAY = 2000;
+	
+	public static final int SKIP_COUNT = 5;
 }

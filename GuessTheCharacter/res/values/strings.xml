@@ -24,7 +24,6 @@
 	<string name="label_confirm">OK</string>
 	<string name="label_cancel">Cancel</string>
 	<string name="label_close">Close</string>
-	<string name="label_loading">Loading&#8230;</string>
 	<string name="label_share">Post</string>
 	<string name="label_social">facebook</string>
 	<string name="label_social_message">Ask your facebook friends for help?</string>
@@ -38,7 +37,6 @@
     
     <string name="finish_display_1">You\'ve solved all the Puzzle!</string>
     <string name="finish_display_2">Stay tuned for the next update!</string>
-    <string name="dev_quote">\"Learning Through Practice\"</string>
     <string name="changelog">Changelog</string>
     <string name="disclaimer">Disclaimer</string>
     <string name="dev_name">JP</string>    

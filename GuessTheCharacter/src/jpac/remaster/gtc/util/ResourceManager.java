@@ -129,6 +129,7 @@ public class ResourceManager {
 						Constants.IMAGE_LOCATION + name + ".png");
 				Bitmap bitmap = BitmapFactory.decodeStream(is);
 				ResourceManager.imageCache.put(name, bitmap);
+				ResourceManager.forRecycle.add(name);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
