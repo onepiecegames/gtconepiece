@@ -1,3 +1,10 @@
+08/07/2013  Version 2.1
+	- Added Skip functionality
+	- 1-Time Bonus Gold for user
+	- Improved Memory management
+	- Fix minor issues
+	- Added Ads (experimental)
+
 08/05/2013  Version 2.0.3
 	- Fix force close in small screen device
 	- Allow transfer to SD card
