@@ -5,12 +5,13 @@
     android:background="@color/tuna" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/dev_logo"
         android:layout_width="@dimen/speech_height"
         android:layout_height="@dimen/badge_height"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:contentDescription="@string/empty"
         android:scaleType="centerInside"
-        android:src="@drawable/law_loading" android:contentDescription="@string/empty"/>
+        android:src="@drawable/logo_dark" />
 
 </RelativeLayout>

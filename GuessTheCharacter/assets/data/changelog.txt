@@ -1,0 +1,34 @@
+08/07/2013  Version 2.1
+	- Added Skip functionality
+	- 1-Time Bonus Gold for user
+	- Improved Memory management
+	- Fix minor issues
+	- Added Ads (experimental)
+
+08/05/2013  Version 2.0.3
+	- Fix force close in small screen device
+	- Allow transfer to SD card
+	- Fix minor issues
+
+08/04/2013  Version 2.0.2
+	- Fix minor issues
+
+08/03/2013	Version 2.0.1
+	- Revamped About Us Page
+	- Fix minor issues in notification
+	- Added Rate & Review functionality
+	
+08/02/2013 Version 2.0
+	- Added Facebook feature
+	- You can now reset data 
+	- 150 new puzzles to solve
+	- Added a 1-word clue description
+	- Some minor bug fixes
+
+07/20/2013 Version 1.2
+	- Minor bug fixes
+	- Formatting of text for level done page
+
+07/18/2013 Version 1.1
+	- Fix scaling issue with tablet
+	- Adjust font size of letters

@@ -22,7 +22,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
+
 public abstract class GTCActivity extends Activity {
+
+	protected Tracker mGaTracker;
+	protected GoogleAnalytics mGaInstance;
 
 	@Override
 	protected void onDestroy() {
@@ -59,11 +66,13 @@ public abstract class GTCActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		EasyTracker.getInstance().activityStart(this);
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
+		EasyTracker.getInstance().activityStop(this);
 		Util.log(getClassName() + "[onStop]");
 	}
 
@@ -78,6 +87,13 @@ public abstract class GTCActivity extends Activity {
 		}
 
 		setFullscreenWindow();
+
+		// Get the GoogleAnalytics singleton. Note that the SDK uses
+	    // the application context to avoid leaking the current context.
+	    mGaInstance = GoogleAnalytics.getInstance(this);
+
+	    // Use the GoogleAnalytics singleton to get a Tracker.
+	    mGaTracker = mGaInstance.getTracker("UA-42918296-1"); // Placeholder tracking ID.
 
 		ResourceManager.setContextReference(this);
 		DataManager.setContextReference(this);
