@@ -23,7 +23,7 @@ public class Constants {
 	// ========================================================================
 	// This is the standard amount user receive after solving a puzzle.
 	// ========================================================================
-	public static final int RECYCLE_THRESHOLD = 10;
+	public static final int RECYCLE_THRESHOLD = 5;
 
 	// ========================================================================
 	// The location of files in the asset folder
@@ -84,4 +84,6 @@ public class Constants {
 	// Splash Delay
 	// ========================================================================
 	public static final int SPLASH_DELAY = 2000;
+	
+	public static final int SKIP_COUNT = 5;
 }

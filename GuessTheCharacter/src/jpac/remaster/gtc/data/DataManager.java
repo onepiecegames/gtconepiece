@@ -21,10 +21,10 @@ public class DataManager {
 	public static final int BUTTON_STATE = 2;
 	public static final int SOLVED_PUZZLES = 3;
 
-	private static UserData userData;
-	private static ButtonMetadata buttonMetadata;
-	private static String puzzleMetadata;
-	private static int socialData;
+	private static UserData userData = new UserData();
+	private static ButtonMetadata buttonMetadata = new ButtonMetadata();
+	private static String puzzleMetadata = "";
+	private static int socialData = Constants.NA;
 
 	public static void setContextReference(Context context) {
 		DataManager.contextRef = context;
@@ -44,7 +44,6 @@ public class DataManager {
 			PuzzleManager.populateList(puzzleMetadata.split("\n"));
 		}
 		loadSharedPrefs();
-		PuzzleManager.init(contextRef);
 	}
 	
 	private static void loadSharedPrefs() {
@@ -60,7 +59,8 @@ public class DataManager {
 		socialData = prefs.getInt("posted_puzzle", Constants.NA);
 		
 		// get puzzle metadata
-		puzzleMetadata = prefs.getString("puzzle_metadata", null);
+		puzzleMetadata = prefs.getString("puzzle_metadata", "");
+		PuzzleManager.populateList(puzzleMetadata.split("\n"));
 		
 		// get button metadata
 		String puzzleInfo = prefs.getString("button_puzzle_info", null);

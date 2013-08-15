@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
+
 public class Util {
 
 	private static final Random globalRand = new Random(
@@ -142,5 +144,14 @@ public class Util {
 		intent.putExtra(Constants.POP_BUTTON1, buttonText);
 
 		return intent;
+	}
+	
+	public static boolean showAd() {
+		int random = randInt(10);
+		if (random >= 6) {
+			AdBuddiz.getInstance().showAd();
+			return true;
+		}
+		return false;
 	}
 }

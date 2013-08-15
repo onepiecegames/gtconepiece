@@ -30,6 +30,16 @@ public class SocialPostingPage extends GTCActivity implements
 
 		action = getStringExtra("action");
 
+		String label = "Loading...";
+		
+		if (action.compareTo(ACTION_SHARE) == 0) {
+			label = "Uploading Photo to Facebook...";
+		} else if (action.compareTo(ACTION_SIGN_OUT) == 0) {
+			label = "Signing Out...";
+		}
+		
+		setText(R.id.loadingLabel, label);
+		
 		adapter = new GTCAuthAdapter(this);
 		adapter.connectToFacebook(this);
 	}
@@ -44,6 +54,7 @@ public class SocialPostingPage extends GTCActivity implements
 		try {
 			// share capture image to facebook
 			if (action.compareTo(ACTION_SHARE) == 0) {
+				 mGaTracker.sendEvent("ui_action", "facebook", "share_photo", 0L);
 				 adapter.uploadImageAsync("Help! Who is this character?",
 				 "guess_the_character.png",
 				 ResourceManager.getCapturedImage(), 1, this);
@@ -68,7 +79,7 @@ public class SocialPostingPage extends GTCActivity implements
 	@Override
 	public void onError(SocialAuthError e) {
 		Util.displayToast(getApplicationContext(),
-				"Error posting on your timeline.");
+				"Cannot Connect to Facebook");
 		finish();
 	}
 

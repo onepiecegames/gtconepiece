@@ -2,7 +2,6 @@ package jpac.remaster.gtc;
 
 import jpac.remaster.gtc.core.GTCActivity;
 import jpac.remaster.gtc.data.DataManager;
-import jpac.remaster.gtc.logic.PuzzleManager;
 import jpac.remaster.gtc.util.Constants;
 import jpac.remaster.gtc.util.ResourceLoader;
 import jpac.remaster.gtc.util.ResourceManager;
@@ -13,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 public class GTCSplash extends GTCActivity implements ResourceLoader {
 
@@ -34,6 +35,8 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 
 		SysInfo.loadScreenInfo(this);
 
+		AdBuddiz.getInstance().cacheAds(this);
+	      
 		LoadResourceHandler handler = new LoadResourceHandler(this);
 		// a delay before executing load
 		handler.sendEmptyMessageDelayed(0, Constants.SPLASH_DELAY);
@@ -63,7 +66,6 @@ public class GTCSplash extends GTCActivity implements ResourceLoader {
 		@Override
 		protected Void doInBackground(Void... params) {
 			ResourceManager.loadSystemFonts();
-			PuzzleManager.init(getApplicationContext());
 			DataManager.init();
 			return null;
 		}

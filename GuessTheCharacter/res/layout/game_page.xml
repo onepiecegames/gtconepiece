@@ -168,14 +168,14 @@
         </RelativeLayout>
 
         <ViewFlipper
-                android:layout_width="@dimen/puzzle_dimen"
-                android:layout_height="@dimen/diff_height"
-                android:background="@color/mine_shaft"
-                android:gravity="center_horizontal"
-                android:autoStart="true"
-                android:flipInterval="3000"
-                android:inAnimation="@anim/fade_in"
-                android:outAnimation="@anim/fade_out">
+            android:layout_width="@dimen/puzzle_dimen"
+            android:layout_height="@dimen/diff_height"
+            android:autoStart="true"
+            android:background="@color/mine_shaft"
+            android:flipInterval="3000"
+            android:gravity="center_horizontal"
+            android:inAnimation="@anim/fade_in"
+            android:outAnimation="@anim/fade_out" >
 
             <LinearLayout
                 android:id="@+id/levelContainer"
@@ -217,15 +217,15 @@
                     android:contentDescription="@string/empty"
                     android:src="@drawable/level_null" />
             </LinearLayout>
-            
-            <TextView 
+
+            <TextView
                 android:id="@+id/categoryLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/font_xlarge"
-                android:textColor="@color/white"
                 android:gravity="center"
-                android:textIsSelectable="false"/>
+                android:textColor="@color/white"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/font_xlarge" />
         </ViewFlipper>
     </LinearLayout>
 

@@ -3,31 +3,22 @@ package jpac.remaster.gtc.logic;
 import java.util.ArrayList;
 
 import jpac.remaster.gtc.util.Util;
-import android.content.Context;
 
 public class PuzzleManager {
 
+	private static ArrayList<Integer> puzzleList;
+	
+	static {
+		puzzleList = new ArrayList<Integer>();
+		
+		for (int i=0; i<PuzzleFactory.TOTAL_PUZZLE; i++) {
+			puzzleList.add(i);
+		}
+	}
+	
 	private static ArrayList<Integer> solvedPuzzles = new ArrayList<Integer>(50);
 
 	public static Puzzle currentPuzzle = null;
-
-	public static ArrayList<Integer> smartLoader;
-
-	public static void init(Context context) {
-		smartLoader = new ArrayList<Integer>();
-		smartLoad();
-	}
-
-	private static void smartLoad() {
-		while (smartLoader.size() < 10) {
-			int index = -1;
-			while (index == -1 || solvedPuzzles.contains(index)
-					|| smartLoader.contains(index)) {
-				index = Util.randInt(PuzzleFactory.TOTAL_PUZZLE);
-			}
-			smartLoader.add(index);
-		}
-	}
 
 	public static void populateList(String[] data) {
 		int n = data.length;
@@ -35,6 +26,7 @@ public class PuzzleManager {
 		for (int i = 1; i < n; i++) {
 			if (data[i] != null) {
 				solvedPuzzles.add(Integer.valueOf(data[i]));
+				puzzleList.remove(Integer.valueOf(data[i]));
 			}
 		}
 	}
@@ -44,26 +36,16 @@ public class PuzzleManager {
 	}
 
 	public static Puzzle getNextPuzzle() {
-		if (solvedPuzzles.size() == PuzzleFactory.TOTAL_PUZZLE) {
+		if (puzzleList.size() <= 0) {
 			return null;
 		}
-
-		int index = -1;
-
-		if (smartLoader.size() < 3
-				&& (PuzzleFactory.TOTAL_PUZZLE - solvedPuzzles.size()) > 1) {
-			new Thread(new Runnable() {
-
-				@Override
-				public void run() {
-					smartLoad();
-				}
-			}).start();
-		}
-
-		index = smartLoader.remove(0);
-
-		return PuzzleFactory.getPuzzleById(index);
+		
+		Util.log("Puzzles: " + puzzleList.size());
+		
+		int idxFromList = Util.randInt(puzzleList.size());
+		int puzzleIndex = puzzleList.remove(idxFromList);
+		
+		return PuzzleFactory.getPuzzleById(puzzleIndex);
 	}
 
 	public static boolean isFinished() {
@@ -88,5 +70,14 @@ public class PuzzleManager {
 		}
 
 		return puzzle;
+	}
+	
+	public static void reset() {
+		solvedPuzzles.clear();
+		puzzleList.clear();
+		
+		for (int i=0; i<PuzzleFactory.TOTAL_PUZZLE; i++) {
+			puzzleList.add(i);
+		}
 	}
 }
