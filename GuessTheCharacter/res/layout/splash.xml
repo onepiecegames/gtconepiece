@@ -2,16 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tuna" >
+    android:paddingBottom="@dimen/margin_medium"
+    android:paddingLeft="@dimen/margin_medium"
+    android:paddingRight="@dimen/margin_medium"
+    android:paddingTop="@dimen/margin_medium"
+    android:background="@drawable/image_background"
+    tools:context=".SplashActivity" >
 
     <ImageView
-        android:id="@+id/dev_logo"
-        android:layout_width="@dimen/speech_height"
-        android:layout_height="@dimen/badge_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:contentDescription="@string/empty"
-        android:scaleType="centerInside"
-        android:src="@drawable/logo_dark" />
+        android:src="@drawable/logo_dark"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/label_copyright"
+        android:textStyle="bold"
+        android:textSize="@dimen/font_snormal"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

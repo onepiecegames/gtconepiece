@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/image_background" >
+
+    <ImageView
+        android:id="@+id/imageGameLogo"
+        android:layout_width="@dimen/puzzle_dimen"
+        android:layout_height="@dimen/puzzle_dimen"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_hires"
+        android:scaleType="fitCenter"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageGameLogo"
+        android:layout_centerHorizontal="true"
+        android:text="@string/label_version"
+        android:textSize="@dimen/font_snormal"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/margin_small" />
+
+    <TextView
+        android:id="@+id/textTapStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/label_tap"
+        android:textSize="@dimen/font_normal"
+        android:textAllCaps="true"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:textColor="#ffffaa"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageGameLogo"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_alias"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/font_xlarge"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

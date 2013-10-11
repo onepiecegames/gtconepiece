@@ -30,6 +30,9 @@
 	<string name="label_signin">Sign In</string>
 	<string name="label_signout">Sign Out</string>
 	<string name="label_next">Next</string>
+    <string name="label_copyright">© Kishido Games 2013</string>
+    <string name="label_version">Version 3.0</string>
+    <string name="label_tap">Tap to Start</string>
 	
     <string name="popup_display_1">You\'ve solved the Puzzle!</string>
     <string name="popup_display_2_1">Receive </string>
